@@ -3,7 +3,9 @@
 ### Descriere
 
   **FMI Idle** simulează experiența Facultății de Matematică și Informatică din perspectiva studentului Ics - încrezător și mândru, căruia i se pare că facultatea este un joc "idle". Ajută-l pe Ics să treacă de Sesiune, să se dueleze cu Profesori și să realizeze Proiecte din ce în ce mai bune! 
+  
   (mereu) Ics primește bani de la Părinți însă, cu cât evoluează mai mult în viața de student, economia acestuia explodează, reușind să se îmbunătățească permanent (poate să obțină chiar și diverse Job-uri part-time) devenind mai puternic **psihic** odată cu trecerea timpului. O putere supranaturală (denumită generic Restanța) îl va face să înțeleagă că ar fi putut să ia alte decizii în trecut și îl învață că poate da RESET la Facultate. RESET-ul îi anihilează Banii primiți de la Părinți, îl trimite la pasul 0 dar contribuie la economia viitoare căci lui Ics îi rămân experiențele trăite.
+  
   Va reuși vreodată Ics să termine Facultatea sau va deveni un milionar terorizat de Restanță ce nu se va bucura vreodată de o licență la FMI?
 
 ### Important!
