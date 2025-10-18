@@ -8,7 +8,7 @@
   
   Va reuși vreodată Ics să termine Facultatea sau va deveni un milionar terorizat de Restanță ce nu se va bucura vreodată de o licență la FMI?
 
-### Important!
+### Reminder:
 
 Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar dacă documentați riguros acest proces.
 Codul generat pus "ca să fie"/pe care nu îl înțelegeți se punctează doar pentru puncte bonus, doar în contextul
