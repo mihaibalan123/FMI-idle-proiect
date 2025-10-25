@@ -1,15 +1,17 @@
 #include <iostream>
 #include <vector>
 
-#include "meniu.h"
+#include "headers/menu.h"
+#include "headers/teachers.h"
 
 int main() {
+    std::vector<teachers> teachers_list = read_teachers("headers/teachers.txt");
 
     std::vector<std::string> options ={
         "View User Profile",
         "Economy Data",
         "Training Camp",
-        "Teacher Duel",
+        "Teacher Duel", //wip
         "Projects Upgrader",
         "RESTANTA Information"
     };
@@ -31,7 +33,12 @@ int main() {
                 std::cout<<"merge3";
                 break;
             case 4:
-                std::cout<<"merge4";
+                std::cout<<"Teachers shown for duel:"<<"\n";
+                for (const auto& i_teacher : teachers_list) {
+                    i_teacher.show_teachers();
+                    i_teacher.total_damage();
+                }
+                option_no=0;
                 break;
             case 5:
                 std::cout<<"merge5";

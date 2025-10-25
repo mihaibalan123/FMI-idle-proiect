@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <utility>
 #include <vector>
 #include <limits>
 
@@ -28,20 +27,20 @@ public:
             i++;
         }
     }
-    [[nodiscard]] int static choose_option() {
+    [[nodiscard]] int choose_option() {
         int number_chosen;
-        bool ok_chosen_nb = false;
+        bool ok_chosen_nmb = false;
         do {
             std::cout<< "Type the number of the selected option :";
             std::cin>> number_chosen;
             if (number_chosen >= 0 && number_chosen <= 6) {
-                ok_chosen_nb=true;
+                ok_chosen_nmb=true;
             } else {
                 std::cout << "Wrong number option. Try again!";
                 cin_cleaner();
-                ok_chosen_nb=false;
+                ok_chosen_nmb=false;
             }
-        }while (!ok_chosen_nb);
+        }while (!ok_chosen_nmb);
         return number_chosen;
     }
 
