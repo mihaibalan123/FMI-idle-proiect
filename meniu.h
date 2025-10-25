@@ -28,13 +28,13 @@ public:
             i++;
         }
     }
-    [[nodiscard]] int choose_option() const{
+    [[nodiscard]] int static choose_option() {
         int number_chosen;
         bool ok_chosen_nb = false;
         do {
             std::cout<< "Type the number of the selected option :";
             std::cin>> number_chosen;
-            if (number_chosen >= 0 && number_chosen <= options.size()) {
+            if (number_chosen >= 0 && number_chosen <= 6) {
                 ok_chosen_nb=true;
             } else {
                 std::cout << "Wrong number option. Try again!";
