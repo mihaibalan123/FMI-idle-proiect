@@ -25,12 +25,15 @@ int main() {
         switch (option_no) {
             case 1:
                 std::cout<<"merge1";
+                option_no=0;
                 break;
             case 2:
                 std::cout<<"merge2";
+                option_no=0;
                 break;
             case 3:
                 std::cout<<"merge3";
+                option_no=0;
                 break;
             case 4:
                 std::cout<<"Teachers shown for duel:"<<"\n";
@@ -42,9 +45,11 @@ int main() {
                 break;
             case 5:
                 std::cout<<"merge5";
+                option_no=0;
                 break;
             case 6:
                 std::cout<<"merge6";
+                option_no=0;
                 break;
             default:
                 std::cout<< "Goodbye!";
