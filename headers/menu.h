@@ -27,7 +27,7 @@ public:
             i++;
         }
     }
-    [[nodiscard]] int choose_option() {
+    [[nodiscard]] int static choose_option() {
         int number_chosen;
         bool ok_chosen_nmb = false;
         do {

@@ -21,6 +21,25 @@ public:
     teachers(): rarity(0), domain(0), aura(0), item_id(0), health(0), damage(0), critical_damage(0),assigned_project(){};
     ~teachers()=default;
 
+    teachers(const teachers& other) : last_name(other.last_name), first_name(other.first_name), //sau =default??
+        rarity(other.rarity), domain(other.domain), aura(other.aura), item_id(other.item_id),
+        health(other.health), damage(other.damage), critical_damage(other.critical_damage), assigned_project(other.assigned_project){};
+
+    teachers& operator=(const teachers& other) {
+        if (this == &other) return *this;
+        this->last_name = other.last_name;
+        this->first_name = other.first_name;
+        this->rarity = other.rarity;
+        this->domain = other.domain;
+        this->aura = other.aura;
+        this->item_id = other.item_id;
+        this->health = other.health;
+        this->damage = other.damage;
+        this->critical_damage = other. critical_damage;
+        this->assigned_project = other.assigned_project;
+        return *this;
+    }
+
     friend std::istream &operator>>(std::istream& is, teachers &t);
 
     void show_teachers() const{

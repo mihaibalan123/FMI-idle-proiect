@@ -1,0 +1,3 @@
+proiect_1 100 10
+autocad:) 15 13
+CN_projectt 1546 31

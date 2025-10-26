@@ -3,16 +3,18 @@
 
 #include "headers/menu.h"
 #include "headers/teachers.h"
+#include "headers/projects.h"
 
 int main() {
     std::vector<teachers> teachers_list = read_teachers("headers/teachers.txt");
+    std::vector<projects> projects_list = read_projects("headers/projects.txt");
 
     std::vector<std::string> options ={
         "View User Profile",
         "Economy Data",
         "Training Camp",
         "Teacher Duel", //wip
-        "Projects Upgrader",
+        "Projects Upgrader",//also wip
         "RESTANTA Information"
     };
 
@@ -44,7 +46,10 @@ int main() {
                 option_no=0;
                 break;
             case 5:
-                std::cout<<"merge5";
+                std::cout<<"Actual projects:"<<"\n";
+                for (const auto& i_project : projects_list) {
+                    i_project.show_projects();
+                }
                 option_no=0;
                 break;
             case 6:
