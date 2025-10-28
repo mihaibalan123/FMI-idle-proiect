@@ -12,9 +12,10 @@ class projects {
 public:
     projects(std::string name, float price, float cashback): name(std::move(name)), price(price), cashback(cashback){};
     projects() : price(0.0f), cashback(0.0f){};
+
     ~projects()=default;
 
-    projects(const projects& other): name(other.name), price(other.price), cashback(other.cashback){};
+    projects(const projects& other) = default;
 
     projects& operator=(const projects& other) {
         if (this == &other) return *this;

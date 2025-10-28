@@ -1,0 +1,13 @@
+[
+  {
+    "last_name": "Ion",
+    "first_name": "Ilie",
+    "rarity": 1,
+    "domain": 2,
+    "aura": 230,
+    "item_id": 40,
+    "health": 5,
+    "damage": 15,
+    "critical_damage": 100
+  }
+]

@@ -1,13 +1,30 @@
 #include <iostream>
 #include <vector>
-
+#include <nlohmann/json.hpp>
 #include "headers/menu.h"
 #include "headers/teachers.h"
 #include "headers/projects.h"
 
 int main() {
-    std::vector<teachers> teachers_list = read_teachers("headers/teachers.txt");
-    std::vector<projects> projects_list = read_projects("headers/projects.txt");
+
+    std::ifstream f("teachers.json");
+    nlohmann::json data = nlohmann::json::parse(f);
+    std::vector<teachers> teachers_list;
+
+    for (const auto& i_teacher : data) {
+        teachers temp_teacher(
+            i_teacher["last_name"],
+            i_teacher["first_name"],
+            i_teacher["rarity"],
+            i_teacher["domain"],
+            i_teacher["aura"],
+            i_teacher["item_id"],
+            i_teacher["health"],
+            i_teacher["damage"],
+            i_teacher["critical_damage"]
+        );
+        teachers_list.push_back(temp_teacher);
+    }
 
     std::vector<std::string> options ={
         "View User Profile",
@@ -40,16 +57,17 @@ int main() {
             case 4:
                 std::cout<<"Teachers shown for duel:"<<"\n";
                 for (const auto& i_teacher : teachers_list) {
-                    i_teacher.show_teachers();
-                    i_teacher.total_damage();
+                    std::cout<<i_teacher;
                 }
                 option_no=0;
                 break;
             case 5:
+                /*
                 std::cout<<"Actual projects:"<<"\n";
                 for (const auto& i_project : projects_list) {
                     i_project.show_projects();
                 }
+                */
                 option_no=0;
                 break;
             case 6:
@@ -62,6 +80,5 @@ int main() {
 
         }
     }while (option_no);
-
     return 0;
 }
