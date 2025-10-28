@@ -51,7 +51,7 @@ int main() {
                 option_no=0;
                 break;
             case 3:
-                std::cout<<"merge3";
+                std::cout<<"merge3 ";
                 option_no=0;
                 break;
             case 4:
