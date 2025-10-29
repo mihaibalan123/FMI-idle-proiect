@@ -26,6 +26,20 @@ int main() {
         teachers_list.push_back(temp_teacher);
     }
 
+	std::ifstream f1("projects.json");
+	nlohmann::json data1 = nlohmann::json::parse(f1);
+	std::vector<projects> projects_list;
+
+	for (const auto& i_project : data1) {
+        projects temp_project(
+            i_project["name"],
+            i_project["price"],
+            i_project["cashback"]
+
+        );
+        projects_list.push_back(temp_project);
+    }
+
     std::vector<std::string> options ={
         "View User Profile",
         "Economy Data",
@@ -62,12 +76,10 @@ int main() {
                 option_no=0;
                 break;
             case 5:
-                /*
                 std::cout<<"Actual projects:"<<"\n";
                 for (const auto& i_project : projects_list) {
-                    i_project.show_projects();
+                    std::cout<<i_project;
                 }
-                */
                 option_no=0;
                 break;
             case 6:

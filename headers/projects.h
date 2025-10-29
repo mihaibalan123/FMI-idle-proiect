@@ -3,8 +3,6 @@
 
 #include<iostream>
 #include<string>
-#include <vector>
-#include<fstream>
 
 class projects {
     std::string name;
@@ -25,11 +23,9 @@ public:
         return *this;
     }
 
-    friend std::istream &operator>>(std::istream& is, projects &t);
+    friend std::istream &operator>>(std::istream& is, projects& t);
+    friend std::ostream& operator<<(std::ostream& os, const projects& t);
 
-    void show_projects() const{
-        std::cout<< name <<" "<< "\n";
-    }
 
 };
 
@@ -38,18 +34,10 @@ public:
     return is;
     }
 
-    inline std::vector<projects> read_projects(const std::string& filename) {
-        std::ifstream f(filename);
-
-        std::vector<projects> projects_list;
-        projects temp_project;
-
-        while (f>> temp_project) {
-            projects_list.push_back(temp_project);
-        }
-        f.close();
-        return projects_list;
-    };
+    inline std::ostream& operator<<(std::ostream& os, const projects& t) {
+        os << t.name<< " "<< t.price<< " "<< t.cashback;
+        return os;
+    }
 
 
 #endif //OOP_PROJECTS_H
