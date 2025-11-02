@@ -4,6 +4,8 @@
 #include <string>
 #include<fstream>
 
+#include "projects.h"
+
 class teachers {
     std::string last_name, first_name;
     int rarity, domain, aura, item_id;
@@ -18,7 +20,7 @@ public:
 
     ~teachers()=default;
 
-    teachers(const teachers& other) = default;//constr de copiere
+    teachers(const teachers& other) = default;
 
     teachers& operator=(const teachers& other) {
         if (this == &other) return *this;
@@ -37,29 +39,7 @@ public:
     friend std::istream& operator>>(std::istream& is, teachers &t);
     friend std::ostream& operator<<(std::ostream& os, const teachers& t);
 
-    /*
-    void show_teachers() const{
-        std::cout<< last_name<<" "<< first_name<< "\n"; //doar de test momentan
-    }
-
-    void total_damage() const{
-         std::cout<< last_name <<" "<< first_name<< " has a total possible damage of "<< damage + (critical_damage / 100 * damage)<<"\n";
-    }
-    */
-
-
 };
-
-    inline std::istream& operator>>(std::istream& is, teachers& t) { // supraincarcarea operatorului
-    is >> t.last_name>> t.first_name>> t.rarity>> t.domain>> t.aura>> t.health>> t.damage>> t.critical_damage>> t.item_id;
-    return is;
-}
-
-    inline std::ostream& operator<<(std::ostream& os, const teachers& t) {
-        os << t.last_name<< " "<< t.first_name<< " "<< t.rarity<< " "<< t.domain<< " " <<t.aura<< " "
-        << t.health<< " "<< t.damage<< " "<< t.critical_damage<< " "<< t.item_id;
-        return os;
-    }
 
 
 

@@ -26,18 +26,7 @@ public:
     friend std::istream &operator>>(std::istream& is, projects& t);
     friend std::ostream& operator<<(std::ostream& os, const projects& t);
 
-
 };
-
-    inline std::istream& operator>>(std::istream& is, projects& t) { // supraincarcarea operatorului
-    is >> t.name>> t.price>> t.cashback;
-    return is;
-    }
-
-    inline std::ostream& operator<<(std::ostream& os, const projects& t) {
-        os << t.name<< " "<< t.price<< " "<< t.cashback;
-        return os;
-    }
 
 
 #endif //OOP_PROJECTS_H
