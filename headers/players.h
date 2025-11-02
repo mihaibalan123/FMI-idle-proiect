@@ -24,7 +24,7 @@ public:
 
     friend std::istream& operator>>(std::istream& is, players &t);
     friend std::ostream& operator<<(std::ostream& os, const players& t);
-
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, currency1, currency2);
 };
 
 

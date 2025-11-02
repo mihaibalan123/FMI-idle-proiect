@@ -43,7 +43,6 @@ void menu::start() {
             i_player["name"],
             i_player["currency1"],
             i_player["currency2"]
-
         );
         players_list.push_back(temp_player);
     }
@@ -56,7 +55,6 @@ void menu::add_player() {
     curr_player = players_list.size() - 1;
 }
 
-
 void menu::choose_player() {
     unsigned long long int option = 0;
     do {
@@ -67,7 +65,6 @@ void menu::choose_player() {
         std::cout << players_list.size() +1 << ". Add new player.\n" << "0.Back.\n";
         std::cin >> option;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
         if (option == 0) return;
         if (option == players_list.size()+1) add_player();
         else if (option > players_list.size()+1) option = 0;
@@ -75,6 +72,12 @@ void menu::choose_player() {
     } while (!option);
 }
 
+void menu::close() {
+    nlohmann::json json_players_list = players_list;
+    std::ofstream f("players.json");
+    f << json_players_list.dump(4);
+    f.close ();
+}
 
 void menu::run() {
     start();
@@ -88,8 +91,10 @@ void menu::run() {
         }
         std::cout << "1.Select Player\n" << "2.Show current player\n"<< "0.Exit\n";
         std::cin >> option;
-        if (!option)
+        if (!option) {
+            close();
             return;
+        }
         if (option == 1) {
             choose_player();
         } else if (option == 2) std::cout << players_list[curr_player]<<'\n';
