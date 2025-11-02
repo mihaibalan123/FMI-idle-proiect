@@ -1,12 +1,16 @@
+#include <fstream>
 #include "menu.h"
 #include "players.h"
 #include "teachers.h"
 #include "projects.h"
+#include <cstdlib>
+#include <ctime>
 
 void menu::display_texts(int x){
     switch (x) {
         case 1: {
-            std::cout << "Welcome to FMI-Idle Game! In order to continue you must select your player profile or add a new one.\n";
+            std::cout << "Welcome to FMI-Idle Game! In order to continue you must select your player "
+                         "profile or add a new one.\n";
             break;
         }
         case 2: {
@@ -18,13 +22,40 @@ void menu::display_texts(int x){
             break;
         }
         case 4: {
-            std::cout << "Access granted!";
+            std::cout << "Access granted!\n";
             break;
         }
         case 5: {
-            std::cout << "Access DENIED!";
+            std::cout << "Access DENIED!\n";
             break;
         }
+        case 6: {
+            std::cout << "You entered in Politehnica Buisness Tower. It's a strange place isn't it? "
+                         "They are ready!\n";
+            break;
+        }
+        default: break;
+    }
+}
+
+void menu::choose_random_t() const {
+    int i, n = teachers_list.size();
+    std::vector<int> indices(n);
+    for (i = 0; i < n; ++i) indices[i] = i;
+    for (i = n-1; i > 0; --i) {
+        int j = rand() % (i + 1);
+        int temp_t = indices[i];
+        indices[i] = indices[j];
+        indices[j] = temp_t;
+    }
+    std::cout << "Faced teachers:\n";
+    for (i = 0; i < 5; ++i) {
+        int random_index = indices[i];
+        const teachers& teacher = teachers_list[random_index];
+        const projects& project = projects_list[random_index];
+        std::cout << random_index << ". " << teacher.get_first_name() << " "<< teacher.get_last_name() << " has the project " << project.get_project_name() << " that costs " << project.get_project_price()<< " !\n";
+
+
     }
 }
 
@@ -80,7 +111,7 @@ void menu::start() {
         );
         players_list.push_back(temp_player);
     }
-} //parsing in fisierele .json
+}
 
 void menu::add_player() {
     players temp_player;
@@ -96,7 +127,7 @@ void menu::choose_player() {
         for (unsigned long long int i = 0; i < players_list.size(); i++) {
             std::cout << i + 1 << "." << players_list[i]<<'\n';
         }
-        std::cout << players_list.size() +1 << ". Add new player.\n" << "0.Back.\n";
+        std::cout << players_list.size() +1 << ". Add new player.\n" << "0.Back\n";
         std::cin >> option;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         if (option == 0) return;
@@ -123,6 +154,7 @@ void menu::close() {
 }
 
 void menu::run() {
+    srand(static_cast<unsigned int>(time(nullptr)));
     start();
     display_texts(1);
     int option;
@@ -134,7 +166,7 @@ void menu::run() {
             players_list.push_back(temp_player);
             curr_player = 0;
         }
-        std::cout << "1.Select Player\n" << "2.Show current player\n"<< "0.Exit\n";
+        std::cout << "1.Select Player\n" << "2.Show current player\n"<< "3.Examination room\n"<< "0.Exit\n";
         std::cin >> option;
         if (!option) {
             close();
@@ -142,6 +174,15 @@ void menu::run() {
         }
         if (option == 1) {
             choose_player();
-        } else if (option == 2) std::cout << "Current player is: "<< players_list[curr_player]<<'\n';
+        }
+        if (option == 2) {
+            if (curr_player != -1) std::cout << "Current player is: "<< players_list[curr_player]<<'\n';
+            else std::cout << "No current player. Please register or select.\n";
+        }
+        if (option == 3) {
+            display_texts(6);
+            choose_random_t();
+            break; // ramane de vazut in continuare
+        }
     } while (option);
 }

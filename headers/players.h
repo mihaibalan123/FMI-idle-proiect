@@ -1,5 +1,6 @@
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
+#include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
 
@@ -46,8 +47,8 @@ inline std::istream& operator>>(std::istream& is, players& t) {
         std:: cout << "Re-type your password# ";
         is >> temp_pass2;
         if (temp_pass1 != temp_pass2) std::cout << "Retry. Passwords doesn't match!\n";
-        if (temp_pass1.size() < 10) std::cout << "Password must be at least 5 chars long!\n";
-    } while (temp_pass1 != temp_pass2 || temp_pass1.size()< 10);
+        if (temp_pass1.size() < 5) std::cout << "Password must be at least 5 chars long!\n";
+    } while (temp_pass1 != temp_pass2 || temp_pass1.size()< 5);
     t.password = temp_pass1;
     return is;
 }

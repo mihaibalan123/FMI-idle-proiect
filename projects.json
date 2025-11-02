@@ -1,7 +1,502 @@
 [
   {
-    "name": "autocad:))",
-    "price": 200.15,
+    "name": "Proiectul Phoenix",
+    "price": 100.00,
+    "cashback": 4.89
+  },
+  {
+    "name": "QuantumLeap",
+    "price": 110.00,
+    "cashback": 1.25
+  },
+  {
+    "name": "DataStream",
+    "price": 120.00,
+    "cashback": 7.15
+  },
+  {
+    "name": "Nexus Core",
+    "price": 130.00,
+    "cashback": 3.44
+  },
+  {
+    "name": "Aura Initiative",
+    "price": 140.00,
+    "cashback": 8.12
+  },
+  {
+    "name": "Orion Matrix",
+    "price": 150.00,
+    "cashback": 9.21
+  },
+  {
+    "name": "CyberMesh",
+    "price": 160.00,
+    "cashback": 10.50
+  },
+  {
+    "name": "Stellar Engine",
+    "price": 170.00,
+    "cashback": 1.11
+  },
+  {
+    "name": "Titan Framework",
+    "price": 180.00,
+    "cashback": 11.83
+  },
+  {
+    "name": "Vortex Analytics",
+    "price": 190.00,
+    "cashback": 2.76
+  },
+  {
+    "name": "PulsarDB",
+    "price": 200.00,
+    "cashback": 13.33
+  },
+  {
+    "name": "Genesis Suite",
+    "price": 210.00,
+    "cashback": 1.95
+  },
+  {
+    "name": "Helios Platform",
+    "price": 220.00,
     "cashback": 15.01
+  },
+  {
+    "name": "Elysium AI",
+    "price": 230.00,
+    "cashback": 12.44
+  },
+  {
+    "name": "Zenith OS",
+    "price": 240.00,
+    "cashback": 16.29
+  },
+  {
+    "name": "Apex Solution",
+    "price": 250.00,
+    "cashback": 17.00
+  },
+  {
+    "name": "Catalyst Engine",
+    "price": 260.00,
+    "cashback": 5.30
+  },
+  {
+    "name": "Omega Protocol",
+    "price": 270.00,
+    "cashback": 18.21
+  },
+  {
+    "name": "NovaWare",
+    "price": 280.00,
+    "cashback": 1.15
+  },
+  {
+    "name": "Momentum",
+    "price": 290.00,
+    "cashback": 19.89
+  },
+  {
+    "name": "InnovaTech",
+    "price": 300.00,
+    "cashback": 21.05
+  },
+  {
+    "name": "Optimus CRM",
+    "price": 310.00,
+    "cashback": 14.55
+  },
+  {
+    "name": "Aegis Security",
+    "price": 320.00,
+    "cashback": 22.18
+  },
+  {
+    "name": "Alpha Build",
+    "price": 330.00,
+    "cashback": 23.33
+  },
+  {
+    "name": "Delta System",
+    "price": 340.00,
+    "cashback": 1.50
+  },
+  {
+    "name": "Gamma Connect",
+    "price": 365.00,
+    "cashback": 25.10
+  },
+  {
+    "name": "Sigma Logic",
+    "price": 390.00,
+    "cashback": 18.01
+  },
+  {
+    "name": "Epsilon",
+    "price": 415.00,
+    "cashback": 29.85
+  },
+  {
+    "name": "Zeta Flow",
+    "price": 440.00,
+    "cashback": 31.22
+  },
+  {
+    "name": "Theta Labs",
+    "price": 465.00,
+    "cashback": 33.14
+  },
+  {
+    "name": "Iota Cloud",
+    "price": 490.00,
+    "cashback": 1.99
+  },
+  {
+    "name": "Kappa AI",
+    "price": 515.00,
+    "cashback": 36.11
+  },
+  {
+    "name": "Lambda",
+    "price": 540.00,
+    "cashback": 38.40
+  },
+  {
+    "name": "Mu Dynamics",
+    "price": 565.00,
+    "cashback": 40.12
+  },
+  {
+    "name": "Nu Synthesis",
+    "price": 590.00,
+    "cashback": 42.88
+  },
+  {
+    "name": "Xi Interface",
+    "price": 615.00,
+    "cashback": 10.10
+  },
+  {
+    "name": "Omicron",
+    "price": 640.00,
+    "cashback": 46.20
+  },
+  {
+    "name": "Pi Network",
+    "price": 665.00,
+    "cashback": 48.99
+  },
+  {
+    "name": "Rho Design",
+    "price": 690.00,
+    "cashback": 50.15
+  },
+  {
+    "name": "Tau Platform",
+    "price": 715.00,
+    "cashback": 52.87
+  },
+  {
+    "name": "Upsilon",
+    "price": 740.00,
+    "cashback": 54.11
+  },
+  {
+    "name": "Phi Vision",
+    "price": 765.00,
+    "cashback": 56.88
+  },
+  {
+    "name": "Chi Systems",
+    "price": 790.00,
+    "cashback": 58.12
+  },
+  {
+    "name": "Psi Logic",
+    "price": 815.00,
+    "cashback": 60.10
+  },
+  {
+    "name": "Omega Max",
+    "price": 840.00,
+    "cashback": 62.33
+  },
+  {
+    "name": "Proiectul Orion",
+    "price": 865.00,
+    "cashback": 64.01
+  },
+  {
+    "name": "Quantum Core",
+    "price": 890.00,
+    "cashback": 66.22
+  },
+  {
+    "name": "Data Weaver",
+    "price": 915.00,
+    "cashback": 68.30
+  },
+  {
+    "name": "Nexus Hub",
+    "price": 940.00,
+    "cashback": 70.14
+  },
+  {
+    "name": "Aura Dynamics",
+    "price": 965.00,
+    "cashback": 72.18
+  },
+  {
+    "name": "Orion Cloud",
+    "price": 995.00,
+    "cashback": 74.50
+  },
+  {
+    "name": "Cyber Sentinel",
+    "price": 1025.00,
+    "cashback": 76.88
+  },
+  {
+    "name": "Stellar Drive",
+    "price": 1055.00,
+    "cashback": 79.12
+  },
+  {
+    "name": "Titan Suite",
+    "price": 1085.00,
+    "cashback": 81.33
+  },
+  {
+    "name": "Vortex Engine",
+    "price": 1115.00,
+    "cashback": 83.55
+  },
+  {
+    "name": "Pulsar Net",
+    "price": 1145.00,
+    "cashback": 85.80
+  },
+  {
+    "name": "Genesis II",
+    "price": 1175.00,
+    "cashback": 88.01
+  },
+  {
+    "name": "Helios Sphere",
+    "price": 1205.00,
+    "cashback": 90.22
+  },
+  {
+    "name": "Elysium Core",
+    "price": 1235.00,
+    "cashback": 92.44
+  },
+  {
+    "name": "Zenith Prime",
+    "price": 1265.00,
+    "cashback": 94.65
+  },
+  {
+    "name": "Apex Cloud",
+    "price": 1295.00,
+    "cashback": 96.87
+  },
+  {
+    "name": "Catalyst AI",
+    "price": 1325.00,
+    "cashback": 99.08
+  },
+  {
+    "name": "Omega Point",
+    "price": 1355.00,
+    "cashback": 101.30
+  },
+  {
+    "name": "Nova Drive",
+    "price": 1385.00,
+    "cashback": 103.51
+  },
+  {
+    "name": "Momentum AI",
+    "price": 1415.00,
+    "cashback": 105.73
+  },
+  {
+    "name": "Innova Labs",
+    "price": 1445.00,
+    "cashback": 107.94
+  },
+  {
+    "name": "Optimus Grid",
+    "price": 1475.00,
+    "cashback": 110.16
+  },
+  {
+    "name": "Aegis Shield",
+    "price": 1505.00,
+    "cashback": 112.37
+  },
+  {
+    "name": "Alpha Tech",
+    "price": 1535.00,
+    "cashback": 114.59
+  },
+  {
+    "name": "Delta Force",
+    "price": 1565.00,
+    "cashback": 116.80
+  },
+  {
+    "name": "Gamma Ray",
+    "price": 1595.00,
+    "cashback": 119.02
+  },
+  {
+    "name": "Sigma Six",
+    "price": 1625.00,
+    "cashback": 121.23
+  },
+  {
+    "name": "Epsilon",
+    "price": 1655.00,
+    "cashback": 123.45
+  },
+  {
+    "name": "Zeta Project",
+    "price": 1685.00,
+    "cashback": 125.66
+  },
+  {
+    "name": "Theta Wave",
+    "price": 1715.00,
+    "cashback": 127.88
+  },
+  {
+    "name": "Iota Solutions",
+    "price": 1745.00,
+    "cashback": 130.09
+  },
+  {
+    "name": "Kappa One",
+    "price": 1775.00,
+    "cashback": 132.31
+  },
+  {
+    "name": "Lambda Labs",
+    "price": 1805.00,
+    "cashback": 134.52
+  },
+  {
+    "name": "Mu Research",
+    "price": 1835.00,
+    "cashback": 136.74
+  },
+  {
+    "name": "Nu Horizon",
+    "price": 1865.00,
+    "cashback": 138.95
+  },
+  {
+    "name": "Xi Data",
+    "price": 1895.00,
+    "cashback": 141.17
+  },
+  {
+    "name": "Omicron AI",
+    "price": 1925.00,
+    "cashback": 143.38
+  },
+  {
+    "name": "Pi Solutions",
+    "price": 1955.00,
+    "cashback": 145.60
+  },
+  {
+    "name": "Rho Dynamics",
+    "price": 1985.00,
+    "cashback": 147.81
+  },
+  {
+    "name": "Tau Industries",
+    "price": 2015.00,
+    "cashback": 150.03
+  },
+  {
+    "name": "Upsilon",
+    "price": 2045.00,
+    "cashback": 152.24
+  },
+  {
+    "name": "Phi Research",
+    "price": 2075.00,
+    "cashback": 154.46
+  },
+  {
+    "name": "Chi Labs",
+    "price": 2105.00,
+    "cashback": 156.67
+  },
+  {
+    "name": "Psi Systems",
+    "price": 2135.00,
+    "cashback": 158.89
+  },
+  {
+    "name": "Omega Ultimate",
+    "price": 2165.00,
+    "cashback": 161.10
+  },
+  {
+    "name": "Final Stand",
+    "price": 2195.00,
+    "cashback": 163.32
+  },
+  {
+    "name": "Horizon",
+    "price": 2225.00,
+    "cashback": 165.53
+  },
+  {
+    "name": "Odyssey",
+    "price": 2255.00,
+    "cashback": 167.75
+  },
+  {
+    "name": "Voyager",
+    "price": 2285.00,
+    "cashback": 169.96
+  },
+  {
+    "name": "Enterprise",
+    "price": 2315.00,
+    "cashback": 172.18
+  },
+  {
+    "name": "Discovery",
+    "price": 2345.00,
+    "cashback": 174.39
+  },
+  {
+    "name": "Pathfinder",
+    "price": 2375.00,
+    "cashback": 176.61
+  },
+  {
+    "name": "Challenger",
+    "price": 2405.00,
+    "cashback": 178.82
+  },
+  {
+    "name": "Endeavour",
+    "price": 2435.00,
+    "cashback": 181.04
+  },
+  {
+    "name": "Atlantis",
+    "price": 2465.00,
+    "cashback": 183.25
   }
 ]

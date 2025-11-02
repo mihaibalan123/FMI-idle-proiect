@@ -2,7 +2,6 @@
 #define OOP_TEACHERS_H
 
 #include <string>
-#include<fstream>
 #include "projects.h"
 
 class teachers {
@@ -38,6 +37,13 @@ public:
     friend std::istream& operator>>(std::istream& is, teachers &t);
     friend std::ostream& operator<<(std::ostream& os, const teachers& t);
 
+    std::string get_first_name() const {
+        return first_name;
+    }
+
+    std::string get_last_name() const {
+        return last_name;
+    }
 };
 
 #endif //OOP_TEACHERS_H
