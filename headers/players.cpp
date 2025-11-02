@@ -2,6 +2,3 @@
 #include<fstream>
 #include "players.h"
 
-
-
-

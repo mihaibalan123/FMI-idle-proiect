@@ -3,7 +3,6 @@
 
 #include <string>
 #include<fstream>
-
 #include "projects.h"
 
 class teachers {
@@ -40,7 +39,5 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const teachers& t);
 
 };
-
-
 
 #endif //OOP_TEACHERS_H

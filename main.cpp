@@ -7,6 +7,5 @@
 int main() {
     menu main_menu;
     main_menu.run();
-
     return 0;
 }
