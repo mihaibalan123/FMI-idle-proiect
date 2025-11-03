@@ -182,7 +182,8 @@ void menu::run() {
         if (option == 3) {
             display_texts(6);
             choose_random_t();
-            break; // ramane de vazut in continuare
+            option = 0;
+            close();
         }
     } while (option);
 }
