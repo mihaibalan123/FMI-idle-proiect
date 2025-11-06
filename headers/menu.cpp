@@ -180,7 +180,7 @@ void menu::run() {
         }
         if (option == 3) {
             display_texts(6);
-            choose_random_t();
+            //choose_random_t();
             option = 0;
             close();
         }
