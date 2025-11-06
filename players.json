@@ -1,20 +1,29 @@
 [
     {
+        "conquer_domain": -1,
         "currency1": 100.0,
         "currency2": 0.0,
+        "damage": 7.0,
+        "health": 500.0,
         "name": "mihai",
         "password": "123456"
     },
     {
+        "conquer_domain": -1,
         "currency1": 100.0,
         "currency2": 0.0,
-        "name": "maria",
-        "password": "maria15"
+        "damage": 7.0,
+        "health": 500.0,
+        "name": "silviu",
+        "password": "silviu69"
     },
     {
+        "conquer_domain": -1,
         "currency1": 100.0,
         "currency2": 0.0,
+        "damage": 7.0,
+        "health": 500.0,
         "name": "jean",
-        "password": "jean12"
+        "password": "jeansex"
     }
 ]

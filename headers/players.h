@@ -7,10 +7,12 @@
 
 class players {
     std::string name, password;
-    float currency1, currency2;
+    int conquer_domain;
+    float currency1, currency2, health, damage;
 public:
-    players(std::string name, std::string password, float currency1, float currency2): name(std::move(name)),password(std::move(password)), currency1(currency1), currency2(currency2){};
-    players() : currency1(0.0f), currency2(0.0f){}
+    players(std::string name, std::string password, int conquer_domain, float currency1, float currency2, float health, float damage): name(std::move(name)),password(std::move(password)), conquer_domain(conquer_domain), currency1(currency1), currency2(currency2), health(health), damage(damage){};
+    players() : conquer_domain(0), currency1(0.0f), currency2(0.0f), health(0.0f), damage(0.0f) {
+    }
 
     ~players() = default;
 
@@ -20,8 +22,11 @@ public:
         if (this == &other) return *this;
         this->name = other.name;
         this->password = other.password;
+        this->conquer_domain = other.conquer_domain;
         this->currency1 = other.currency1;
         this->currency2 = other.currency2;
+        this->health = other.health;
+        this->damage = other.damage;
         return *this;
     }
 
@@ -31,14 +36,17 @@ public:
 
     friend std::istream& operator>>(std::istream& is, players &t);
     friend std::ostream& operator<<(std::ostream& os, const players& t);
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, currency1, currency2, password)
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, conquer_domain, currency1, currency2, password, health, damage)
 };
 
 
 inline std::istream& operator>>(std::istream& is, players& t) {
     std::string temp_pass1, temp_pass2;
-    t.currency1=100.0;
-    t.currency2=0.0;
+    t.currency1 = 100.0;
+    t.currency2 = 0.0;
+    t.conquer_domain = -1;
+    t.health = 500.0;
+    t.damage = 7.0;
     std::cout << "NEW PLAYER REGISTRATION\n";
     std::cout << "Insert player name: ";
     getline(is, t.name);

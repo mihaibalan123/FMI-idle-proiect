@@ -36,14 +36,6 @@ public:
 
     friend std::istream& operator>>(std::istream& is,  teachers &t);
     friend std::ostream& operator<<(std::ostream& os, const teachers &t);
-
-    [[nodiscard]] std::string get_first_name() const {
-        return first_name;
-    }
-
-    [[nodiscard]] std::string get_last_name() const {
-        return last_name;
-    }
 };
 
 #endif //OOP_TEACHERS_H

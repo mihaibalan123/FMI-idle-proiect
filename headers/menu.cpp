@@ -4,6 +4,7 @@
 #include "teachers.h"
 #include "projects.h"
 #include <cstdlib>
+#include <random>
 
 void menu::display_texts(int x){
     switch (x) {
@@ -33,7 +34,7 @@ void menu::display_texts(int x){
                          "They are ready!\n";
             break;
         }
-        default: break;
+        default: ;
     }
 }
 
@@ -84,8 +85,11 @@ void menu::start() {
         players temp_player(
             i_player["name"],
             i_player["password"],
+            i_player["conquer_domain"],
             i_player["currency1"],
-            i_player["currency2"]
+            i_player["currency2"],
+            i_player["health"],
+            i_player["damage"]
         );
         players_list.push_back(temp_player);
     }
@@ -124,6 +128,50 @@ void menu::choose_player() {
     } while (!option);
 }
 
+void menu::choose_random_t() const {
+
+    unsigned long long int size = teachers_list.size();
+    int available_rerolls = 4;
+    int x = 0, ok;
+
+    std::vector<int> teacher_indices;
+    for (unsigned long long int i= 0; i < size; i++) {
+        teacher_indices.push_back(x++);
+    }
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::ranges::shuffle(teacher_indices, generator);
+
+    while (available_rerolls >= 0) {
+        int selected_teachers = 5;
+        if (available_rerolls < 4) {
+            std::cout << "Reroll or keep them ? \n" << "0. Keep.\n" << "1. Reroll.\n";
+            std::cout << "You have " << available_rerolls << " available rerolls left!\n";
+            std::cin >> ok;
+            if (ok == 0) {
+                std::cout << "Selection kept. Proceeding...\n";
+                break;
+            } else if (ok != 1) {
+                std::cout << "??? Selection kept. Proceeding...\n";
+                break;
+            }
+        }
+        std::ranges::shuffle(teacher_indices, generator);
+        std::cout << "You faced:\n";
+        for (int i = 0; i < selected_teachers; ++i){
+            std::cout << teacher_indices[i] << " ";
+        }
+        std::cout << "\n";
+        if (available_rerolls > 0) {
+            available_rerolls--;
+        } else if (ok == 1) {
+            std::cout << "No rerolls left. Selection kept. Proceeding...\n";
+            break;
+        }
+    }
+}
+
+
 void menu::close() {
     nlohmann::json json_players_list = players_list;
     std::ofstream f("players.json");
@@ -159,7 +207,7 @@ void menu::run() {
         }
         if (option == 3) {
             display_texts(6);
-            //choose_random_t();
+            choose_random_t();
             option = 0;
             close();
         }
