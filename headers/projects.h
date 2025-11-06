@@ -26,11 +26,11 @@ public:
     friend std::istream &operator>>(std::istream& is, projects& t);
     friend std::ostream& operator<<(std::ostream& os, const projects& t);
 
-    std::string get_project_name() const {
+    [[nodiscard]] std::string get_project_name() const {
         return name;
     }
 
-    int get_project_price() const {
+    [[nodiscard]] float get_project_price() const {
         return price;
     }
 

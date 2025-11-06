@@ -3,12 +3,13 @@
 #include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
+#include <utility>
 
 class players {
     std::string name, password;
     float currency1, currency2;
 public:
-    players(std::string name, const std::string &password, float currency1, float currency2): name(std::move(name)),password(password), currency1(currency1), currency2(currency2){};
+    players(std::string name, std::string password, float currency1, float currency2): name(std::move(name)),password(std::move(password)), currency1(currency1), currency2(currency2){};
     players() : currency1(0.0f), currency2(0.0f){}
 
     ~players() = default;
@@ -24,7 +25,7 @@ public:
         return *this;
     }
 
-    std::string get_password() const {
+    [[nodiscard]] std::string get_password() const {
         return password;
     }
 

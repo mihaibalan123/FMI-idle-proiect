@@ -37,7 +37,7 @@ void menu::display_texts(int x){
         default: break;
     }
 }
-
+/*
 void menu::choose_random_t() const {
     int i, n = teachers_list.size();
     std::vector<int> indices(n);
@@ -54,10 +54,9 @@ void menu::choose_random_t() const {
         const teachers& teacher = teachers_list[random_index];
         const projects& project = projects_list[random_index];
         std::cout << random_index << ". " << teacher.get_first_name() << " "<< teacher.get_last_name() << " has the project " << project.get_project_name() << " that costs " << project.get_project_price()<< " !\n";
-
-
     }
 }
+*/
 
 bool menu::verify_password(const players& player) {
     std::string temp_password;
@@ -134,7 +133,7 @@ void menu::choose_player() {
         if (option == players_list.size()+1) add_player();
         else if (option > players_list.size()+1) option = 0;
         else {
-            int index = option - 1;
+            unsigned long long int index = option - 1;
             if (verify_password(players_list[index])) {
                 curr_player = index;
                 display_texts(4);
@@ -154,7 +153,7 @@ void menu::close() {
 }
 
 void menu::run() {
-    srand(static_cast<unsigned int>(time(nullptr)));
+    //srand(static_cast<unsigned int>(time(nullptr)));
     start();
     display_texts(1);
     int option;
@@ -176,7 +175,7 @@ void menu::run() {
             choose_player();
         }
         if (option == 2) {
-            if (curr_player != -1) std::cout << "Current player is: "<< players_list[curr_player]<<'\n';
+            if (curr_player) std::cout << "Current player is: "<< players_list[curr_player]<<'\n';
             else std::cout << "No current player. Please register or select.\n";
         }
         if (option == 3) {

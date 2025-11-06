@@ -4,5 +4,11 @@
         "currency2": 0.0,
         "name": "mihai",
         "password": "123456"
+    },
+    {
+        "currency1": 100.0,
+        "currency2": 0.0,
+        "name": "maria",
+        "password": "maria15"
     }
 ]
