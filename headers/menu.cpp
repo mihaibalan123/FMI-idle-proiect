@@ -132,7 +132,7 @@ void menu::choose_random_t() const {
 
     unsigned long long int size = teachers_list.size();
     int available_rerolls = 4;
-    int x = 0, ok;
+    int x = 0, ok = 0;
 
     std::vector<int> teacher_indices;
     for (unsigned long long int i= 0; i < size; i++) {

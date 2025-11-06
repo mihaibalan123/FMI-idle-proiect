@@ -30,7 +30,7 @@ public:
         return *this;
     }
 
-    [[nodiscard]] std::string get_password() const {
+    [[nodiscard]] const std::string& get_password() const {
         return password;
     }
 
