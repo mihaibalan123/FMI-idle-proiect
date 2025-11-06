@@ -10,13 +10,12 @@ class menu {
     std::vector<teachers> teachers_list;
     std::vector<projects> projects_list;
     std::vector<players> players_list;
-    unsigned long long int curr_player = -1;
+    int curr_player = -1;
 
     static void display_texts(int x);
     void start();
     void add_player();
     void choose_player();
-    //void choose_random_t() const;
     void close();
     static bool verify_password(const players& p);
 public:

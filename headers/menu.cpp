@@ -4,7 +4,6 @@
 #include "teachers.h"
 #include "projects.h"
 #include <cstdlib>
-#include <ctime>
 
 void menu::display_texts(int x){
     switch (x) {
@@ -37,26 +36,6 @@ void menu::display_texts(int x){
         default: break;
     }
 }
-/*
-void menu::choose_random_t() const {
-    int i, n = teachers_list.size();
-    std::vector<int> indices(n);
-    for (i = 0; i < n; ++i) indices[i] = i;
-    for (i = n-1; i > 0; --i) {
-        int j = rand() % (i + 1);
-        int temp_t = indices[i];
-        indices[i] = indices[j];
-        indices[j] = temp_t;
-    }
-    std::cout << "Faced teachers:\n";
-    for (i = 0; i < 5; ++i) {
-        int random_index = indices[i];
-        const teachers& teacher = teachers_list[random_index];
-        const projects& project = projects_list[random_index];
-        std::cout << random_index << ". " << teacher.get_first_name() << " "<< teacher.get_last_name() << " has the project " << project.get_project_name() << " that costs " << project.get_project_price()<< " !\n";
-    }
-}
-*/
 
 bool menu::verify_password(const players& player) {
     std::string temp_password;
@@ -116,7 +95,7 @@ void menu::add_player() {
     players temp_player;
     std::cin >> temp_player;
     players_list.push_back(temp_player);
-    curr_player = players_list.size() - 1;
+    curr_player = static_cast<int>(players_list.size() - 1);
 }
 
 void menu::choose_player() {
@@ -135,7 +114,7 @@ void menu::choose_player() {
         else {
             unsigned long long int index = option - 1;
             if (verify_password(players_list[index])) {
-                curr_player = index;
+                curr_player = static_cast<int>(index);
                 display_texts(4);
             } else {
                 display_texts(5);
@@ -175,7 +154,7 @@ void menu::run() {
             choose_player();
         }
         if (option == 2) {
-            if (curr_player) std::cout << "Current player is: "<< players_list[curr_player]<<'\n';
+            if (curr_player != -1) std::cout << "Current player is: "<< players_list[curr_player]<<'\n';
             else std::cout << "No current player. Please register or select.\n";
         }
         if (option == 3) {
