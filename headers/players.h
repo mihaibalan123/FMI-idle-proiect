@@ -36,12 +36,12 @@ public:
         return password;
     }
 
-    [[nodiscard]] float get_health() const {
-        return health;
-    }
-
     [[nodiscard]] const std::vector<int>& get_project_id() const {
         return project_id;
+    }
+
+    [[nodiscard]] float get_health() const {
+        return health;
     }
 
     void add_project_id(int id) {

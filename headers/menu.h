@@ -17,6 +17,7 @@ class menu {
     void add_player();
     void choose_player();
     void choose_random_t();
+    void show_projects() const;
     void close();
     static bool verify_password(const players& p);
 public:

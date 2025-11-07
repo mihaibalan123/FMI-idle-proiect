@@ -34,9 +34,33 @@ void menu::display_texts(int x){
                          "They are ready!\n";
             break;
         }
+        case 7: {
+            std::cout << "Here you can see the projects you fought for! Upgrade them in order to increase you currencies and later you can even reset getting -RESTANTA- and grow stronger !" << "\n";
+        }
         default: ;
     }
 } // cam redundanta dar poate vor fi texte pe care le voi repeta deci pastrez pentru structura
+
+void menu::show_projects() const {
+    if (curr_player == -1) {
+        std::cout << "You must select a player!\n";
+        return;
+    }
+    const std::vector<int>& owned_projects = players_list[curr_player].get_project_id();
+
+    if (owned_projects.empty()) {
+        std::cout << "No projects. Go in examination room!\n";
+        return;
+    }
+    std::cout << "\nPlayer " << players_list[curr_player] << " owns " << owned_projects.size() << " projects:\n";
+    for (auto& i : owned_projects) {
+        if (i >= 0 && i <static_cast<int>(projects_list.size())) {
+            const projects& p = projects_list[i];
+            std::cout << i << ". " << p.get_name() << "\n";
+        }
+    }
+    std::cout<<"\n";
+}
 
 bool menu::verify_password(const players& player) {
     std::string temp_password;
@@ -89,7 +113,8 @@ void menu::start() {
             i_player["currency1"],
             i_player["currency2"],
             i_player["health"],
-            i_player["damage"]
+            i_player["damage"],
+            i_player["project_id"].get<std::vector<int>>()
         );
         players_list.push_back(temp_player);
     }
@@ -184,7 +209,7 @@ void menu::choose_random_t(){
         std::cout << aux_t << ". " <<"defeated! Well done! You got project no." << aux_t << "\n";
         players_list[curr_player].add_project_id(aux_t);
     } else {
-        std::cout << "You died !";
+        std::cout << "You died !" << "\n";
     }
 
 }
@@ -197,7 +222,6 @@ void menu::close() {
 }
 
 void menu::run() {
-    //srand(static_cast<unsigned int>(time(nullptr)));
     start();
     display_texts(1);
     int option;
@@ -209,7 +233,7 @@ void menu::run() {
             players_list.push_back(temp_player);
             curr_player = 0;
         }
-        std::cout << "1.Select Player\n" << "2.Show current player\n"<< "3.Examination room\n"<< "0.Exit\n";
+        std::cout << "1.Select Player\n" << "2.Show current player\n"<< "3.Examination room\n"<< "4.Projects Information\n" "0.Exit\n";
         std::cin >> option;
         if (!option) {
             close();
@@ -225,8 +249,10 @@ void menu::run() {
         if (option == 3) {
             display_texts(6);
             choose_random_t();
-            option = 0;
-            close();
+        }
+        if (option == 4) {
+            display_texts((7));
+            show_projects();
         }
     } while (option);
 }

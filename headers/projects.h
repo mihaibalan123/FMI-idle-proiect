@@ -23,6 +23,10 @@ public:
         return *this;
     }
 
+    [[nodiscard]] const std::string& get_name() const {
+        return name;
+    }
+
     friend std::istream &operator>>(std::istream& is, projects& t);
     friend std::ostream& operator<<(std::ostream& os, const projects& t);
 };
