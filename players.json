@@ -6,7 +6,10 @@
         "damage": 7.0,
         "health": 500.0,
         "name": "mihai",
-        "password": "123456"
+        "password": "mihai123",
+        "project_id": [
+            63
+        ]
     },
     {
         "conquer_domain": -1,
@@ -14,7 +17,18 @@
         "currency2": 0.0,
         "damage": 7.0,
         "health": 500.0,
-        "name": "autocad",
-        "password": "acad15"
+        "name": "cristi",
+        "password": "123456",
+        "project_id": []
+    },
+    {
+        "conquer_domain": -1,
+        "currency1": 100.0,
+        "currency2": 0.0,
+        "damage": 7.0,
+        "health": 500.0,
+        "name": "man",
+        "password": "123456",
+        "project_id": []
     }
 ]

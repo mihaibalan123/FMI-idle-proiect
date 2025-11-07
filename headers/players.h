@@ -9,8 +9,9 @@ class players {
     std::string name, password;
     int conquer_domain;
     float currency1, currency2, health, damage;
+    std::vector<int> project_id;
 public:
-    players(std::string name, std::string password, int conquer_domain, float currency1, float currency2, float health, float damage): name(std::move(name)),password(std::move(password)), conquer_domain(conquer_domain), currency1(currency1), currency2(currency2), health(health), damage(damage){};
+    players(std::string name, std::string password, int conquer_domain, float currency1, float currency2, float health, float damage, std::vector<int> project_id = {}): name(std::move(name)),password(std::move(password)), conquer_domain(conquer_domain), currency1(currency1), currency2(currency2), health(health), damage(damage), project_id(std::move(project_id)) {};
     players() : conquer_domain(0), currency1(0.0f), currency2(0.0f), health(0.0f), damage(0.0f) {
     }
 
@@ -27,6 +28,7 @@ public:
         this->currency2 = other.currency2;
         this->health = other.health;
         this->damage = other.damage;
+        this->project_id = other.project_id;
         return *this;
     }
 
@@ -38,11 +40,19 @@ public:
         return health;
     }
 
+    [[nodiscard]] const std::vector<int>& get_project_id() const {
+        return project_id;
+    }
+
+    void add_project_id(int id) {
+        project_id.push_back(id);
+    }
+
     [[nodiscard]] int turns_to_defeat(float enemy_hp) const;
 
     friend std::istream& operator>>(std::istream& is, players &t);
     friend std::ostream& operator<<(std::ostream& os, const players& t);
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, conquer_domain, currency1, currency2, password, health, damage)
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, conquer_domain, currency1, currency2, password, health, damage, project_id)
 };
 
 
@@ -53,6 +63,7 @@ inline std::istream& operator>>(std::istream& is, players& t) {
     t.conquer_domain = -1;
     t.health = 500.0;
     t.damage = 7.0;
+    t.project_id.clear();
     std::cout << "NEW PLAYER REGISTRATION\n";
     std::cout << "Insert player name: ";
     getline(is, t.name);

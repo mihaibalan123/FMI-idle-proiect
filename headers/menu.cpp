@@ -36,7 +36,7 @@ void menu::display_texts(int x){
         }
         default: ;
     }
-}
+} // cam redundanta dar poate vor fi texte pe care le voi repeta deci pastrez pentru structura
 
 bool menu::verify_password(const players& player) {
     std::string temp_password;
@@ -128,7 +128,7 @@ void menu::choose_player() {
     } while (!option);
 }
 
-void menu::choose_random_t() const {
+void menu::choose_random_t(){
 
     std::vector<teachers> teacher_list_cpy = teachers_list;
     unsigned long long int size = teachers_list.size();
@@ -182,6 +182,7 @@ void menu::choose_random_t() const {
     teachers teacher_fought = teachers_list[aux_t];
     if (teacher_fought.turns_to_defeat(player_fought.get_health(),teacher_fought.get_critical_damage()) < player_fought.turns_to_defeat(teacher_fought.get_health())) {
         std::cout << aux_t << ". " <<"defeated! Well done! You got project no." << aux_t << "\n";
+        players_list[curr_player].add_project_id(aux_t);
     } else {
         std::cout << "You died !";
     }
