@@ -134,7 +134,7 @@ void menu::choose_player() {
         for (unsigned long long int i = 0; i < players_list.size(); i++) {
             std::cout << i + 1 << ". " << players_list[i]<<'\n';
         }
-        std::cout << players_list.size() +1 << ". Add new player.\n" << "0.Back\n";
+        std::cout << players_list.size() +1 << ". Add new  player.\n" << "0.Back\n";
         std::cin >> option;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         if (option == 0) return;
