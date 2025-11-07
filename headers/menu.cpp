@@ -53,7 +53,7 @@ void menu::show_projects() const {
         return;
     }
     std::cout << "\nPlayer " << players_list[curr_player] << " owns " << owned_projects.size() << " projects:\n";
-    for (auto& i : owned_projects) {
+    for (const auto& i : owned_projects) {
         if (i >= 0 && i <static_cast<int>(projects_list.size())) {
             const projects& p = projects_list[i];
             std::cout << i << ". " << p.get_name() << "\n";
