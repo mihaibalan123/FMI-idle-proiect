@@ -132,7 +132,7 @@ void menu::choose_player() {
     do {
         std::cout << "Players List:\n";
         for (unsigned long long int i = 0; i < players_list.size(); i++) {
-            std::cout << i + 1 << "." << players_list[i]<<'\n';
+            std::cout << i + 1 << ". " << players_list[i]<<'\n';
         }
         std::cout << players_list.size() +1 << ". Add new player.\n" << "0.Back\n";
         std::cin >> option;
