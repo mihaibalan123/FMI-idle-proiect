@@ -130,9 +130,12 @@ void menu::choose_player() {
 
 void menu::choose_random_t() const {
 
+    std::vector<teachers> teacher_list_cpy = teachers_list;
     unsigned long long int size = teachers_list.size();
-    int available_rerolls = 4;
+    int available_rerolls = 4, fight_t;
     int x = 0, ok = 0;
+    players player_fought = players_list[curr_player];
+    projects project_got;
 
     std::vector<int> teacher_indices;
     for (unsigned long long int i= 0; i < size; i++) {
@@ -151,7 +154,8 @@ void menu::choose_random_t() const {
             if (ok == 0) {
                 std::cout << "Selection kept. Proceeding...\n";
                 break;
-            } else if (ok != 1) {
+            }
+            if (ok != 1) {
                 std::cout << "??? Selection kept. Proceeding...\n";
                 break;
             }
@@ -159,7 +163,7 @@ void menu::choose_random_t() const {
         std::ranges::shuffle(teacher_indices, generator);
         std::cout << "You faced:\n";
         for (int i = 0; i < selected_teachers; ++i){
-            std::cout << teacher_indices[i] << " ";
+            std::cout << teacher_indices[i] << ". " << teacher_list_cpy[teacher_indices[i]] << "\n";
         }
         std::cout << "\n";
         if (available_rerolls > 0) {
@@ -169,8 +173,20 @@ void menu::choose_random_t() const {
             break;
         }
     }
-}
+    for (int i = 0 ; i < 5 ;i++) {
+        std::cout << i <<". Teacher no. " << teacher_indices[i] << "\n";
+    }
+    std::cout << "Who you wanna fight with?\n";
+    std::cin >> fight_t;
+    int aux_t = teacher_indices[fight_t];
+    teachers teacher_fought = teachers_list[aux_t];
+    if (teacher_fought.turns_to_defeat(player_fought.get_health(),teacher_fought.get_critical_damage()) < player_fought.turns_to_defeat(teacher_fought.get_health())) {
+        std::cout << aux_t << ". " <<"defeated! Well done! You got project no." << aux_t << "\n";
+    } else {
+        std::cout << "You died !";
+    }
 
+}
 
 void menu::close() {
     nlohmann::json json_players_list = players_list;

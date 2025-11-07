@@ -34,6 +34,12 @@ public:
         return password;
     }
 
+    [[nodiscard]] float get_health() const {
+        return health;
+    }
+
+    [[nodiscard]] int turns_to_defeat(float enemy_hp) const;
+
     friend std::istream& operator>>(std::istream& is, players &t);
     friend std::ostream& operator<<(std::ostream& os, const players& t);
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, conquer_domain, currency1, currency2, password, health, damage)

@@ -30,7 +30,7 @@ inline std::istream& operator>>(std::istream& is, teachers& t) {
 }
 
 inline std::ostream& operator<<(std::ostream& os, const teachers& t) {
-    os << t.last_name << t.first_name << t.rarity << " " << t.domain << " " << t.aura << " " << t.health << " " << t.damage << " " << t.critical_damage << " " << t.item_id;
+    os << t.last_name << " " <<  t.first_name << " " << t.rarity << " is from the domain no. " << t.domain << ", has " << t.aura << " aura, " << t.health << " health and " << t.damage << " damage with " << t.critical_damage << "% critical_damage ";
     return os;
 }
 

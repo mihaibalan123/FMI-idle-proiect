@@ -2,7 +2,7 @@
 #define OOP_TEACHERS_H
 
 #include <string>
-
+#include <iostream>
 
 class teachers {
     std::string last_name, first_name;
@@ -34,8 +34,20 @@ public:
         return *this;
     }
 
+    [[nodiscard]] float get_health() const {
+        return health;
+    }
+
+    [[nodiscard]] float get_critical_damage() const {
+        return critical_damage;
+    }
+
+    [[nodiscard]] int turns_to_defeat(float enemy_hp, float critical_chance) const;
+
     friend std::istream& operator>>(std::istream& is,  teachers &t);
     friend std::ostream& operator<<(std::ostream& os, const teachers &t);
+
 };
+
 
 #endif //OOP_TEACHERS_H
