@@ -15,23 +15,6 @@ public:
     players() : conquer_domain(0), currency1(0.0f), currency2(0.0f), health(0.0f), damage(0.0f) {
     }
 
-    ~players() = default;
-
-    players (const players& other) = default;
-
-    players& operator=(const players& other) {
-        if (this == &other) return *this;
-        this->name = other.name;
-        this->password = other.password;
-        this->conquer_domain = other.conquer_domain;
-        this->currency1 = other.currency1;
-        this->currency2 = other.currency2;
-        this->health = other.health;
-        this->damage = other.damage;
-        this->project_id = other.project_id;
-        return *this;
-    }
-
     [[nodiscard]] const std::string& get_password() const {
         return password;
     }
@@ -49,12 +32,10 @@ public:
     }
 
     [[nodiscard]] int turns_to_defeat(float enemy_hp) const;
-
     friend std::istream& operator>>(std::istream& is, players &t);
     friend std::ostream& operator<<(std::ostream& os, const players& t);
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(players, name, conquer_domain, currency1, currency2, password, health, damage, project_id)
 };
-
 
 inline std::istream& operator>>(std::istream& is, players& t) {
     std::string temp_pass1, temp_pass2;
