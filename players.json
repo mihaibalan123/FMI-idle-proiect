@@ -1,16 +1,20 @@
 [
     {
-        "conquer_domain": -1,
+        "conquer_domain": 1,
         "currency1": 100.0,
         "currency2": 0.0,
         "damage": 7.0,
+        "defeated_domains": [
+            3,
+            1,
+            1
+        ],
         "health": 500.0,
         "name": "mihai",
         "password": "mihai123",
         "project_id": [
-            31,
-            66,
-            0
+            1,
+            57
         ]
     },
     {
@@ -18,6 +22,7 @@
         "currency1": 100.0,
         "currency2": 0.0,
         "damage": 7.0,
+        "defeated_domains": [],
         "health": 500.0,
         "name": "cristi",
         "password": "123456",
@@ -28,6 +33,7 @@
         "currency1": 100.0,
         "currency2": 0.0,
         "damage": 7.0,
+        "defeated_domains": [],
         "health": 500.0,
         "name": "man",
         "password": "123456",

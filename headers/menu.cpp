@@ -136,8 +136,9 @@ void menu::start() {
             i_player["currency2"],
             i_player["health"],
             i_player["damage"],
-            i_player["project_id"]
-        );
+            i_player["project_id"],
+            i_player.value("defeated_domains", std::vector<int>{})
+            );
         players_list.push_back(temp_player);
     }
 }
@@ -226,10 +227,13 @@ void menu::choose_random_t() {
     std::cin >> fight_t;
     int aux_t = teacher_indices[fight_t];
     teachers teacher_fought = teachers_list[aux_t];
-    if (teacher_fought.turns_to_defeat(player_fought.get_health(), teacher_fought.get_critical_damage()) < player_fought
+    if (teacher_fought.turns_to_defeat(player_fought.get_health(), teacher_fought.get_critical_damage()) > player_fought
         .turns_to_defeat(teacher_fought.get_health())) {
         std::cout << aux_t << ". " << "defeated! Well done! You got project no." << aux_t << "\n";
         players_list[curr_player].add_project_id(aux_t);
+        int domain_id = teacher_fought.get_domain();
+        players_list[curr_player].add_defeated_domain(domain_id);
+        players_list[curr_player].calculate_and_set_conquer_domain();
     } else {
         std::cout << "You died !" << "\n";
     }
