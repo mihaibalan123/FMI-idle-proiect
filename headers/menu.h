@@ -14,6 +14,8 @@ class menu {
 
     static void display_texts(int x);
     void start();
+    void show_stats() const;
+    void project_upgrade();
     void add_player();
     void choose_player();
     void choose_random_t();

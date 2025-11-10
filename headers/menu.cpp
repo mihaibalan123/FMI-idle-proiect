@@ -43,6 +43,70 @@ void menu::display_texts(int x) {
     }
 } // cam redundanta dar poate vor fi texte pe care le voi repeta deci pastrez pentru structura
 
+void menu::project_upgrade() {
+    if (curr_player == -1) {
+        std::cout << "You must select a player!\n";
+        return;
+    }
+
+    const std::vector<int>& project_levels = players_list[curr_player].get_project_id();
+
+    std::cout << "Buy projects : \n";
+    bool ok = false;
+
+    for (size_t i = 0; i < project_levels.size(); ++i) {
+        int level = project_levels[i];
+        if (level > 0 && i < projects_list.size()) {
+            const projects& p = projects_list[i];
+            float cost = p.get_price();
+            std::cout << i << ". " << p.get_name() << " level: " << level <<" cost upgrade: " << cost << " and cashback: " << p.get_cashback() << "\n";
+            ok = true;
+        }
+    }
+
+    if (!ok) {
+        std::cout << "Fight with a teacher first!\n";
+        return;
+    }
+
+    int selected_id;
+    std::cout << "\n Which project will you upgrade?? ";
+    std::cin >> selected_id;
+
+    int ok1 = 0;
+    for (int i = 0; i < static_cast<int>(projects_list.size()); ++i) {
+        if (project_levels[i] != 0 && selected_id == i) {
+            ok1 = 1;
+        }
+    }
+
+    if (ok1 == 0) {
+        std::cout << "Invalid id! \n";
+        return;
+    } else {
+        players& current_player = players_list[curr_player];
+        const projects& selected_project = projects_list[selected_id];
+
+        float cost = selected_project.get_price();
+        float current_currency = current_player.get_currency1();
+
+        if (current_currency >= cost) {
+            current_player.set_currency1(current_currency - cost);
+
+            current_player.add_project_id(selected_id);
+
+            float reward = selected_project.get_cashback() * 10.0f;
+            current_player.set_currency1(current_player.get_currency1() + reward);
+
+            std::cout << "\n[SUCCES] project \"" << selected_project.get_name() << "was upgraded 1 level \n";
+            std::cout << "New currency1: " << current_player.get_currency1() << "\n";
+        } else {
+            std::cout << "Not enough money!! " << cost << ".\n";
+        }
+    }
+}
+
+
 void menu::show_projects() const {
     if (curr_player == -1) {
         std::cout << "You must select a player!\n";
@@ -54,11 +118,12 @@ void menu::show_projects() const {
         std::cout << "No projects. Go in examination room!\n";
         return;
     }
-    std::cout << "\nPlayer " << players_list[curr_player] << " owns " << owned_projects.size() << " projects:\n";
-    for (const auto &i: owned_projects) {
-        if (i >= 0 && i < static_cast<int>(projects_list.size())) {
-            const projects &p = projects_list[i];
-            std::cout << i << ". " << p << "\n";
+    std::cout << "\nPlayer " << players_list[curr_player] << " owns projects at these levels:\n";
+    for (int project_id = 0; project_id < static_cast<int>(owned_projects.size()); ++project_id) {
+        int level = owned_projects[project_id];
+        if (level > 0 && project_id < static_cast<int>(projects_list.size())) {
+            const projects &p = projects_list[project_id];
+            std::cout << project_id << ". " << p << " [Level: " << level << "]" << "\n";
         }
     }
     std::cout << "\n";
@@ -142,6 +207,17 @@ void menu::start() {
         players_list.push_back(temp_player);
     }
 }
+
+void menu::show_stats() const{
+    if (curr_player != -1) {
+        std::cout << "Current player is: " << players_list[curr_player] << '\n';
+        std::cout << "Currency1 value is: " << players_list[curr_player].get_currency1() << "\n";
+        std::cout << "Most -beatable- domain is: " << players_list[curr_player].get_conquer_domain() << "\n";
+        std::cout << "\n";
+    }
+    else std::cout << "No current player. Please register or select.\n";
+}
+
 
 void menu::add_player() {
     players temp_player;
@@ -258,8 +334,7 @@ void menu::run() {
             players_list.push_back(temp_player);
             curr_player = 0;
         }
-        std::cout << "1.Select Player\n" << "2.Show current player\n" << "3.Examination room\n" <<
-                "4.Projects Information\n" "0.Exit\n";
+        std::cout << "1.Select Player\n" << "2.Show current player\n" << "3.Examination room\n" << "4.Projects Information\n" << "5.Upgrade projects\n" "0.Exit\n";
         std::cin >> option;
         if (!option) {
             close();
@@ -269,8 +344,7 @@ void menu::run() {
             choose_player();
         }
         if (option == 2) {
-            if (curr_player != -1) std::cout << "Current player is: " << players_list[curr_player] << '\n';
-            else std::cout << "No current player. Please register or select.\n";
+            show_stats();
         }
         if (option == 3) {
             display_texts(6);
@@ -279,6 +353,9 @@ void menu::run() {
         if (option == 4) {
             display_texts((7));
             show_projects();
+        }
+        if (option == 5) {
+            project_upgrade();
         }
     } while (option);
 }
