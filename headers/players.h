@@ -47,7 +47,7 @@ public:
         }
         project_id[id]++;
     }
-
+    /*
     [[nodiscard]] float get_total_cashback(const std::vector<projects>& projects_list) const {
         float total_cashback = 0.0f;
         for (int id = 0; id < static_cast<int>(project_id.size()); ++id) {
@@ -59,6 +59,7 @@ public:
         }
         return total_cashback;
     }
+    */
 
     void add_defeated_domain(int domain_id) {
         defeated_domains.push_back(domain_id);
