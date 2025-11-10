@@ -11,7 +11,7 @@ class teachers {
     float health, damage, critical_damage;
     projects p;
 public:
-    teachers(std::string last_name, std::string  first_name, int rarity, int domain, int aura, int item_id, float health,
+    teachers(std::string last_name,  std::string  first_name, int rarity, int domain, int aura, int item_id, float health,
         float damage, float critical_damage, const projects&  assigned_project): last_name(std::move(last_name)),
         first_name(std::move(first_name)), rarity(rarity), domain(domain),aura(aura), item_id(item_id), health(health),
         damage(damage), critical_damage(critical_damage), p(assigned_project) {}
