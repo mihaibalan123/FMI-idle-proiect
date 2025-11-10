@@ -41,7 +41,7 @@ void menu::display_texts(int x) {
         }
         default: ;
     }
-} // cam redundanta dar poate vor fi texte pe care le voi repeta deci pastrez pentru structura
+}
 
 void menu::project_upgrade() {
     if (curr_player == -1) {

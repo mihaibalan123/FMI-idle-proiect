@@ -11,7 +11,6 @@ class menu {
     std::vector<projects> projects_list;
     std::vector<players> players_list;
     int curr_player = -1;
-
     static void display_texts(int x);
     void start();
     void show_stats() const;

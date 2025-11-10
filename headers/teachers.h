@@ -12,27 +12,39 @@ class teachers {
     projects p;
 public:
     teachers(std::string last_name, std::string  first_name, int rarity, int domain, int aura, int item_id, float health,
-        float damage, float critical_damage, projects  assigned_project): last_name(std::move(last_name)),
+        float damage, float critical_damage, const projects&  assigned_project): last_name(std::move(last_name)),
         first_name(std::move(first_name)), rarity(rarity), domain(domain),aura(aura), item_id(item_id), health(health),
-        damage(damage), critical_damage(critical_damage), p(std::move(assigned_project)) {}
-
+        damage(damage), critical_damage(critical_damage), p(assigned_project) {}
     teachers(): rarity(0), domain(0), aura(0), item_id(0), health(0), damage(0), critical_damage(0){};
+    ~teachers() = default;
 
-    ~teachers()=default;
-
-    teachers(const teachers& other) = default;
+    teachers(const teachers& other) :
+        last_name(other.last_name),
+        first_name(other.first_name),
+        rarity(other.rarity),
+        domain(other.domain),
+        aura(other.aura),
+        item_id(other.item_id),
+        health(other.health),
+        damage(other.damage),
+        critical_damage(other.critical_damage),
+        p(other.p)
+    {}
 
     teachers& operator=(const teachers& other) {
-        if (this == &other) return *this;
-        this->last_name = other.last_name;
-        this->first_name = other.first_name;
-        this->rarity = other.rarity;
-        this->domain = other.domain;
-        this->aura = other.aura;
-        this->item_id = other.item_id;
-        this->health = other.health;
-        this->damage = other.damage;
-        this->critical_damage = other. critical_damage;
+        if (this == &other) {
+            return *this;
+        }
+        last_name = other.last_name;
+        first_name = other.first_name;
+        rarity = other.rarity;
+        domain = other.domain;
+        aura = other.aura;
+        item_id = other.item_id;
+        health = other.health;
+        damage = other.damage;
+        critical_damage = other.critical_damage;
+        p = other.p;
         return *this;
     }
 
@@ -64,6 +76,5 @@ inline std::ostream& operator<<(std::ostream& os, const teachers& t) {
     os << t.p;
     return os;
 }
-
 
 #endif //OOP_TEACHERS_H

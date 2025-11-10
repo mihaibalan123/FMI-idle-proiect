@@ -8,3 +8,4 @@ int teachers::turns_to_defeat(float enemy_hp, float critical_chance) const {
     float turns_float = enemy_hp / average_damage;
     return static_cast<int>(turns_float);
 }
+
