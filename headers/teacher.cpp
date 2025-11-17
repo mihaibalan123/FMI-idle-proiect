@@ -1,10 +1,10 @@
 #include "teacher.h"
 
-int teacher::turns_to_defeat(float enemy_hp, float critical_chance) const {
+int teacher::turns_to_defeat(float enemy_hp, float t_critical_chance) const {
     if (this->damage <= 0.0f) {
         return (enemy_hp > 0) ? -1 : 0;
     }
-    float average_damage = this->damage * (1.0f + this->critical_chance * critical_chance);
+    float average_damage = this->damage * (1.0f + this->critical_chance * t_critical_chance);
     float turns_float = enemy_hp / average_damage;
     return static_cast<int>(turns_float);
 }

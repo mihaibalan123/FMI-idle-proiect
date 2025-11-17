@@ -64,7 +64,7 @@ public:
         return domain;
     }
 
-    [[nodiscard]] int turns_to_defeat(float enemy_hp, float critical_chance) const;
+    [[nodiscard]] int turns_to_defeat(float enemy_hp, float t_critical_chance) const;
 
     friend std::istream& operator>>(std::istream& is,  teacher &t);
     friend std::ostream& operator<<(std::ostream& os, const teacher &t);

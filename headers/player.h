@@ -20,10 +20,7 @@ class player {
     long long last_login_timestamp = 0;
 public:
     player(std::string name, std::string password, int conquer_domain, float currency1, float currency2, float health, float damage, std::vector<int> project_id,std::vector<int> project_levels, std::vector<int> defeated_domains = {}, long long last_login_timestamp  = 0): username(std::move(name)),password(std::move(password)), current_target_domain_id(conquer_domain), currency1(currency1), currency2(currency2), health(health), damage(damage), project_id(std::move(project_id)),project_levels(std::move(project_levels)), defeated_domains(std::move(defeated_domains)), last_login_timestamp(last_login_timestamp) {};
-    player() : current_target_domain_id(0), currency1(0.0f), currency2(0.0f), health(0.0f), damage(0.0f), last_login_timestamp(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()) {
-        project_id = {};
-        project_levels = {};
-    }
+    player() : current_target_domain_id(0), currency1(0.0f), currency2(0.0f), health(0.0f), damage(0.0f), last_login_timestamp(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()) {}
     ~player() = default;
 
     void add_project_id(int id);
@@ -69,6 +66,8 @@ public:
     [[nodiscard]] long long get_last_login_timestamp() const;
     void set_last_login_timestamp(long long timestamp);
     void reset_projects();
+    void idle_earnings(const std::vector<project>& projects_list);
+    void reset_game();
 
     friend std::istream& operator>>(std::istream& is, player &t);
     friend std::ostream& operator<<(std::ostream& os, const player& t);

@@ -8,12 +8,10 @@ const std::string& player::get_name() const {
     return username;
 }
 
-// 2. Get Damage
 float player::get_damage() const {
     return damage;
 }
 
-// 3. Get Defeated Domains
 const std::vector<int>& player::get_defeated_domains() const {
     return defeated_domains;
 }
@@ -159,5 +157,65 @@ void player::fight_teacher(const teacher& opponent, int p_project_id) {
         this->calculate_and_set_conquer_domain();
     } else {
         std::cout << "You died! Teacher " << opponent.get_last_name() << " was stronger." << "\n";
+    }
+}
+
+void player::idle_earnings(const std::vector<project>& projects_list) {
+    long long current_time = std::chrono::duration_cast<std::chrono::seconds>(
+        std::chrono::system_clock::now().time_since_epoch()).count();
+
+    long long time_elapsed_seconds = current_time - get_last_login_timestamp();
+    constexpr long long parse_seconds = 5 * 60;
+
+    if (time_elapsed_seconds <= 0) {
+        set_last_login_timestamp(current_time);
+        return;
+    }
+
+    long long tick_count = time_elapsed_seconds / parse_seconds;
+
+    if (tick_count > 0) {
+        float total_idle_earnings = 0.0f;
+        const std::vector<int> &i_project_levels = get_project_levels();
+
+        for (size_t i = 0; i < i_project_levels.size() && i < projects_list.size(); ++i) {
+            int level = i_project_levels[i];
+            if (level > 0) {
+                const project &p = projects_list[i];
+                float earnings_per_tick = p.get_cashback() * static_cast<float>(level);
+                total_idle_earnings += earnings_per_tick;
+            }
+        }
+
+        float final_earnings = total_idle_earnings * static_cast<float>(tick_count);
+        set_currency1(get_currency1() + final_earnings);
+
+        std::cout << "\nIdle Income: You were away for " << time_elapsed_seconds / 3600 << " hours and " <<(time_elapsed_seconds % 3600) / 60 << " minutes and " << (time_elapsed_seconds % 60) << " seconds.\n";
+        std::cout << "You earned " << final_earnings << " currency1!\n";
+    }
+    set_last_login_timestamp(current_time);
+}
+
+void player::reset_game() {
+    float c1_to_reset = get_currency1();
+
+    float multiplier = 5.0f;
+    float earned_currency2 = std::log10(c1_to_reset + 1.0f) * multiplier;
+
+    std::cout << "Do you want to reset? \n";
+    std::cout << "You have " << c1_to_reset << " currency1 and will earn " << earned_currency2 << " currency2.\n";
+    std::cout << "This will reset your Currency1 and all Project levels.\n";
+    std::cout << "Type 'ok' to confirm the reset or anything else not to: ";
+
+    std::string confirmation;
+    std::cin >> confirmation;
+
+    if (confirmation == "ok") {
+        set_currency2(get_currency2() + earned_currency2);
+        set_currency1(0.0f);
+        this->reset_projects();
+        std::cout << "Success!\n";
+    } else {
+        std::cout << "Cancelled.\n";
     }
 }

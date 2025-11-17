@@ -105,7 +105,7 @@ void menu::start() {
     std::ifstream f1("projects.json");
     nlohmann::json data1 = nlohmann::json::parse(f1);
 
-    for (auto &i_project: data1) {
+    for (const auto &i_project: data1) {
         project temp_project(
             i_project["name"],
             i_project["price"],
@@ -117,10 +117,10 @@ void menu::start() {
 
     std::ifstream f("teachers.json");
     nlohmann::json data = nlohmann::json::parse(f);
-    for (auto &i_teacher: data) {
+    for (const auto &i_teacher: data) {
         int project_idx = i_teacher["assigned_project"];
         if (project_idx >= 0 && project_idx < static_cast<int>(projects_list.size())) {
-            project &assigned_project = projects_list[project_idx];
+            const project &assigned_project = projects_list[project_idx];
 
             teacher temp_teacher(
                 i_teacher["last_name"],
@@ -209,7 +209,7 @@ void menu::choose_player() {
                 curr_player = static_cast<int>(index);
                 display_texts(4);
                 player &current_player = players_list[curr_player];
-                idle_earnings(current_player);
+                current_player.idle_earnings(projects_list);
             } else {
                 display_texts(5);
                 option = 0;
@@ -283,69 +283,13 @@ void menu::choose_random_teacher() {
     current_player.fight_teacher(teacher_fought, aux_t_index);
 }
 
-void menu::idle_earnings(player &current_player) const {
-    long long current_time = std::chrono::duration_cast<std::chrono::seconds>(
-        std::chrono::system_clock::now().time_since_epoch()).count();
-
-    long long time_elapsed_seconds = current_time - current_player.get_last_login_timestamp();
-    constexpr long long parse_seconds = 5 * 60;
-
-    if (time_elapsed_seconds <= 0) {
-        current_player.set_last_login_timestamp(current_time);
-        return;
-    }
-
-    long long tick_count = time_elapsed_seconds / parse_seconds;
-
-    if (tick_count > 0) {
-        float total_idle_earnings = 0.0f;
-        const std::vector<int> &project_levels = current_player.get_project_levels();
-        for (size_t i = 0; i < project_levels.size() && i < projects_list.size(); ++i) {
-            int level = project_levels[i];
-            if (level > 0) {
-                const project &p = projects_list[i];
-                float earnings_per_tick = p.get_cashback() * static_cast<float>(level);
-                total_idle_earnings += earnings_per_tick;
-            }
-        }
-
-        float final_earnings = total_idle_earnings * static_cast<float>(tick_count);
-        current_player.set_currency1(current_player.get_currency1() + final_earnings);
-
-        std::cout << "\nIdle Income: You were away for " << time_elapsed_seconds / 3600 << " hours and " <<(time_elapsed_seconds % 3600) / 60 << " minutes and " << (time_elapsed_seconds % 60) << " seconds.\n";
-        std::cout << "You earned " << final_earnings << " currency1!\n";
-    }
-    current_player.set_last_login_timestamp(current_time);
-}
-
 void menu::reset_game() {
     if (curr_player == -1) {
         std::cout << "You must select a player!\n";
         return;
     }
-
     player &current_player = players_list[curr_player];
-    float c1_to_reset = current_player.get_currency1();
-
-    float multiplier = 5.0f;
-    float earned_currency2 = std::log10(c1_to_reset + 1.0f) * multiplier;
-
-    std::cout << "Do you want to reset? \n";
-    std::cout << "You have " << c1_to_reset << " currency1 and will earn " << earned_currency2 << " currency2.\n";
-    std::cout << "This will reset your Currency1 and all Project levels.\n";
-    std::cout << "Type 'ok' to confirm the reset or anything else not to: ";
-
-    std::string confirmation;
-    std::cin >> confirmation;
-
-    if (confirmation == "ok") {
-        current_player.set_currency2(current_player.get_currency2() + earned_currency2);
-        current_player.set_currency1(0.0f);
-        current_player.reset_projects();
-        std::cout << "Success!\n";
-    } else {
-        std::cout << "Cancelled.\n";
-    }
+    current_player.reset_game();
 }
 
 void menu::close() {
@@ -371,7 +315,7 @@ void menu::run() {
             std::cin >> temp_player;
             players_list.push_back(temp_player);
             curr_player = 0;
-            idle_earnings(players_list[curr_player]);
+            players_list[curr_player].idle_earnings(projects_list);
         }
         std::cout << "1.Select Player\n" << "2.Show current player\n" << "3.Examination room\n" <<
                 "4.Projects Information\n" << "5.Upgrade projects\n" << "6.RESTANTA (Reset)\n" "0.Exit\n";
