@@ -1,13 +1,7 @@
 #include "project.h"
 
-project::project(const nlohmann::json& j) :
-    name(j["name"]),
-    price(j["price"]),
-    cashback(j["cashback"])
-{}
-
 inline std::istream& operator>>(std::istream& is, project& t) {
-    is >> t.name>> t.price>> t.cashback;
+    is >> t.proj_name>> t.market_price>> t.if_bought_cashback;
     return is;
 }
 

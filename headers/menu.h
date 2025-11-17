@@ -16,9 +16,11 @@ class menu {
     void show_stats() const;
     void project_upgrade();
     void add_player();
+    void idle_earnings(player& current_player) const;
     void choose_player();
-    void choose_random_t();
+    void choose_random_teacher();
     void show_projects() const;
+    void reset_game();
     void close();
     static bool verify_password(const player& p);
 public:

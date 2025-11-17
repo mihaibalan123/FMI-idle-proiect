@@ -8,15 +8,14 @@
 class teacher {
     std::string last_name, first_name;
     int rarity, domain, aura, item_id;
-    float health, damage, critical_damage;
+    float health, damage, critical_chance;
     project p;
 public:
     teacher(std::string last_name,  std::string  first_name, int rarity, int domain, int aura, int item_id, float health,
         float damage, float critical_damage, const project&  assigned_project): last_name(std::move(last_name)),
         first_name(std::move(first_name)), rarity(rarity), domain(domain),aura(aura), item_id(item_id), health(health),
-        damage(damage), critical_damage(critical_damage), p(assigned_project) {}
-    teacher(): rarity(0), domain(0), aura(0), item_id(0), health(0), damage(0), critical_damage(0){};
-    explicit teacher(const nlohmann::json& j, const project& assigned_project);
+        damage(damage), critical_chance(critical_damage), p(assigned_project) {}
+    teacher(): rarity(0), domain(0), aura(0), item_id(0), health(0), damage(0), critical_chance(0){};
     ~teacher() = default;
 
     teacher(const teacher& other) :
@@ -28,7 +27,7 @@ public:
         item_id(other.item_id),
         health(other.health),
         damage(other.damage),
-        critical_damage(other.critical_damage),
+        critical_chance(other.critical_chance),
         p(other.p)
     {}
 
@@ -44,7 +43,7 @@ public:
         item_id = other.item_id;
         health = other.health;
         damage = other.damage;
-        critical_damage = other.critical_damage;
+        critical_chance = other.critical_chance;
         p = other.p;
         return *this;
     }
@@ -58,7 +57,7 @@ public:
     }
 
     [[nodiscard]] float get_critical_chance() const {
-        return critical_damage;
+        return critical_chance;
     }
 
     [[nodiscard]] int get_domain() const {
@@ -72,12 +71,12 @@ public:
 };
 
 inline std::istream& operator>>(std::istream& is, teacher& t) {
-    is >> t.last_name>> t.first_name >> t.rarity>> t.domain>> t.aura>> t.item_id>> t.health>> t.damage>> t.critical_damage;
+    is >> t.last_name>> t.first_name >> t.rarity>> t.domain>> t.aura>> t.item_id>> t.health>> t.damage>> t.critical_chance;
     return is;
 }
 
 inline std::ostream& operator<<(std::ostream& os, const teacher& t) {
-    os << t.last_name << " " <<  t.first_name << " " << t.rarity << " is from the domain no. " << t.domain << ", has " << t.aura << " aura, " << t.health << " health and " << t.damage << " damage with " << t.critical_damage << "% critical_damage " << "\n";
+    os << t.last_name << " " <<  t.first_name << " " << t.rarity << " is from the domain no. " << t.domain << ", has " << t.aura << " aura, " << t.health << " health and " << t.damage << " damage with " << t.critical_chance << "% critical_damage " << "\n";
     os << t.p;
     return os;
 }

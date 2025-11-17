@@ -4,25 +4,23 @@
 #include <nlohmann/json.hpp>
 
 class project {
-    std::string name;
-    float price, cashback;
+    std::string proj_name;
+    float market_price, if_bought_cashback;
 public:
-    project(std::string name, float price, float cashback): name(std::move(name)), price(price), cashback(cashback){};
-    project() : price(0.0f), cashback(0.0f){};
-
-    explicit project(const nlohmann::json& j);
+    project(std::string name, float price, float cashback): proj_name(std::move(name)), market_price(price), if_bought_cashback(cashback){};
+    project() : market_price(0.0f), if_bought_cashback(0.0f){};
     ~project() = default;
 
     [[nodiscard]] const std::string& get_name() const {
-        return name;
+        return proj_name;
     }
 
     [[nodiscard]] float get_price() const {
-        return price;
+        return market_price;
     }
 
     [[nodiscard]] float get_cashback() const {
-        return cashback;
+        return if_bought_cashback;
     }
 
     friend std::istream &operator>>(std::istream& is, project& t);

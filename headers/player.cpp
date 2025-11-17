@@ -4,23 +4,52 @@
 #include <algorithm>
 #include <vector>
 
-player::player(const nlohmann::json& j) :
-    name(j["name"]),
-    password(j["password"]),
-    conquer_domain(j["conquer_domain"]),
-    currency1(j["currency1"]),
-    currency2(j["currency2"]),
-    health(j["health"]),
-    damage(j["damage"]),
-    project_id(j["project_id"].get<std::vector<int>>()),
-    defeated_domains(j.value("defeated_domains", std::vector<int>{}))
-{}
+const std::string& player::get_name() const {
+    return username;
+}
+
+// 2. Get Damage
+float player::get_damage() const {
+    return damage;
+}
+
+// 3. Get Defeated Domains
+const std::vector<int>& player::get_defeated_domains() const {
+    return defeated_domains;
+}
+
+long long player::get_last_login_timestamp() const {
+    return last_login_timestamp;
+}
+
+void player::set_last_login_timestamp(long long timestamp) {
+    last_login_timestamp = timestamp;
+}
+
+void player::reset_projects() {
+    project_id.clear();
+    project_levels.clear();
+}
+
+[[nodiscard]] const std::vector<int>& player::get_project_levels() const {
+    return project_levels;
+}
+
+[[nodiscard]] float player::get_currency2() const {
+    return currency2;
+}
+
+void player::set_currency2(float value) {
+    currency2 = value;
+}
 
 void player::add_project_id(int id) {
     if (id >= static_cast<int>(project_id.size())) {
-        project_id.resize(id + 1,0);
+        project_id.resize(id + 1, 0);
+        project_levels.resize(id + 1, 0);
     }
     project_id[id]++;
+    project_levels[id]++;
 }
 
 void player::add_defeated_domain(int domain_id) {
@@ -29,7 +58,7 @@ void player::add_defeated_domain(int domain_id) {
 
 void player::calculate_and_set_conquer_domain() {
     if (defeated_domains.empty()) {
-        this->conquer_domain = -1;
+        this->current_target_domain_id = -1;
         return;
     }
     std::ranges::sort(defeated_domains);
@@ -52,7 +81,7 @@ void player::calculate_and_set_conquer_domain() {
     if (curr_c > max_count) {
         mfdomain = curr_d;
     }
-    this->conquer_domain = mfdomain;
+    this->current_target_domain_id = mfdomain;
 }
 
 int player::turns_to_defeat(float enemy_hp) const {
