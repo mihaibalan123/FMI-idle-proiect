@@ -12,7 +12,7 @@ player::player(const nlohmann::json& j) :
     currency2(j["currency2"]),
     health(j["health"]),
     damage(j["damage"]),
-    project_id(j["project_id"]),
+    project_id(j["project_id"].get<std::vector<int>>()),
     defeated_domains(j.value("defeated_domains", std::vector<int>{}))
 {}
 
@@ -116,10 +116,10 @@ void player::project_upgrade(int selected_id, const std::vector<project>& projec
 }
 
 void player::fight_teacher(const teacher& opponent, int p_project_id) {
-    constexpr float CRITICAL_CHANCE_PLAYER = 0.05f;
+    float critical_chance = opponent.get_critical_chance();
 
     int player_turns = this->turns_to_defeat(opponent.get_health());
-    int teacher_turns = opponent.turns_to_defeat(this->get_health(), CRITICAL_CHANCE_PLAYER);
+    int teacher_turns = opponent.turns_to_defeat(this->get_health(), critical_chance);
 
     if (player_turns != -1 && (teacher_turns == -1 || player_turns <= teacher_turns)) {
         std::cout << opponent.get_last_name() << " defeated! Well done! You got project no." << p_project_id << "\n";

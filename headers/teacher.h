@@ -57,7 +57,7 @@ public:
         return health;
     }
 
-    [[nodiscard]] float get_critical_damage() const {
+    [[nodiscard]] float get_critical_chance() const {
         return critical_damage;
     }
 
