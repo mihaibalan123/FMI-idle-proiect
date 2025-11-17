@@ -8,6 +8,8 @@ gi# FMI-Idle
   
   Va reuși vreodată Ics să termine Facultatea sau va deveni un milionar terorizat de Restanță ce nu se va bucura vreodată de o licență la FMI?
 
+  La prima rulare a jocului, utilizatorul trebuie sa selecteze un profil deja creat conectandu-se cu parola sau poate crea un profil nou. In meniu se pot vedea statisticile user-ului (valoarea currency1/currency2 ---> generic momentan). Userul se poate duela cu profesori, castigandu-le proiectul din dreptul lor. Fiecare proiect are o variabila de pret (intrucat poate fi imbunatatit) si una de cashback (overtime ---> momentan la 5 minute) valoarea currency1 se incrementeaza cu cashback-ul fiecarui proiect detinut. Se poate reseta valoarea currency1 si se incrementeaza logaritmic * 5 valoarea currency2. Totul se ramane in fisiere json la terminarea programului. Urmeaza iteme, buff-uri, debuff-uri, ....
+
 ### Reminder:
 
 Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar dacă documentați riguros acest proces.
