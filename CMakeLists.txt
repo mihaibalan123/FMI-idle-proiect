@@ -52,12 +52,12 @@ add_executable(${MAIN_EXECUTABLE_NAME}
     main.cpp
         headers/menu.cpp
         headers/menu.h
-        headers/teachers.cpp
-        headers/teachers.h
-        headers/projects.cpp
-        headers/projects.h
-        headers/players.cpp
-        headers/players.h
+        headers/teacher.cpp
+        headers/teacher.h
+        headers/project.cpp
+        headers/project.h
+        headers/player.cpp
+        headers/player.h
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )

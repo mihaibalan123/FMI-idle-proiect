@@ -1,8 +1,8 @@
 #include <fstream>
 #include "menu.h"
-#include "players.h"
-#include "teachers.h"
-#include "projects.h"
+#include "player.h"
+#include "teacher.h"
+#include "project.h"
 #include <cstdlib>
 #include <random>
 
@@ -43,13 +43,22 @@ void menu::display_texts(int x) {
     }
 }
 
+void menu::show_projects() const {
+    if (curr_player == -1) {
+        std::cout << "You must select a player!\n";
+        return;
+    }
+    players_list[curr_player].show_projects(projects_list);
+}
+
 void menu::project_upgrade() {
     if (curr_player == -1) {
         std::cout << "You must select a player!\n";
         return;
     }
 
-    const std::vector<int>& project_levels = players_list[curr_player].get_project_id();
+    player& current_player = players_list[curr_player];
+    const std::vector<int>& project_levels = current_player.get_project_id();
 
     std::cout << "Buy projects : \n";
     bool ok = false;
@@ -57,8 +66,8 @@ void menu::project_upgrade() {
     for (size_t i = 0; i < project_levels.size(); ++i) {
         int level = project_levels[i];
         if (level > 0 && i < projects_list.size()) {
-            const projects& p = projects_list[i];
-            float cost = p.get_price();
+            const project& p = projects_list[i];
+            float cost = p.get_price() * static_cast<float>(level + 1);
             std::cout << i << ". " << p.get_name() << " level: " << level <<" cost upgrade: " << cost << " and cashback: " << p.get_cashback() << "\n";
             ok = true;
         }
@@ -73,63 +82,16 @@ void menu::project_upgrade() {
     std::cout << "\n Which project will you upgrade?? ";
     std::cin >> selected_id;
 
-    int ok1 = 0;
-    for (int i = 0; i < static_cast<int>(projects_list.size()); ++i) {
-        if (project_levels[i] != 0 && selected_id == i) {
-            ok1 = 1;
-        }
-    }
-
-    if (ok1 == 0) {
-        std::cout << "Invalid id! \n";
+    if (selected_id < 0 || selected_id >= static_cast<int>(projects_list.size()) ||
+        selected_id >= static_cast<int>(project_levels.size()) || project_levels[selected_id] == 0)
+    {
+        std::cout << "Invalid or unowned project id! \n";
         return;
-    } else {
-        players& current_player = players_list[curr_player];
-        const projects& selected_project = projects_list[selected_id];
-
-        float cost = selected_project.get_price();
-        float current_currency = current_player.get_currency1();
-
-        if (current_currency >= cost) {
-            current_player.set_currency1(current_currency - cost);
-
-            current_player.add_project_id(selected_id);
-
-            float reward = selected_project.get_cashback() * 10.0f;
-            current_player.set_currency1(current_player.get_currency1() + reward);
-
-            std::cout << "\n[SUCCES] project \"" << selected_project.get_name() << "was upgraded 1 level \n";
-            std::cout << "New currency1: " << current_player.get_currency1() << "\n";
-        } else {
-            std::cout << "Not enough money!! " << cost << ".\n";
-        }
     }
+    current_player.project_upgrade(selected_id, projects_list);
 }
 
-
-void menu::show_projects() const {
-    if (curr_player == -1) {
-        std::cout << "You must select a player!\n";
-        return;
-    }
-    const std::vector<int> &owned_projects = players_list[curr_player].get_project_id();
-
-    if (owned_projects.empty()) {
-        std::cout << "No projects. Go in examination room!\n";
-        return;
-    }
-    std::cout << "\nPlayer " << players_list[curr_player] << " owns projects at these levels:\n";
-    for (int project_id = 0; project_id < static_cast<int>(owned_projects.size()); ++project_id) {
-        int level = owned_projects[project_id];
-        if (level > 0 && project_id < static_cast<int>(projects_list.size())) {
-            const projects &p = projects_list[project_id];
-            std::cout << project_id << ". " << p << " [Level: " << level << "]" << "\n";
-        }
-    }
-    std::cout << "\n";
-}
-
-bool menu::verify_password(const players &player) {
+bool menu::verify_password(const player &player) {
     std::string temp_password;
     display_texts(3);
     std::getline(std::cin, temp_password);
@@ -143,68 +105,27 @@ void menu::start() {
     nlohmann::json data1 = nlohmann::json::parse(f1);
 
     for (const auto &i_project: data1) {
-        projects temp_project(
-            i_project["name"],
-            i_project["price"],
-            i_project["cashback"]
-
-        );
-        projects_list.push_back(temp_project);
+        projects_list.emplace_back(i_project);
     }
 
     std::ifstream f("teachers.json");
     nlohmann::json data = nlohmann::json::parse(f);
-    for (const auto &i_teacher: data) {
-        int project_idx = i_teacher["assigned_project"];
-        if (project_idx >= 0 && project_idx < static_cast<int>(projects_list.size())) {
-            const projects &assigned_project = projects_list[project_idx];
 
-            teachers temp_teacher(
-                i_teacher["last_name"],
-                i_teacher["first_name"],
-                i_teacher["rarity"],
-                i_teacher["domain"],
-                i_teacher["aura"],
-                i_teacher["item_id"],
-                i_teacher["health"],
-                i_teacher["damage"],
-                i_teacher["critical_damage"],
-                assigned_project
-            );
-            teachers_list.push_back(temp_teacher);
-        } else {
-            teachers temp_teacher(
-                i_teacher["last_name"],
-                i_teacher["first_name"],
-                i_teacher["rarity"],
-                i_teacher["domain"],
-                i_teacher["aura"],
-                i_teacher["item_id"],
-                i_teacher["health"],
-                i_teacher["damage"],
-                i_teacher["critical_damage"],
-                projects()
-            );
-            teachers_list.push_back(temp_teacher);
+        for (const auto &i_teacher: data) {
+            int project_idx = i_teacher["assigned_project"];
+            if (project_idx >= 0 && project_idx < static_cast<int>(projects_list.size())) {
+                const project &assigned_project = projects_list[project_idx];
+                teachers_list.emplace_back(i_teacher, assigned_project);
+            } else {
+                teachers_list.emplace_back(i_teacher, project());
+            }
         }
-    }
 
     std::ifstream f2("players.json");
     nlohmann::json data2 = nlohmann::json::parse(f2);
 
     for (const auto &i_player: data2) {
-        players temp_player(
-            i_player["name"],
-            i_player["password"],
-            i_player["conquer_domain"],
-            i_player["currency1"],
-            i_player["currency2"],
-            i_player["health"],
-            i_player["damage"],
-            i_player["project_id"],
-            i_player.value("defeated_domains", std::vector<int>{})
-            );
-        players_list.push_back(temp_player);
+        players_list.emplace_back(i_player);
     }
 }
 
@@ -218,9 +139,8 @@ void menu::show_stats() const{
     else std::cout << "No current player. Please register or select.\n";
 }
 
-
 void menu::add_player() {
-    players temp_player;
+    player temp_player;
     std::cin >> temp_player;
     players_list.push_back(temp_player);
     curr_player = static_cast<int>(players_list.size() - 1);
@@ -253,66 +173,68 @@ void menu::choose_player() {
 }
 
 void menu::choose_random_t() {
-    std::vector<teachers> teacher_list_cpy = teachers_list;
-    unsigned long long int size = teachers_list.size();
-    int available_rerolls = 4, fight_t;
-    int x = 0, ok = 0;
-    players player_fought = players_list[curr_player];
-    projects project_got;
+    if (curr_player == -1) {
+        std::cout << "You must select a player!\n";
+        return;
+    }
+    display_texts(6);
 
     std::vector<int> teacher_indices;
-    for (unsigned long long int i = 0; i < size; i++) {
-        teacher_indices.push_back(x++);
+    for (int i = 0; i < static_cast<int>(teachers_list.size()); ++i) {
+        teacher_indices.push_back(i);
     }
+
     std::random_device rd;
     std::mt19937 generator(rd());
-    std::ranges::shuffle(teacher_indices, generator);
+
+    int available_rerolls = 4;
+    int fight_t = -1;
 
     while (available_rerolls >= 0) {
-        int selected_teachers = 5;
-        if (available_rerolls < 4) {
+        std::ranges::shuffle(teacher_indices, generator);
+
+        std::cout << "You faced:\n";
+        for (int i = 0; i < 5 && i < static_cast<int>(teacher_indices.size()); ++i) {
+            int current_teacher_id = teacher_indices[i];
+            std::cout << i << ". " << teachers_list[current_teacher_id] << "\n";
+        }
+
+        if (available_rerolls > 0) {
+            int ok;
             std::cout << "Reroll or keep them ? \n" << "0. Keep.\n" << "1. Reroll.\n";
             std::cout << "You have " << available_rerolls << " available rerolls left!\n";
             std::cin >> ok;
+
             if (ok == 0) {
                 std::cout << "Selection kept. Proceeding...\n";
                 break;
-            }
-            if (ok != 1) {
+            } else if (ok == 1) {
+                available_rerolls--;
+            } else {
                 std::cout << "??? Selection kept. Proceeding...\n";
                 break;
             }
-        }
-        std::ranges::shuffle(teacher_indices, generator);
-        std::cout << "You faced:\n";
-        for (int i = 0; i < selected_teachers; ++i) {
-            std::cout << teacher_indices[i] << ". " << teacher_list_cpy[teacher_indices[i]] << "\n";
-        }
-        std::cout << "\n";
-        if (available_rerolls > 0) {
-            available_rerolls--;
-        } else if (ok == 1) {
+        } else {
             std::cout << "No rerolls left. Selection kept. Proceeding...\n";
             break;
         }
     }
-    for (int i = 0; i < 5; i++) {
-        std::cout << i << ". Teacher no. " << teacher_indices[i] << "\n";
-    }
-    std::cout << "Who you wanna fight with?\n";
-    std::cin >> fight_t;
-    int aux_t = teacher_indices[fight_t];
-    teachers teacher_fought = teachers_list[aux_t];
-    if (teacher_fought.turns_to_defeat(player_fought.get_health(), teacher_fought.get_critical_damage()) > player_fought
-        .turns_to_defeat(teacher_fought.get_health())) {
-        std::cout << aux_t << ". " << "defeated! Well done! You got project no." << aux_t << "\n";
-        players_list[curr_player].add_project_id(aux_t);
-        int domain_id = teacher_fought.get_domain();
-        players_list[curr_player].add_defeated_domain(domain_id);
-        players_list[curr_player].calculate_and_set_conquer_domain();
-    } else {
-        std::cout << "You died !" << "\n";
-    }
+
+    int aux_t_index = -1;
+    do {
+        std::cout << "Who you wanna fight with? (0-4)\n";
+        std::cin >> fight_t;
+        if (fight_t >= 0 && fight_t < 5) {
+            aux_t_index = teacher_indices[fight_t];
+        } else {
+             std::cout << "Invalid selection. Try again.\n";
+        }
+    } while (aux_t_index == -1);
+
+    player& current_player = players_list[curr_player];
+    const teacher& teacher_fought = teachers_list[aux_t_index];
+
+    current_player.fight_teacher(teacher_fought, aux_t_index);
 }
 
 void menu::close() {
@@ -329,7 +251,7 @@ void menu::run() {
     do {
         if (players_list.empty()) {
             display_texts(2);
-            players temp_player;
+            player temp_player;
             std::cin >> temp_player;
             players_list.push_back(temp_player);
             curr_player = 0;

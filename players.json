@@ -102,5 +102,16 @@
         "name": "jean",
         "password": "jeann1",
         "project_id": []
+    },
+    {
+        "conquer_domain": -1,
+        "currency1": 100.0,
+        "currency2": 0.0,
+        "damage": 7.0,
+        "defeated_domains": [],
+        "health": 500.0,
+        "name": "ilie",
+        "password": "123456",
+        "project_id": []
     }
 ]

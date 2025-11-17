@@ -2,14 +2,14 @@
 #define OOP_MENU_H
 
 #include <vector>
-#include "teachers.h"
-#include "projects.h"
-#include "players.h"
+#include "teacher.h"
+#include "project.h"
+#include "player.h"
 
 class menu {
-    std::vector<teachers> teachers_list;
-    std::vector<projects> projects_list;
-    std::vector<players> players_list;
+    std::vector<teacher> teachers_list;
+    std::vector<project> projects_list;
+    std::vector<player> players_list;
     int curr_player = -1;
     static void display_texts(int x);
     void start();
@@ -20,7 +20,7 @@ class menu {
     void choose_random_t();
     void show_projects() const;
     void close();
-    static bool verify_password(const players& p);
+    static bool verify_password(const player& p);
 public:
     void run();
 
