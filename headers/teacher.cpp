@@ -1,5 +1,21 @@
 #include "teacher.h"
 
+const std::string& teacher::get_last_name() const {
+    return last_name;
+}
+
+float teacher::get_health() const {
+    return health;
+}
+
+float teacher::get_critical_chance() const {
+    return critical_chance;
+}
+
+int teacher::get_domain() const {
+    return domain;
+}
+
 std::vector<teacher> teacher::load_teachers(const std::vector<project>& projects_list) {
 
     std::vector<teacher> teachers_list;

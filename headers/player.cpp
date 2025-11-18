@@ -4,6 +4,26 @@
 #include <algorithm>
 #include <vector>
 
+const std::string& player::get_password() const {
+    return password;
+}
+
+const std::vector<int>& player::get_project_id() const {
+    return project_id;
+}
+
+float player::get_health() const {
+    return health;
+}
+
+float player::get_currency1() const {
+    return currency1;
+}
+
+int player::get_conquer_domain() const {
+    return current_target_domain_id;
+}
+
 const std::string& player::get_name() const {
     return username;
 }
@@ -16,13 +36,35 @@ const std::vector<int>& player::get_defeated_domains() const {
     return defeated_domains;
 }
 
+[[nodiscard]] const std::vector<int>& player::get_project_levels() const {
+    return project_levels;
+}
+
+[[nodiscard]] float player::get_currency2() const {
+    return currency2;
+}
+
 long long player::get_last_login_timestamp() const {
     return last_login_timestamp;
+}
+
+
+
+
+void player::set_currency1(float value) {
+    currency1 = value;
+}
+
+void player::set_currency2(float value) {
+    currency2 = value;
 }
 
 void player::set_last_login_timestamp(long long timestamp) {
     last_login_timestamp = timestamp;
 }
+
+
+
 
 std::vector<player> player::load_players() {
 
@@ -74,18 +116,6 @@ int player::add_new_player(std::vector<player>& players_list) {
 void player::reset_projects() {
     project_id.clear();
     project_levels.clear();
-}
-
-[[nodiscard]] const std::vector<int>& player::get_project_levels() const {
-    return project_levels;
-}
-
-[[nodiscard]] float player::get_currency2() const {
-    return currency2;
-}
-
-void player::set_currency2(float value) {
-    currency2 = value;
 }
 
 void player::add_project_id(int id) {

@@ -9,12 +9,12 @@ class teacher {
     std::string last_name, first_name;
     int rarity, domain, aura, item_id;
     float health, damage, critical_chance;
-    project p;
+    project assigned_project;
 public:
     teacher(std::string last_name,  std::string  first_name, int rarity, int domain, int aura, int item_id, float health,
         float damage, float critical_damage, const project&  assigned_project): last_name(std::move(last_name)),
         first_name(std::move(first_name)), rarity(rarity), domain(domain),aura(aura), item_id(item_id), health(health),
-        damage(damage), critical_chance(critical_damage), p(assigned_project) {}
+        damage(damage), critical_chance(critical_damage), assigned_project(assigned_project) {}
     teacher(): rarity(0), domain(0), aura(0), item_id(0), health(0), damage(0), critical_chance(0){};
     ~teacher() = default;
 
@@ -28,7 +28,7 @@ public:
         health(other.health),
         damage(other.damage),
         critical_chance(other.critical_chance),
-        p(other.p)
+        assigned_project(other.assigned_project)
     {}
 
     teacher& operator=(const teacher& other) {
@@ -44,26 +44,14 @@ public:
         health = other.health;
         damage = other.damage;
         critical_chance = other.critical_chance;
-        p = other.p;
+        assigned_project = other.assigned_project;
         return *this;
     }
 
-    [[nodiscard]] const std::string& get_last_name() const {
-        return last_name;
-    }
-
-    [[nodiscard]] float get_health() const {
-        return health;
-    }
-
-    [[nodiscard]] float get_critical_chance() const {
-        return critical_chance;
-    }
-
-    [[nodiscard]] int get_domain() const {
-        return domain;
-    }
-
+    [[nodiscard]] const std::string& get_last_name() const;
+    [[nodiscard]] float get_health() const;
+    [[nodiscard]] float get_critical_chance() const;
+    [[nodiscard]] int get_domain() const;
 
     static std::vector<teacher> load_teachers(const std::vector<project>& projects_list);
     [[nodiscard]] int turns_to_defeat(float enemy_hp, float t_critical_chance) const;
@@ -79,7 +67,7 @@ inline std::istream& operator>>(std::istream& is, teacher& t) {
 
 inline std::ostream& operator<<(std::ostream& os, const teacher& t) {
     os << t.last_name << " " <<  t.first_name << " " << t.rarity << " is from the domain no. " << t.domain << ", has " << t.aura << " aura, " << t.health << " health and " << t.damage << " damage with " << t.critical_chance << "% critical_damage " << "\n";
-    os << t.p;
+    os << t.assigned_project;
     return os;
 }
 

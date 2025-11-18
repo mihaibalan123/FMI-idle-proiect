@@ -1,5 +1,17 @@
 #include "project.h"
 
+const std::string& project::get_name() const {
+    return proj_name;
+}
+
+float project::get_price() const {
+    return market_price;
+}
+
+float project::get_cashback() const {
+    return if_bought_cashback;
+}
+
 std::vector<project> project::load_projects() {
 
     std::vector<project> projects_list;
@@ -21,7 +33,6 @@ inline std::istream& operator>>(std::istream& is, project& t) {
     is >> t.proj_name>> t.market_price>> t.if_bought_cashback;
     return is;
 }
-
 std::ostream& operator<<(std::ostream& os, const project& p) {
     os << p.get_name() << " (price of his project is: " << p.get_price() << " with cashback: " << p.get_cashback() << ")" << "\n";
     return os;

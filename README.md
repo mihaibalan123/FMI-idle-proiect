@@ -1,6 +1,6 @@
-gi# FMI-Idle
+# FMI-Idle Game
 
-### Descriere
+## Descriere
 
   **FMI Idle** simulează experiența Facultății de Matematică și Informatică din perspectiva studentului Ics - încrezător și mândru, căruia i se pare că facultatea este un joc "idle". Ajută-l pe Ics să treacă de Sesiune, să se dueleze cu Profesori și să realizeze Proiecte din ce în ce mai bune! 
   
@@ -10,7 +10,7 @@ gi# FMI-Idle
 
   La prima rulare a jocului, utilizatorul trebuie sa selecteze un profil deja creat conectandu-se cu parola sau poate crea un profil nou. In meniu se pot vedea statisticile user-ului (valoarea currency1/currency2 ---> generic momentan). Userul se poate duela cu profesori, castigandu-le proiectul din dreptul lor. Fiecare proiect are o variabila de pret (intrucat poate fi imbunatatit) si una de cashback (overtime ---> momentan la 5 minute) valoarea currency1 se incrementeaza cu cashback-ul fiecarui proiect detinut. Se poate reseta valoarea currency1 si se incrementeaza logaritmic * 5 valoarea currency2. Totul se ramane in fisiere json la terminarea programului. Urmeaza iteme, buff-uri, debuff-uri, ....
 
-### Reminder:
+## Reminder:
 
 Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar dacă documentați riguros acest proces.
 Codul generat pus "ca să fie"/pe care nu îl înțelegeți se punctează doar pentru puncte bonus, doar în contextul

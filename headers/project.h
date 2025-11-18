@@ -12,17 +12,9 @@ public:
     project() : market_price(0.0f), if_bought_cashback(0.0f){};
     ~project() = default;
 
-    [[nodiscard]] const std::string& get_name() const {
-        return proj_name;
-    }
-
-    [[nodiscard]] float get_price() const {
-        return market_price;
-    }
-
-    [[nodiscard]] float get_cashback() const {
-        return if_bought_cashback;
-    }
+    [[nodiscard]] const std::string& get_name() const;
+    [[nodiscard]] float get_price() const;
+    [[nodiscard]] float get_cashback() const;
 
     static std::vector<project> load_projects();
 
