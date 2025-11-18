@@ -1,6 +1,7 @@
 #ifndef OOP_PROJECTS_H
 #define OOP_PROJECTS_H
 #include<string>
+#include <fstream>
 #include <nlohmann/json.hpp>
 
 class project {
@@ -22,6 +23,8 @@ public:
     [[nodiscard]] float get_cashback() const {
         return if_bought_cashback;
     }
+
+    static std::vector<project> load_projects();
 
     friend std::istream &operator>>(std::istream& is, project& t);
     friend std::ostream& operator<<(std::ostream& os, const project& t);

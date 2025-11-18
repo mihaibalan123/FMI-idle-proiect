@@ -11,18 +11,14 @@ class menu {
     std::vector<project> projects_list;
     std::vector<player> players_list;
     int curr_player = -1;
-    static void display_texts(int x);
     void start();
     void show_stats() const;
     void project_upgrade();
-    void add_player();
-    void idle_earnings(player& current_player) const;
     void choose_player();
     void choose_random_teacher();
     void show_projects() const;
     void reset_game();
     void close();
-    static bool verify_password(const player& p);
 public:
     void run();
 

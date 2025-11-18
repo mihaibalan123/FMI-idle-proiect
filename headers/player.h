@@ -56,13 +56,18 @@ public:
         currency1 = value;
     }
 
-    const std::string& get_name() const;
-    float get_damage() const;
-    const std::vector<int>& get_defeated_domains() const;
+    [[nodiscard]] const std::string& get_name() const;
+    [[nodiscard]] float get_damage() const;
+    [[nodiscard]] const std::vector<int>& get_defeated_domains() const;
 
     [[nodiscard]] const std::vector<int>& get_project_levels() const;
     [[nodiscard]] float get_currency2() const;
     void set_currency2(float value);
+
+    static std::vector<player> load_players();
+    static void save_players(const std::vector<player>& players_list);
+    static int add_new_player(std::vector<player>& players_list);
+    [[nodiscard]] bool verify_password() const;
     [[nodiscard]] long long get_last_login_timestamp() const;
     void set_last_login_timestamp(long long timestamp);
     void reset_projects();

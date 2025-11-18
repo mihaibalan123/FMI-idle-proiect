@@ -64,6 +64,8 @@ public:
         return domain;
     }
 
+
+    static std::vector<teacher> load_teachers(const std::vector<project>& projects_list);
     [[nodiscard]] int turns_to_defeat(float enemy_hp, float t_critical_chance) const;
 
     friend std::istream& operator>>(std::istream& is,  teacher &t);

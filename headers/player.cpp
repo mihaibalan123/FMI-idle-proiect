@@ -24,6 +24,53 @@ void player::set_last_login_timestamp(long long timestamp) {
     last_login_timestamp = timestamp;
 }
 
+std::vector<player> player::load_players() {
+
+    std::vector<player> players_list;
+    std::ifstream f2("players.json");
+    nlohmann::json data2 = nlohmann::json::parse(f2);
+
+    for (auto &i_player: data2) {
+        player temp_player(
+            i_player.value("name", std::string{""}),
+            i_player.value("password", std::string{""}),
+            i_player.value("conquer_domain", 0),
+            i_player.value("currency1", 0.0f),
+            i_player.value("currency2", 0.0f),
+            i_player.value("health", 0.0f),
+            i_player.value("damage", 0.0f),
+            i_player.value("project_id", std::vector<int>{}),
+            i_player.value("project_levels", std::vector<int>{}),
+            i_player.value("defeated_domains", std::vector<int>{}),
+            i_player.value("last_login_timestamp", 0LL)
+        );
+        players_list.push_back(temp_player);
+    }
+    return players_list;
+}
+
+void player::save_players(const std::vector<player>& players_list) {
+    nlohmann::json json_players_list = players_list;
+    std::ofstream f("players.json");
+    f << json_players_list.dump(4);
+    f.close();
+}
+
+bool player::verify_password() const {
+    std::string temp_password;
+    std::cout << "Required password>";
+    std::getline(std::cin, temp_password);
+    if (temp_password == this->get_password()) return true;
+    return false;
+}
+
+int player::add_new_player(std::vector<player>& players_list) {
+    player temp_player;
+    std::cin >> temp_player;
+    players_list.push_back(temp_player);
+    return static_cast<int>(players_list.size() - 1);
+}
+
 void player::reset_projects() {
     project_id.clear();
     project_levels.clear();

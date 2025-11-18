@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 523.5199584960938,
+        "currency1": 4571.83984375,
         "currency2": 14.82011890411377,
         "damage": 7.0,
         "defeated_domains": [
@@ -12,7 +12,7 @@
             3
         ],
         "health": 500.0,
-        "last_login_timestamp": 1763350598,
+        "last_login_timestamp": 1763358160,
         "name": "mihai",
         "password": "123456",
         "project_id": [
@@ -171,5 +171,18 @@
             0,
             1
         ]
+    },
+    {
+        "conquer_domain": -1,
+        "currency1": 100.0,
+        "currency2": 0.0,
+        "damage": 7.0,
+        "defeated_domains": [],
+        "health": 500.0,
+        "last_login_timestamp": 1763486944,
+        "name": "marius",
+        "password": "123456",
+        "project_id": [],
+        "project_levels": []
     }
 ]
