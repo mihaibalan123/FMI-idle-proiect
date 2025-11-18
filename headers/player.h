@@ -9,7 +9,6 @@
 #include "teacher.h"
 #include <vector>
 #include <chrono>
-#include <conio.h>
 
 class player {
     std::string username, password;

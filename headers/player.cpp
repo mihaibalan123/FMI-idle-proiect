@@ -309,6 +309,7 @@ inline std::istream& operator>>(std::istream& is, player& t) {
     std::cout << "Insert player name: ";
     getline(is, t.username);
     do {
+        std::cout << "Password must be at least 5 chars long!\n";
         std::cout << "Insert your password> ";
         is >> temp_pass1;
         std:: cout << "Re-type your password# ";
