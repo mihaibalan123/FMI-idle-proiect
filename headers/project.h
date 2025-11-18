@@ -20,7 +20,6 @@ public:
 
     friend std::istream &operator>>(std::istream& is, project& t);
     friend std::ostream& operator<<(std::ostream& os, const project& t);
-
 };
 
 

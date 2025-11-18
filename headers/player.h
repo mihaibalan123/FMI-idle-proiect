@@ -9,6 +9,7 @@
 #include "teacher.h"
 #include <vector>
 #include <chrono>
+#include <conio.h>
 
 class player {
     std::string username, password;
@@ -60,47 +61,5 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const player& t);
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(player, username, current_target_domain_id, currency1, currency2, password, health, damage, project_id, project_levels, defeated_domains, last_login_timestamp)
 };
-
-inline std::istream& operator>>(std::istream& is, player& t) {
-    std::string temp_pass1, temp_pass2;
-    t.currency1 = 100.0;
-    t.currency2 = 0.0;
-    t.current_target_domain_id = -1;
-    t.health = 500.0;
-    t.damage = 7.0;
-    t.project_id.clear();
-    std::cout << "NEW PLAYER REGISTRATION\n";
-    std::cout << "Insert player name: ";
-    getline(is, t.username);
-    do {
-        std::cout << "Insert your password> ";
-        is >> temp_pass1;
-        std:: cout << "Re-type your password# ";
-        is >> temp_pass2;
-        if (temp_pass1 != temp_pass2) std::cout << "Retry. Passwords doesn't match!\n";
-        if (temp_pass1.size() < 5) std::cout << "Password must be at least 5 chars long!\n";
-    } while (temp_pass1 != temp_pass2 || temp_pass1.size()< 5);
-    t.password = temp_pass1;
-    return is;
-}
-inline std::ostream& operator<<(std::ostream& os, const player& t) {
-    os << t.username;
-    return os;
-}
-inline void to_json(nlohmann::json& j, const player& p) {
-    j = nlohmann::json{
-            {"name", p.get_name()},
-            {"password", p.get_password()},
-            {"conquer_domain", p.get_conquer_domain()},
-            {"currency1", p.get_currency1()},
-            {"currency2", p.get_currency2()},
-            {"health", p.get_health()},
-            {"damage", p.get_damage()},
-            {"project_id", p.get_project_id()},
-            {"project_levels", p.get_project_levels()},
-            {"defeated_domains", p.get_defeated_domains()},
-            {"last_login_timestamp", p.get_last_login_timestamp()}
-    };
-}
 
 #endif //OOP_PLAYER_H

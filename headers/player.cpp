@@ -48,9 +48,6 @@ long long player::get_last_login_timestamp() const {
     return last_login_timestamp;
 }
 
-
-
-
 void player::set_currency1(float value) {
     currency1 = value;
 }
@@ -62,9 +59,6 @@ void player::set_currency2(float value) {
 void player::set_last_login_timestamp(long long timestamp) {
     last_login_timestamp = timestamp;
 }
-
-
-
 
 std::vector<player> player::load_players() {
 
@@ -100,8 +94,20 @@ void player::save_players(const std::vector<player>& players_list) {
 
 bool player::verify_password() const {
     std::string temp_password;
-    std::cout << "Required password>";
-    std::getline(std::cin, temp_password);
+    int ch;
+    std::cout << "Required password> ";
+    while ((ch = _getch()) != '\r') {
+        if (ch == '\b') {
+            if (!temp_password.empty()) {
+                temp_password.pop_back();
+                std::cout << "\b \b";
+            }
+        } else {
+            temp_password.push_back(static_cast<char>(ch));
+            std::cout << "*";
+        }
+    }
+    std::cout << std::endl;
     if (temp_password == this->get_password()) return true;
     return false;
 }
@@ -295,4 +301,48 @@ void player::reset_game() {
     } else {
         std::cout << "Cancelled.\n";
     }
+}
+
+inline std::istream& operator>>(std::istream& is, player& t) {
+    std::string temp_pass1, temp_pass2;
+    t.currency1 = 100.0;
+    t.currency2 = 0.0;
+    t.current_target_domain_id = -1;
+    t.health = 500.0;
+    t.damage = 7.0;
+    t.project_id.clear();
+    std::cout << "NEW PLAYER REGISTRATION\n";
+    std::cout << "Insert player name: ";
+    getline(is, t.username);
+    do {
+        std::cout << "Insert your password> ";
+        is >> temp_pass1;
+        std:: cout << "Re-type your password# ";
+        is >> temp_pass2;
+        if (temp_pass1 != temp_pass2) std::cout << "Retry. Passwords doesn't match!\n";
+        if (temp_pass1.size() < 5) std::cout << "Password must be at least 5 chars long!\n";
+    } while (temp_pass1 != temp_pass2 || temp_pass1.size()< 5);
+    t.password = temp_pass1;
+    return is;
+}
+
+inline std::ostream& operator<<(std::ostream& os, const player& t) {
+    os << t.username;
+    return os;
+}
+
+inline void to_json(nlohmann::json& j, const player& p) {
+    j = nlohmann::json{
+                {"name", p.get_name()},
+                {"password", p.get_password()},
+                {"conquer_domain", p.get_conquer_domain()},
+                {"currency1", p.get_currency1()},
+                {"currency2", p.get_currency2()},
+                {"health", p.get_health()},
+                {"damage", p.get_damage()},
+                {"project_id", p.get_project_id()},
+                {"project_levels", p.get_project_levels()},
+                {"defeated_domains", p.get_defeated_domains()},
+                {"last_login_timestamp", p.get_last_login_timestamp()}
+    };
 }
