@@ -94,20 +94,8 @@ void player::save_players(const std::vector<player>& players_list) {
 
 bool player::verify_password() const {
     std::string temp_password;
-    int ch;
-    std::cout << "Required password> ";
-    while ((ch = _getch()) != '\r') {
-        if (ch == '\b') {
-            if (!temp_password.empty()) {
-                temp_password.pop_back();
-                std::cout << "\b \b";
-            }
-        } else {
-            temp_password.push_back(static_cast<char>(ch));
-            std::cout << "*";
-        }
-    }
-    std::cout << std::endl;
+    std::cout << "Required password>";
+    std::getline(std::cin, temp_password);
     if (temp_password == this->get_password()) return true;
     return false;
 }
@@ -122,6 +110,30 @@ int player::add_new_player(std::vector<player>& players_list) {
 void player::reset_projects() {
     project_id.clear();
     project_levels.clear();
+}
+
+void player::player_stats(std::ostream& os) const {
+    os << "Player: " << this->username << "\n";
+    os << "Currency1: " << this->currency1 << "\n";
+    os << "Currency2: " << this->currency2 << "\n";
+    os << "Health: " << this->health << "\n";
+    os << "Damage: " << this->damage << "\n";
+}
+
+void player::player_full_stats(std::ostream& os, const std::vector<project>& projects_list) const {
+    this->player_stats(os);
+    os << "Projects list:\n";
+    bool ok = false;
+    for (size_t i = 0; i < this->project_levels.size() && i < projects_list.size(); ++i) {
+        int level = this->project_levels[i];
+        if (level > 0) {
+            os << "  - " << projects_list[i].get_name() << " [" << level << "]\n";
+            ok = true;
+        }
+    }
+    if (!ok) {
+        os << "  No projects owned.\n";
+    }
 }
 
 void player::add_project_id(int id) {
@@ -172,24 +184,6 @@ int player::turns_to_defeat(float enemy_hp) const {
     float average_damage = damage + 0.2f * this->health;
     float turns_float = enemy_hp / average_damage;
     return static_cast<int>(turns_float);
-}
-
-void player::show_projects(const std::vector<project>& projects_list) const {
-    const std::vector<int> &owned_projects = this->get_project_id();
-
-    if (owned_projects.empty() ) {
-        std::cout << "No projects. Go in examination room!\n";
-        return;
-    }
-    std::cout << "\nPlayer " << *this << " owns projects at these levels:\n";
-    for (int i = 0; i < static_cast<int>(owned_projects.size()); ++i) {
-        int level = owned_projects[i];
-        if (level > 0 && i < static_cast<int>(projects_list.size())) {
-            const project &p = projects_list[i];
-            std::cout << i << ". " << p.get_name() << " [Level: " << level << "]" << "\n";
-        }
-    }
-    std::cout << "\n";
 }
 
 void player::project_upgrade(int selected_id, const std::vector<project>& projects_list) {
@@ -326,7 +320,7 @@ inline std::istream& operator>>(std::istream& is, player& t) {
     return is;
 }
 
-inline std::ostream& operator<<(std::ostream& os, const player& t) {
+std::ostream& operator<<(std::ostream& os, const player& t) {
     os << t.username;
     return os;
 }

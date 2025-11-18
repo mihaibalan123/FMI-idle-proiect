@@ -54,6 +54,8 @@ public:
     static int add_new_player(std::vector<player>& players_list);
     [[nodiscard]] bool verify_password() const;
     void reset_projects();
+    void player_stats(std::ostream& os) const;
+    void player_full_stats(std::ostream& os, const std::vector<project>& projects_list) const;
     void idle_earnings(const std::vector<project>& projects_list);
     void reset_game();
 

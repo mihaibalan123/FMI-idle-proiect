@@ -45,12 +45,11 @@ void menu::choose_player() {
 
 void menu::show_stats() const {
     if (curr_player != -1) {
-        std::cout << "Current player is: " << players_list[curr_player] << '\n';
-        std::cout << "Currency1 value is: " << players_list[curr_player].get_currency1() << "\n";
-        std::cout << "Currency2 value is: " << players_list[curr_player].get_currency2() << "\n";
-        std::cout << "Most -beatable- domain is: " << players_list[curr_player].get_conquer_domain() << "\n";
+        players_list[curr_player].player_stats(std::cout);
         std::cout << "\n";
-    } else std::cout << "No current player. Please register or select.\n";
+    } else {
+        std::cout << "No current player. Please register or select.\n";
+    }
 }
 
 void menu::choose_random_teacher() {
@@ -120,12 +119,13 @@ void menu::choose_random_teacher() {
 }
 
 void menu::show_projects() const {
-    std::cout <<"Here you can see the projects you fought for! Upgrade them in order to increase you currencies and later you can even reset getting -RESTANTA- and grow stronger !"<< "\n";
+    std::cout << "Here you can see the projects you fought for! Upgrade them in order to increase you currencies and later you can even reset getting -RESTANTA- and grow stronger !" << "\n";
     if (curr_player == -1) {
         std::cout << "You must select a player!\n";
         return;
     }
-    players_list[curr_player].show_projects(projects_list);
+    players_list[curr_player].player_full_stats(std::cout, projects_list);
+    std::cout << "\n";
 }
 
 void menu::project_upgrade() {
@@ -197,7 +197,7 @@ void menu::run() {
             curr_player = 0;
             players_list[curr_player].idle_earnings(projects_list);
         }
-        std::cout << "1.Select Player\n" << "2.Show current player\n" << "3.Examination room\n" << "4.Projects Information\n" << "5.Upgrade projects\n" << "6.RESTANTA (Reset)\n" "0.Exit\n";
+        std::cout << "1.Select Player / Switch user\n" << "2.Show current player basic stats\n" << "3.Examination room ---> fight a teacher\n" << "4.Player Projects Information\n" << "5.Upgrade your projects\n" << "6.RESTANTA (Reset currency)\n" "0.Exit\n";
         std::cin >> option;
         if (!option) {
             close();
