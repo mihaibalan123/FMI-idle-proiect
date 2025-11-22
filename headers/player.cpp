@@ -192,11 +192,29 @@ void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
         }
     }
 
+    int recommended_slot = 0;
+    float min_hp = std::numeric_limits<float>::max();
+
+    for(int i = 0; i < 5; ++i) {
+        int real_id = teacher_indices[i];
+        float current_hp = teachers_list[real_id].get_health();
+
+        if(current_hp < min_hp) {
+            min_hp = current_hp;
+            recommended_slot = i;
+        }
+    }
+    std::cout << "\n Hint: Weakest teacher is at option " << recommended_slot << " with " << min_hp << " hp.\n";
+
     int fight_t = -1;
     int aux_t_index = -1;
     do {
-        std::cout << "Who do you wanna fight? (0-4)\n";
+        std::cout << "Who do you wanna fight? (0-4; 5 for auto-pick the -weakest- one)\n";
         std::cin >> fight_t;
+        if (fight_t == 5) {
+            std::cout << "Auto-picking option " << recommended_slot << "...\n";
+            fight_t = recommended_slot;
+        }
         if (fight_t >= 0 && fight_t < 5 && fight_t < static_cast<int>(teacher_indices.size())) {
             aux_t_index = teacher_indices[fight_t];
         } else {
@@ -205,7 +223,6 @@ void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
     } while (aux_t_index == -1);
 
     const teacher &teacher_fought = teachers_list[aux_t_index];
-
     this->fight_teacher(teacher_fought, aux_t_index);
 }
 
