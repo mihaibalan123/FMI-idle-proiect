@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 79872.640625,
+        "currency1": 292066.9375,
         "currency2": 14.82011890411377,
         "damage": 7.0,
         "defeated_domains": [
@@ -12,7 +12,7 @@
             3
         ],
         "health": 500.0,
-        "last_login_timestamp": 1763493666,
+        "last_login_timestamp": 1763852750,
         "name": "mihai",
         "password": "123456",
         "project_id": [

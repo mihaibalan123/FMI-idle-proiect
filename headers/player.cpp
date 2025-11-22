@@ -3,6 +3,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <random>
 
 const std::string& player::get_password() const {
     return password;
@@ -127,7 +128,10 @@ void player::player_full_stats(std::ostream& os, const std::vector<project>& pro
     for (size_t i = 0; i < this->project_levels.size() && i < projects_list.size(); ++i) {
         int level = this->project_levels[i];
         if (level > 0) {
-            os << "  - " << projects_list[i].get_name() << " [" << level << "]\n";
+            const project& p = projects_list[i];
+            float current_income = p.get_cashback() * static_cast<float>(level);
+            float next_upgrade_cost = p.get_price() * static_cast<float>(level + 1);
+            os << "  - " << projects_list[i].get_name() << " [" << level << "]" << " Income: " << current_income << " Cashback: " << p.get_cashback() << " Next upgrade cost: " << next_upgrade_cost << "\n";
             ok = true;
         }
     }
@@ -135,6 +139,111 @@ void player::player_full_stats(std::ostream& os, const std::vector<project>& pro
         os << "  No projects owned.\n";
     }
 }
+
+void player::show_stats() const {
+    this->player_stats(std::cout);
+    std::cout << "\n";
+}
+
+void player::show_projects_info(const std::vector<project> &projects_repo) const {
+    std::cout << "Here you can see the projects you fought for! Upgrade them in order to increase you currencies and later you can even reset getting -RESTANTA- and grow stronger !\n";
+    this->player_full_stats(std::cout, projects_repo);
+    std::cout << "\n";
+}
+
+void player::reset_progress() {
+    this->reset_game();
+}
+
+void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
+    std::cout << "You entered in Politehnica Business Tower! It's a strange place isn't it? They are ready!\n";
+
+    std::vector<int> teacher_indices;
+    for (int i = 0; i < static_cast<int>(teachers_list.size()); ++i) {
+        teacher_indices.push_back(i);
+    }
+
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    int available_rerolls = 3;
+
+    while (available_rerolls >= 0) {
+        std::ranges::shuffle(teacher_indices, generator);
+
+        std::cout << "You faced:\n";
+        for (int i = 0; i < 5 && i < static_cast<int>(teacher_indices.size()); ++i) {
+            int current_teacher_id = teacher_indices[i];
+            std::cout << i << ". " << teachers_list[current_teacher_id] << "\n";
+        }
+
+        if (available_rerolls > 0) {
+            int ok;
+            std::cout << "Reroll (1) or Keep (0)? (" << available_rerolls << " left)\n";
+            std::cin >> ok;
+            if (ok == 0) {
+                std::cout << "Selection kept. Proceeding...\n";
+                break;
+            }
+            if (ok == 1) available_rerolls--;
+            else break;
+        } else {
+            std::cout << "No rerolls left.\n";
+            break;
+        }
+    }
+
+    int fight_t = -1;
+    int aux_t_index = -1;
+    do {
+        std::cout << "Who do you wanna fight? (0-4)\n";
+        std::cin >> fight_t;
+        if (fight_t >= 0 && fight_t < 5 && fight_t < static_cast<int>(teacher_indices.size())) {
+            aux_t_index = teacher_indices[fight_t];
+        } else {
+            std::cout << "Invalid selection.\n";
+        }
+    } while (aux_t_index == -1);
+
+    const teacher &teacher_fought = teachers_list[aux_t_index];
+
+    this->fight_teacher(teacher_fought, aux_t_index);
+}
+
+void player::perform_upgrade(const std::vector<project> &projects_list) {
+    const std::vector<int> &my_levels = this->get_project_id();
+
+    std::cout << "Buy projects : \n";
+    bool ok = false;
+
+    for (size_t i = 0; i < my_levels.size(); ++i) {
+        int level = my_levels[i];
+        if (level > 0 && i < projects_list.size()) {
+            const project &p = projects_list[i];
+            float cost = p.get_price() * static_cast<float>(level + 1);
+            std::cout << i << ". " << p.get_name() << " lvl: " << level
+                      << " cost: " << cost << " cashback: " << p.get_cashback() << "\n";
+            ok = true;
+        }
+    }
+
+    if (!ok) {
+        std::cout << "Fight with a teacher first!\n";
+        return;
+    }
+
+    int selected_id;
+    std::cout << "\nWhich project will you upgrade?? ";
+    std::cin >> selected_id;
+
+    if (selected_id < 0 || selected_id >= static_cast<int>(projects_list.size()) ||
+        selected_id >= static_cast<int>(my_levels.size()) || my_levels[selected_id] == 0) {
+        std::cout << "Invalid or unowned project id! \n";
+        return;
+        }
+
+    this->project_upgrade(selected_id, projects_list);
+}
+
 
 void player::add_project_id(int id) {
     if (id >= static_cast<int>(project_id.size())) {

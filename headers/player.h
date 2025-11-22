@@ -23,12 +23,16 @@ public:
     player() : current_target_domain_id(0), currency1(0.0f), currency2(0.0f), health(0.0f), damage(0.0f), last_login_timestamp(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()) {}
     ~player() = default;
 
+    void show_stats() const;
+    void show_projects_info(const std::vector<project>& projects_repo) const;
+    void reset_progress();
+    void enter_examination_room(const std::vector<teacher>& teachers_list);
+    void perform_upgrade(const std::vector<project>& projects_list);
+
     void add_project_id(int id);
     void add_defeated_domain(int domain_id);
     void calculate_and_set_conquer_domain();
     [[nodiscard]] int turns_to_defeat(float enemy_hp) const;
-
-    void show_projects(const std::vector<project>& projects_list) const;
     void project_upgrade(int selected_id, const std::vector<project>& projects_list);
     void fight_teacher(const teacher& opponent, int p_project_id);
 

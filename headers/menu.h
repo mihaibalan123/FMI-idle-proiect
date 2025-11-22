@@ -12,12 +12,7 @@ class menu {
     std::vector<player> players_list;
     int curr_player = -1;
     void start();
-    void show_stats() const;
-    void project_upgrade();
     void choose_player();
-    void choose_random_teacher();
-    void show_projects() const;
-    void reset_game();
     void close();
 public:
     void run();
