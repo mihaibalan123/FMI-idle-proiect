@@ -13,6 +13,7 @@ public:
                                                 damage_bonus(damage_bonus) {
     }
 
+
     [[nodiscard]] item *clone() const override;
 
     [[nodiscard]] std::string get_type() const override {
