@@ -13,6 +13,9 @@ void menu::start() {
     projects_list = project::load_projects();
     teachers_list = teacher::load_teachers(projects_list);
     players_list = player::load_players();
+    books_list = book::load_books();
+    drinks_list = drink::load_drinks();
+    cheating_sheets_list = cheating_sheet::load_cheating_sheets();
 }
 
 void menu::choose_player() {
@@ -45,7 +48,8 @@ void menu::choose_player() {
 
 void menu::close() {
     if (curr_player != -1) {
-        long long current_time = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+        long long current_time = std::chrono::duration_cast<std::chrono::seconds>(
+            std::chrono::system_clock::now().time_since_epoch()).count();
         players_list[curr_player].set_last_login_timestamp(current_time);
     }
     player::save_players(players_list);
@@ -53,7 +57,8 @@ void menu::close() {
 
 void menu::run() {
     start();
-    std::cout << "Welcome to FMI-Idle Game! In order to continue you must select your player profile or add a new one.\n";
+    std::cout <<
+            "Welcome to FMI-Idle Game! In order to continue you must select your player profile or add a new one.\n";
     int option;
     do {
         if (players_list.empty()) {
@@ -64,7 +69,9 @@ void menu::run() {
             curr_player = 0;
             players_list[curr_player].idle_earnings(projects_list);
         }
-        std::cout << "1.Select Player / Switch user\n" << "2.Show current player basic stats\n" << "3.Examination room ---> fight a teacher\n" << "4.Player Projects Information\n" << "5.Upgrade your projects\n" << "6.RESTANTA (Reset currency)\n" "0.Exit\n";
+        std::cout << "1.Select Player / Switch user\n" << "2.Show current player basic stats\n" <<
+                "3.Examination room ---> fight a teacher\n" << "4.Player Projects Information\n" <<
+                "5.Upgrade your projects\n" << "6.RESTANTA (Reset currency)\n" "0.Exit\n";
         std::cin >> option;
         if (!option) {
             close();

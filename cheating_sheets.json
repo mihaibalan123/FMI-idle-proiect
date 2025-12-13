@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Japanese 'helmet'",
+    "description": "Obvious (1 project level up, 80% risk, -10 if not success).",
+    "rarity": "Common",
+    "price": 10.0,
+    "consumable": true,
+    "project_boost": 1,
+    "success_chance": 0.8,
+    "risk_damage": 10.0
+  }
+]

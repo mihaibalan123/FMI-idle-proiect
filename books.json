@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Autocad Extra-Classes",
+    "description": "Useful ALOT",
+    "rarity": "Legendary",
+    "price": 50.0,
+    "consumable": false,
+    "damage_bonus": 10.0
+  }
+]

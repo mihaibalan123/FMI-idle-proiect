@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Coffee",
+    "description": "2 hours extra learning-time (15 hp restore).",
+    "rarity": "Common",
+    "price": 5.0,
+    "consumable": true,
+    "health_restore": 15.0
+  },
+  {
+    "name": "Energy Drink",
+    "description": "8 hours extra learning-time (40 hp restore).",
+    "rarity": "Rare",
+    "price": 20.0,
+    "consumable": true,
+    "health_restore": 40.0
+  }
+]

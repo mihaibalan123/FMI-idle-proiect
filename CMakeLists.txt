@@ -58,6 +58,14 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         headers/project.h
         headers/player.cpp
         headers/player.h
+        headers/item.cpp
+        headers/item.h
+        headers/book.cpp
+        headers/book.h
+        headers/drink.cpp
+        headers/drink.h
+        headers/cheating_sheet.cpp
+        headers/cheating_sheet.h
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
@@ -88,6 +96,6 @@ if(APPLE)
     install(FILES launcher.command DESTINATION ${DESTINATION_DIR})
 endif()
 
-copy_files(FILES tastatura.txt teachers.json projects.json players.json COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
+copy_files(FILES tastatura.txt teachers.json projects.json players.json books.json cheating_sheets.json drinks.json COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
 # copy_files(DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
