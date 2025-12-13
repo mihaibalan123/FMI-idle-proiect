@@ -1,7 +1,8 @@
 #ifndef OOP_CHEATING_SHEET_H
 #define OOP_CHEATING_SHEET_H
 #include "item.h"
-#include "player.h"
+
+class player;
 
 class cheating_sheet : public item {
     int project_boost;

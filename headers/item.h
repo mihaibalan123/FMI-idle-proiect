@@ -2,6 +2,7 @@
 #define OOP_ITEM_H
 #include <fstream>
 #include <utility>
+#include <vector>
 
 class player;
 
