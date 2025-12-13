@@ -172,18 +172,18 @@ void player::save_players(const std::vector<player>& players_list) {
             item_json["consumable"] = item_ptr->get_consumable();
 
             if (item_ptr->get_type() == "book") {
-                if (const auto b = dynamic_cast<book*>(item_ptr.get())) {
+                if (const auto b = dynamic_cast<const book*>(item_ptr.get())) {
                     item_json["damage_bonus"] = b->get_damage_bonus();
                     item_json["rarity"] = b->get_rarity();
                 }
             }
             else if (item_ptr->get_type() == "drink") {
-                if (const auto d = dynamic_cast<drink*>(item_ptr.get())) {
+                if (const auto d = dynamic_cast<const drink*>(item_ptr.get())) {
                     item_json["health_restore"] = d->get_health_restore();
                 }
             }
             else if (item_ptr->get_type() == "cheating_sheet") {
-                if (const auto c = dynamic_cast<cheating_sheet*>(item_ptr.get())) {
+                if (const auto c = dynamic_cast<const cheating_sheet*>(item_ptr.get())) {
                     item_json["project_boost"] = c->get_project_boost();
                     item_json["success_chance"] = c->get_success_chance();
                     item_json["risk_damage"] = c->get_risk_damage();
