@@ -26,7 +26,7 @@ public:
 
     virtual bool purchase(player &p) = 0;
 
-    [[nodiscard]] std::string get_rarity() const {
+    [[nodiscard]] const std::string& get_rarity() const {
         return rarity;
     }
 
@@ -34,7 +34,7 @@ public:
         return consumable;
     }
 
-    [[nodiscard]] std::string get_name() const {
+    [[nodiscard]] const  std::string& get_name() const {
         return name;
     }
 
@@ -42,7 +42,7 @@ public:
         return price;
     }
 
-    [[nodiscard]] std::string get_description() const {
+    [[nodiscard]] const std::string& get_description() const {
         return description;
     }
 };
