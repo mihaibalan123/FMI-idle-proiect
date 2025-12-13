@@ -1,5 +1,6 @@
 #include "cheating_sheet.h"
 #include "player.h"
+#include <iostream>
 
 item *cheating_sheet::clone() const {
     return new cheating_sheet(*this);
