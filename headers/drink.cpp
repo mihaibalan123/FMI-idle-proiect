@@ -19,3 +19,14 @@ std::vector<drink *> drink::load_drinks() {
     }
     return drinks_list;
 }
+
+bool drink::purchase(player& p) {
+    if (p.get_currency2() >= this->price) {
+        p.set_currency2(p.get_currency2() - this->price);
+        std::cout << "Paid " << this->price << " currency2 for drink '" << name << "'.\n";
+        return true;
+    }
+
+    std::cout << "Not enough currency2! Cost: " << this->price << "\n";
+    return false;
+}

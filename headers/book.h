@@ -1,6 +1,7 @@
 #ifndef OOP_BOOK_H
 #define OOP_BOOK_H
 #include "item.h"
+#include "player.h"
 
 class book : public item {
     float damage_bonus;
@@ -14,11 +15,16 @@ public:
 
     [[nodiscard]] item *clone() const override;
 
-    [[nodiscard]] std::string getType() const override {
+    [[nodiscard]] std::string get_type() const override {
         return "book";
     }
 
+    [[nodiscard]] float get_damage_bonus() const {
+        return damage_bonus;
+    }
+
     static std::vector<book *> load_books();
+    bool purchase(player& p) override;
 };
 
 

@@ -19,3 +19,13 @@ std::vector<book *> book::load_books() {
     }
     return books_list;
 }
+
+bool book::purchase(player& p) {
+    if (p.get_currency1()>=this->price) {
+        p.set_currency1(p.get_currency1()-this->price);
+        std::cout << "Paid " << this->price << " currency1 for book '" << name << "'.\n";
+        return true;
+    }
+    std::cout << "Not enough currency1! Cost: " << this->price << "\n";
+    return false;
+}

@@ -66,6 +66,8 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         headers/drink.h
         headers/cheating_sheet.cpp
         headers/cheating_sheet.h
+        headers/shop.cpp
+        headers/shop.h
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )

@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 163.32000732421875,
+        "currency1": 12802.2802734375,
         "currency2": 46.65178298950195,
         "damage": 7.0,
         "defeated_domains": [
@@ -15,7 +15,18 @@
             3
         ],
         "health": 500.0,
-        "last_login_timestamp": 1765644141,
+        "inventory": [
+            {
+                "consumable": false,
+                "damage_bonus": 10.0,
+                "description": "Useful ALOT(+10 damage)",
+                "name": "Autocad Extra-Classes",
+                "price": 50.0,
+                "rarity": "Legendary",
+                "type": "book"
+            }
+        ],
+        "last_login_timestamp": 1765667928,
         "name": "mihai",
         "password": "123456",
         "project_id": [
@@ -212,6 +223,7 @@
         "damage": 7.0,
         "defeated_domains": [],
         "health": 500.0,
+        "inventory": [],
         "last_login_timestamp": 1763486944,
         "name": "cristi",
         "password": "123456",

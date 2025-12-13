@@ -76,6 +76,10 @@ void player::set_currency2(float value) {
     currency2 = value;
 }
 
+void player::set_health(float value) {
+    health = value;
+}
+
 void player::set_last_login_timestamp(long long timestamp) {
     last_login_timestamp = timestamp;
 }
@@ -141,7 +145,55 @@ std::vector<player> player::load_players() {
 }
 
 void player::save_players(const std::vector<player>& players_list) {
-    nlohmann::json json_players_list = players_list;
+    nlohmann::json json_players_list = nlohmann::json::array();
+
+    for (const auto& p : players_list) {
+        nlohmann::json p_json;
+        p_json["name"] = p.username;
+        p_json["password"] = p.password;
+        p_json["currency1"] = p.currency1;
+        p_json["currency2"] = p.currency2;
+        p_json["health"] = p.health;
+        p_json["damage"] = p.damage;
+        p_json["conquer_domain"] = p.current_target_domain_id;
+        p_json["last_login_timestamp"] = p.last_login_timestamp;
+        p_json["project_id"] = p.project_id;
+        p_json["project_levels"] = p.project_levels;
+        p_json["defeated_domains"] = p.defeated_domains;
+        p_json["inventory"] = nlohmann::json::array();
+
+        for (const auto& item_ptr : p.inventory) {
+            nlohmann::json item_json;
+            item_json["type"] = item_ptr->get_type();
+            item_json["name"] = item_ptr->get_name();
+            item_json["description"] = item_ptr->get_description();
+            item_json["price"] = item_ptr->get_price();
+            item_json["rarity"] = item_ptr->get_rarity();
+            item_json["consumable"] = item_ptr->get_consumable();
+
+            if (item_ptr->get_type() == "book") {
+                if (auto b = dynamic_cast<book*>(item_ptr.get())) {
+                    item_json["damage_bonus"] = b->get_damage_bonus();
+                    item_json["rarity"] = b->get_rarity();
+                }
+            }
+            else if (item_ptr->get_type() == "drink") {
+                if (auto d = dynamic_cast<drink*>(item_ptr.get())) {
+                    item_json["health_restore"] = d->get_health_restore();
+                }
+            }
+            else if (item_ptr->get_type() == "cheating_sheet") {
+                if (auto c = dynamic_cast<cheating_sheet*>(item_ptr.get())) {
+                    item_json["project_boost"] = c->get_project_boost();
+                    item_json["success_chance"] = c->get_success_chance();
+                    item_json["risk_damage"] = c->get_risk_damage();
+                }
+            }
+            p_json["inventory"].push_back(item_json);
+        }
+        json_players_list.push_back(p_json);
+    }
+
     std::ofstream f("players.json");
     f << json_players_list.dump(4);
     f.close();
@@ -337,8 +389,8 @@ void player::show_inventory() const {
     }
     std::cout << username << "'s Inventory \n";
     for (size_t i = 0; i < inventory.size(); ++i) {
-        std::cout << i + 1 << ". [" << inventory[i]->getType() << "] " << inventory[i]->getName() << "\n";
-        std::cout << "   Description: " << inventory[i]->getDescription() << "\n";
+        std::cout << i + 1 << ". [" << inventory[i]->get_type() << "] " << inventory[i]->get_name() << "\n";
+        std::cout << "   Description: " << inventory[i]->get_description() << "\n";
     }
 }
 

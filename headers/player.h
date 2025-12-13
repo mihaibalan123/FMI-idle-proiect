@@ -4,11 +4,11 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <utility>
+#include <memory>
 #include <algorithm>
 #include "project.h"
 #include "teacher.h"
 #include "item.h"
-#include <memory>
 #include <vector>
 #include <chrono>
 
@@ -100,6 +100,8 @@ public:
     void set_currency1(float value);
 
     void set_currency2(float value);
+
+    void set_health(float value);
 
     void set_last_login_timestamp(long long timestamp);
 

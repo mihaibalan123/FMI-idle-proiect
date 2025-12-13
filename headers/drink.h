@@ -1,6 +1,7 @@
 #ifndef OOP_DRINK_H
 #define OOP_DRINK_H
 #include "item.h"
+#include "player.h"
 
 class drink : public item {
     float health_restore;
@@ -14,11 +15,16 @@ public:
 
     [[nodiscard]] item *clone() const override;
 
-    [[nodiscard]] std::string getType() const override {
+    [[nodiscard]] std::string get_type() const override {
         return "drink";
     }
 
+    [[nodiscard]] float get_health_restore() const {
+        return health_restore;
+    }
+
     static std::vector<drink *> load_drinks();
+    bool purchase(player& p) override;
 };
 
 

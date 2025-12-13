@@ -24,3 +24,14 @@ std::vector<cheating_sheet *> cheating_sheet::load_cheating_sheets() {
     }
     return cheating_sheets_list;
 }
+
+bool cheating_sheet::purchase(player& p) {
+    if (p.get_health() >= this->price) {
+        p.set_health(p.get_health() - this->price);
+        std::cout << "Paid " << this->price << " of your own life for cheating sheet" << name << "'.\n";
+        return true;
+    }
+
+    std::cout << "Not enough health! Please stay alive... Cost: " << this->price << "\n";
+    return false;
+}

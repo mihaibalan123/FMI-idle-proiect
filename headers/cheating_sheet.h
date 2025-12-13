@@ -1,6 +1,7 @@
 #ifndef OOP_CHEATING_SHEET_H
 #define OOP_CHEATING_SHEET_H
 #include "item.h"
+#include "player.h"
 
 class cheating_sheet : public item {
     int project_boost;
@@ -16,11 +17,24 @@ public:
 
     [[nodiscard]] item *clone() const override;
 
-    [[nodiscard]] std::string getType() const override {
+    [[nodiscard]] std::string get_type() const override {
         return "cheating_sheet";
     }
 
+    [[nodiscard]] int get_project_boost() const {
+        return project_boost;
+    }
+
+    [[nodiscard]] float get_success_chance() const {
+        return success_chance;
+    }
+
+    [[nodiscard]] float get_risk_damage() const {
+        return risk_damage;
+    }
+
     static std::vector<cheating_sheet *> load_cheating_sheets();
+    bool purchase(player &p) override;
 };
 
 #endif //OOP_CHEATING_SHEET_H

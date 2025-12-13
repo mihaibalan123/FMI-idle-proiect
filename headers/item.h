@@ -2,8 +2,8 @@
 #define OOP_ITEM_H
 #include <fstream>
 #include <utility>
-#include <nlohmann/json.hpp>
-#include <vector>
+
+class player;
 
 class item {
 protected:
@@ -21,10 +21,30 @@ public:
     virtual ~item() = default;
 
     [[nodiscard]] virtual item *clone() const = 0;
-    [[nodiscard]] virtual std::string getType() const = 0;
-    [[nodiscard]] std::string getName() const { return name; }
-    [[nodiscard]] float getPrice() const { return price; }
-    [[nodiscard]] std::string getDescription() const { return description; }
+
+    [[nodiscard]] virtual std::string get_type() const = 0;
+
+    virtual bool purchase(player &p) = 0;
+
+    [[nodiscard]] std::string get_rarity() const {
+        return rarity;
+    }
+
+    [[nodiscard]] bool get_consumable() const {
+        return consumable;
+    }
+
+    [[nodiscard]] std::string get_name() const {
+        return name;
+    }
+
+    [[nodiscard]] float get_price() const {
+        return price;
+    }
+
+    [[nodiscard]] std::string get_description() const {
+        return description;
+    }
 };
 
 
