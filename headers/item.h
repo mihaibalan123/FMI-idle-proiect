@@ -20,7 +20,11 @@ public:
 
     virtual ~item() = default;
 
-    [[nodiscard]] virtual item *clone() const =0;
+    [[nodiscard]] virtual item *clone() const = 0;
+    [[nodiscard]] virtual std::string getType() const = 0;
+    [[nodiscard]] std::string getName() const { return name; }
+    [[nodiscard]] float getPrice() const { return price; }
+    [[nodiscard]] std::string getDescription() const { return description; }
 };
 
 

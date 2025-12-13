@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "teacher.h"
+#include "item.h"
 #include "project.h"
 #include "player.h"
 #include "book.h"
@@ -20,6 +21,7 @@ class menu {
     void start();
     void choose_player();
     void close();
+    void visit_shop();
 public:
     void run();
 

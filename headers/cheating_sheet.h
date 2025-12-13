@@ -16,6 +16,10 @@ public:
 
     [[nodiscard]] item *clone() const override;
 
+    [[nodiscard]] std::string getType() const override {
+        return "cheating_sheet";
+    }
+
     static std::vector<cheating_sheet *> load_cheating_sheets();
 };
 

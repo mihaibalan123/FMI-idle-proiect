@@ -1,9 +1,28 @@
 #include "player.h"
 #include "teacher.h"
+#include "book.h"
+#include "cheating_sheet.h"
+#include "drink.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <random>
+
+inline void to_json(nlohmann::json& j, const player& p) {
+    j = nlohmann::json{
+                        {"name", p.get_name()},
+                        {"password", p.get_password()},
+                        {"conquer_domain", p.get_conquer_domain()},
+                        {"currency1", p.get_currency1()},
+                        {"currency2", p.get_currency2()},
+                        {"health", p.get_health()},
+                        {"damage", p.get_damage()},
+                        {"project_id", p.get_project_id()},
+                        {"project_levels", p.get_project_levels()},
+                        {"defeated_domains", p.get_defeated_domains()},
+                        {"last_login_timestamp", p.get_last_login_timestamp()}
+    };
+}
 
 const std::string& player::get_password() const {
     return password;
@@ -68,6 +87,39 @@ std::vector<player> player::load_players() {
     nlohmann::json data2 = nlohmann::json::parse(f2);
 
     for (auto &i_player: data2) {
+        std::vector<std::unique_ptr<item>> temp_inventory;
+        if (i_player.contains("inventory")) {
+            for (const auto& item_json : i_player["inventory"]) {
+                std::string type = item_json.value("type", "unknown");
+                std::string i_name = item_json.value("name", "Unknown Item");
+                std::string i_desc = item_json.value("description", "No desc");
+                std::string i_rarity = item_json.value("rarity", "Common");
+                float i_price = item_json.value("price", 0.0f);
+                bool i_consumable = item_json.value("consumable", false);
+
+                if (type == "book") {
+                    float dmg = item_json.value("damage_bonus", 0.0f);
+                    temp_inventory.push_back(std::make_unique<book>(
+                        i_name, i_desc, i_rarity, i_price, i_consumable, dmg
+                    ));
+                }
+                else if (type == "drink") {
+                    float hp = item_json.value("health_restore", 0.0f);
+                    temp_inventory.push_back(std::make_unique<drink>(
+                        i_name, i_desc, i_rarity, i_price, i_consumable, hp
+                    ));
+                }
+                else if (type == "cheating_sheet") {
+                    int boost = item_json.value("project_boost", 0);
+                    float chance = item_json.value("success_chance", 0.0f);
+                    float risk = item_json.value("risk_damage", 0.0f);
+                    temp_inventory.push_back(std::make_unique<cheating_sheet>(
+                        i_name, i_desc, i_rarity, i_price, i_consumable, boost, chance, risk
+                    ));
+                }
+            }
+        }
+
         player temp_player(
             i_player.value("name", std::string{""}),
             i_player.value("password", std::string{""}),
@@ -79,9 +131,11 @@ std::vector<player> player::load_players() {
             i_player.value("project_id", std::vector<int>{}),
             i_player.value("project_levels", std::vector<int>{}),
             i_player.value("defeated_domains", std::vector<int>{}),
+            std::move(temp_inventory),
             i_player.value("last_login_timestamp", 0LL)
         );
-        players_list.push_back(temp_player);
+
+        players_list.push_back(std::move(temp_player));
     }
     return players_list;
 }
@@ -104,7 +158,7 @@ bool player::verify_password() const {
 int player::add_new_player(std::vector<player>& players_list) {
     player temp_player;
     std::cin >> temp_player;
-    players_list.push_back(temp_player);
+    players_list.push_back(std::move(temp_player));
     return static_cast<int>(players_list.size() - 1);
 }
 
@@ -269,6 +323,23 @@ void player::add_project_id(int id) {
     }
     project_id[id]++;
     project_levels[id]++;
+}
+
+void player::add_item(std::unique_ptr<item> new_item) {
+    this->inventory.push_back(std::move(new_item));
+    std::cout << "Item added to your inventory!\n";
+}
+
+void player::show_inventory() const {
+    if (inventory.empty()) {
+        std::cout << "Your inventory is empty.\n";
+        return;
+    }
+    std::cout << username << "'s Inventory \n";
+    for (size_t i = 0; i < inventory.size(); ++i) {
+        std::cout << i + 1 << ". [" << inventory[i]->getType() << "] " << inventory[i]->getName() << "\n";
+        std::cout << "   Description: " << inventory[i]->getDescription() << "\n";
+    }
 }
 
 void player::add_defeated_domain(int domain_id) {
@@ -452,18 +523,3 @@ std::ostream& operator<<(std::ostream& os, const player& t) {
     return os;
 }
 
-inline void to_json(nlohmann::json& j, const player& p) {
-    j = nlohmann::json{
-                {"name", p.get_name()},
-                {"password", p.get_password()},
-                {"conquer_domain", p.get_conquer_domain()},
-                {"currency1", p.get_currency1()},
-                {"currency2", p.get_currency2()},
-                {"health", p.get_health()},
-                {"damage", p.get_damage()},
-                {"project_id", p.get_project_id()},
-                {"project_levels", p.get_project_levels()},
-                {"defeated_domains", p.get_defeated_domains()},
-                {"last_login_timestamp", p.get_last_login_timestamp()}
-    };
-}

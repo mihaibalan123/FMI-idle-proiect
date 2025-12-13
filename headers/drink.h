@@ -14,6 +14,10 @@ public:
 
     [[nodiscard]] item *clone() const override;
 
+    [[nodiscard]] std::string getType() const override {
+        return "drink";
+    }
+
     static std::vector<drink *> load_drinks();
 };
 
