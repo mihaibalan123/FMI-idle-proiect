@@ -1,4 +1,6 @@
 #include "book.h"
+#include <iostream>
+#include <nlohmann/json.hpp>
 
 item *book::clone() const {
     return new book(*this);

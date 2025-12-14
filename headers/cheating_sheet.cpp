@@ -1,6 +1,7 @@
 #include "cheating_sheet.h"
 #include "player.h"
-#include <iostream>
+#include <fstream>
+#include <nlohmann/json.hpp>
 
 item *cheating_sheet::clone() const {
     return new cheating_sheet(*this);
