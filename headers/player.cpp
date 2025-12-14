@@ -16,6 +16,10 @@ const std::vector<int>& player::get_project_id() const {
     return project_id;
 }
 
+const std::vector<int>& player::get_project_levels() const {
+    return project_levels;
+}
+
 float player::get_health() const {
     return health;
 }
@@ -24,17 +28,6 @@ float player::get_currency1() const {
     return currency1;
 }
 
-int player::get_conquer_domain() const {
-    return current_target_domain_id;
-}
-
-const std::string& player::get_name() const {
-    return username;
-}
-
-[[nodiscard]] const std::vector<int>& player::get_project_levels() const {
-    return project_levels;
-}
 
 [[nodiscard]] float player::get_currency2() const {
     return currency2;

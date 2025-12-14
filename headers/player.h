@@ -83,10 +83,6 @@ public:
 
     [[nodiscard]] float get_currency1() const;
 
-    [[nodiscard]] int get_conquer_domain() const;
-
-    [[nodiscard]] const std::string &get_name() const;
-
     [[nodiscard]] const std::vector<int> &get_project_levels() const;
 
     [[nodiscard]] float get_currency2() const;
