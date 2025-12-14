@@ -81,8 +81,8 @@ set_compiler_flags(RUN_SANITIZERS TRUE TARGET_NAMES ${MAIN_EXECUTABLE_NAME})
 
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
 # target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
- target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ${json_SOURCE_DIR}/include)
- target_link_directories(${MAIN_EXECUTABLE_NAME} PRIVATE ${json_BINARY_DIR}/lib)
+# target_include_directories(${MAIN_EXECUTABLE_NAME} SYSTEM PRIVATE ${json_SOURCE_DIR}/include)
+# target_link_directories(${MAIN_EXECUTABLE_NAME} PRIVATE ${json_BINARY_DIR}/lib)
 # target_link_libraries(${MAIN_EXECUTABLE_NAME} nlohmann_json::nlohmann_json)
 
  target_link_libraries(${MAIN_EXECUTABLE_NAME}

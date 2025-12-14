@@ -8,22 +8,6 @@
 #include <vector>
 #include <random>
 
-inline void to_json(nlohmann::json& j, const player& p) {
-    j = nlohmann::json{
-                        {"name", p.get_name()},
-                        {"password", p.get_password()},
-                        {"conquer_domain", p.get_conquer_domain()},
-                        {"currency1", p.get_currency1()},
-                        {"currency2", p.get_currency2()},
-                        {"health", p.get_health()},
-                        {"damage", p.get_damage()},
-                        {"project_id", p.get_project_id()},
-                        {"project_levels", p.get_project_levels()},
-                        {"defeated_domains", p.get_defeated_domains()},
-                        {"last_login_timestamp", p.get_last_login_timestamp()}
-    };
-}
-
 const std::string& player::get_password() const {
     return password;
 }
