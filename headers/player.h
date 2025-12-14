@@ -87,10 +87,6 @@ public:
 
     [[nodiscard]] const std::string &get_name() const;
 
-    [[nodiscard]] float get_damage() const;
-
-    [[nodiscard]] const std::vector<int> &get_defeated_domains() const;
-
     [[nodiscard]] const std::vector<int> &get_project_levels() const;
 
     [[nodiscard]] float get_currency2() const;

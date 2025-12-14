@@ -32,14 +32,6 @@ const std::string& player::get_name() const {
     return username;
 }
 
-float player::get_damage() const {
-    return damage;
-}
-
-const std::vector<int>& player::get_defeated_domains() const {
-    return defeated_domains;
-}
-
 [[nodiscard]] const std::vector<int>& player::get_project_levels() const {
     return project_levels;
 }
