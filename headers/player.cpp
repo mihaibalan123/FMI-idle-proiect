@@ -538,7 +538,7 @@ float player::get_total_damage() const {
     for (const auto &i: inventory) {
         if (i->get_type() == "book") {
             if (!i->get_consumable()) {
-                if (const auto b = dynamic_cast<book *>(i.get())) {
+                if (const auto b = dynamic_cast<const book *>(i.get())) {
                     total += b->get_damage_bonus();
                 }
             }
