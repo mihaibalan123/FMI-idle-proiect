@@ -450,7 +450,7 @@ void player::fight_teacher(const teacher &opponent, int p_project_id) {
     if (turns_to_win <= turns_to_die) {
         std::cout << "Victory! You defeated " << opponent.get_last_name() << "!\n";
 
-        float damage_taken = turns_to_win * teacher_damage;
+        float damage_taken = static_cast<float>(turns_to_win) * teacher_damage;
 
         this->health -= damage_taken;
         if (this->health < 0) this->health = 0;
@@ -509,10 +509,9 @@ void player::idle_earnings(const std::vector<project> &projects_list) {
 }
 
 bool player::has_any_project() const {
-    for (int i: project_levels) {
-        if (i > 0) return true;
-    }
-    return false;
+    return std::ranges::any_of(project_levels, [](int i) {
+        return i > 0;
+    });
 }
 
 bool player::boost_random_project(int value) {
@@ -539,7 +538,7 @@ float player::get_total_damage() const {
     for (const auto &i: inventory) {
         if (i->get_type() == "book") {
             if (!i->get_consumable()) {
-                if (auto b = dynamic_cast<book *>(i.get())) {
+                if (const auto b = dynamic_cast<book *>(i.get())) {
                     total += b->get_damage_bonus();
                 }
             }

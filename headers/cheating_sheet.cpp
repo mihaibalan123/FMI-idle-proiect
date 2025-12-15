@@ -51,7 +51,7 @@ void cheating_sheet::use(player &p) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 1.0);
-    float roll = dis(gen);
+    double roll = dis(gen);
 
     std::cout << "(Success Chance: " << this->success_chance * 100 << "%)\n";
 

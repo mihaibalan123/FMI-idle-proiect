@@ -113,7 +113,7 @@ public:
 
     void use_items_menu();
 
-    bool has_any_project() const;
+    [[nodiscard]] bool has_any_project() const;
 
     bool boost_random_project(int value);
 
