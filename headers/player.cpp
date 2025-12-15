@@ -8,20 +8,24 @@
 #include <vector>
 #include <random>
 
-const std::string& player::get_password() const {
+const std::string &player::get_password() const {
     return password;
 }
 
-const std::vector<int>& player::get_project_id() const {
+const std::vector<int> &player::get_project_id() const {
     return project_id;
 }
 
-const std::vector<int>& player::get_project_levels() const {
+const std::vector<int> &player::get_project_levels() const {
     return project_levels;
 }
 
 float player::get_health() const {
     return health;
+}
+
+float player::get_damage() const {
+    return damage;
 }
 
 float player::get_currency1() const {
@@ -49,20 +53,23 @@ void player::set_health(float value) {
     health = value;
 }
 
+void player::set_damage(float value) {
+    damage = value;
+}
+
 void player::set_last_login_timestamp(long long timestamp) {
     last_login_timestamp = timestamp;
 }
 
 std::vector<player> player::load_players() {
-
     std::vector<player> players_list;
     std::ifstream f2("players.json");
     nlohmann::json data2 = nlohmann::json::parse(f2);
 
     for (auto &i_player: data2) {
-        std::vector<std::unique_ptr<item>> temp_inventory;
+        std::vector<std::unique_ptr<item> > temp_inventory;
         if (i_player.contains("inventory")) {
-            for (const auto& item_json : i_player["inventory"]) {
+            for (const auto &item_json: i_player["inventory"]) {
                 std::string type = item_json.value("type", "unknown");
                 std::string i_name = item_json.value("name", "Unknown Item");
                 std::string i_desc = item_json.value("description", "No desc");
@@ -75,14 +82,12 @@ std::vector<player> player::load_players() {
                     temp_inventory.push_back(std::make_unique<book>(
                         i_name, i_desc, i_rarity, i_price, i_consumable, dmg
                     ));
-                }
-                else if (type == "drink") {
+                } else if (type == "drink") {
                     float hp = item_json.value("health_restore", 0.0f);
                     temp_inventory.push_back(std::make_unique<drink>(
                         i_name, i_desc, i_rarity, i_price, i_consumable, hp
                     ));
-                }
-                else if (type == "cheating_sheet") {
+                } else if (type == "cheating_sheet") {
                     int boost = item_json.value("project_boost", 0);
                     float chance = item_json.value("success_chance", 0.0f);
                     float risk = item_json.value("risk_damage", 0.0f);
@@ -113,10 +118,10 @@ std::vector<player> player::load_players() {
     return players_list;
 }
 
-void player::save_players(const std::vector<player>& players_list) {
+void player::save_players(const std::vector<player> &players_list) {
     nlohmann::json json_players_list = nlohmann::json::array();
 
-    for (const auto& p : players_list) {
+    for (const auto &p: players_list) {
         nlohmann::json p_json;
         p_json["name"] = p.username;
         p_json["password"] = p.password;
@@ -131,7 +136,7 @@ void player::save_players(const std::vector<player>& players_list) {
         p_json["defeated_domains"] = p.defeated_domains;
         p_json["inventory"] = nlohmann::json::array();
 
-        for (const auto& item_ptr : p.inventory) {
+        for (const auto &item_ptr: p.inventory) {
             nlohmann::json item_json;
             item_json["type"] = item_ptr->get_type();
             item_json["name"] = item_ptr->get_name();
@@ -141,18 +146,16 @@ void player::save_players(const std::vector<player>& players_list) {
             item_json["consumable"] = item_ptr->get_consumable();
 
             if (item_ptr->get_type() == "book") {
-                if (const auto b = dynamic_cast<const book*>(item_ptr.get())) {
+                if (const auto b = dynamic_cast<const book *>(item_ptr.get())) {
                     item_json["damage_bonus"] = b->get_damage_bonus();
                     item_json["rarity"] = b->get_rarity();
                 }
-            }
-            else if (item_ptr->get_type() == "drink") {
-                if (const auto d = dynamic_cast<const drink*>(item_ptr.get())) {
+            } else if (item_ptr->get_type() == "drink") {
+                if (const auto d = dynamic_cast<const drink *>(item_ptr.get())) {
                     item_json["health_restore"] = d->get_health_restore();
                 }
-            }
-            else if (item_ptr->get_type() == "cheating_sheet") {
-                if (const auto c = dynamic_cast<const cheating_sheet*>(item_ptr.get())) {
+            } else if (item_ptr->get_type() == "cheating_sheet") {
+                if (const auto c = dynamic_cast<const cheating_sheet *>(item_ptr.get())) {
                     item_json["project_boost"] = c->get_project_boost();
                     item_json["success_chance"] = c->get_success_chance();
                     item_json["risk_damage"] = c->get_risk_damage();
@@ -176,7 +179,7 @@ bool player::verify_password() const {
     return false;
 }
 
-int player::add_new_player(std::vector<player>& players_list) {
+int player::add_new_player(std::vector<player> &players_list) {
     player temp_player;
     std::cin >> temp_player;
     players_list.push_back(std::move(temp_player));
@@ -188,7 +191,7 @@ void player::reset_projects() {
     project_levels.clear();
 }
 
-void player::player_stats(std::ostream& os) const {
+void player::player_stats(std::ostream &os) const {
     os << "Player: " << this->username << "\n";
     os << "Currency1: " << this->currency1 << "\n";
     os << "Currency2: " << this->currency2 << "\n";
@@ -196,17 +199,18 @@ void player::player_stats(std::ostream& os) const {
     os << "Damage: " << this->damage << "\n";
 }
 
-void player::player_full_stats(std::ostream& os, const std::vector<project>& projects_list) const {
+void player::player_full_stats(std::ostream &os, const std::vector<project> &projects_list) const {
     this->player_stats(os);
     os << "Projects list:\n";
     bool ok = false;
     for (size_t i = 0; i < this->project_levels.size() && i < projects_list.size(); ++i) {
         int level = this->project_levels[i];
         if (level > 0) {
-            const project& p = projects_list[i];
+            const project &p = projects_list[i];
             float current_income = p.get_cashback() * static_cast<float>(level);
             float next_upgrade_cost = p.get_price() * static_cast<float>(level + 1);
-            os << "  - " << projects_list[i].get_name() << " [" << level << "]" << " Income: " << current_income << " Cashback: " << p.get_cashback() << " Next upgrade cost: " << next_upgrade_cost << "\n";
+            os << "  - " << projects_list[i].get_name() << " [" << level << "]" << " Income: " << current_income <<
+                    " Cashback: " << p.get_cashback() << " Next upgrade cost: " << next_upgrade_cost << "\n";
             ok = true;
         }
     }
@@ -221,7 +225,8 @@ void player::show_stats() const {
 }
 
 void player::show_projects_info(const std::vector<project> &projects_repo) const {
-    std::cout << "Here you can see the projects you fought for! Upgrade them in order to increase you currencies and later you can even reset getting -RESTANTA- and grow stronger !\n";
+    std::cout <<
+            "Here you can see the projects you fought for! Upgrade them in order to increase you currencies and later you can even reset getting -RESTANTA- and grow stronger !\n";
     this->player_full_stats(std::cout, projects_repo);
     std::cout << "\n";
 }
@@ -270,11 +275,11 @@ void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
     int recommended_slot = 0;
     float min_hp = std::numeric_limits<float>::max();
 
-    for(int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i) {
         int real_id = teacher_indices[i];
         float current_hp = teachers_list[real_id].get_health();
 
-        if(current_hp < min_hp) {
+        if (current_hp < min_hp) {
             min_hp = current_hp;
             recommended_slot = i;
         }
@@ -298,6 +303,7 @@ void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
     } while (aux_t_index == -1);
 
     const teacher &teacher_fought = teachers_list[aux_t_index];
+    this->use_items_menu();
     this->fight_teacher(teacher_fought, aux_t_index);
 }
 
@@ -313,7 +319,7 @@ void player::perform_upgrade(const std::vector<project> &projects_list) {
             const project &p = projects_list[i];
             float cost = p.get_price() * static_cast<float>(level + 1);
             std::cout << i << ". " << p.get_name() << " lvl: " << level
-                      << " cost: " << cost << " cashback: " << p.get_cashback() << "\n";
+                    << " cost: " << cost << " cashback: " << p.get_cashback() << "\n";
             ok = true;
         }
     }
@@ -331,7 +337,7 @@ void player::perform_upgrade(const std::vector<project> &projects_list) {
         selected_id >= static_cast<int>(my_levels.size()) || my_levels[selected_id] == 0) {
         std::cout << "Invalid or unowned project id! \n";
         return;
-        }
+    }
 
     this->project_upgrade(selected_id, projects_list);
 }
@@ -377,7 +383,7 @@ void player::calculate_and_set_conquer_domain() {
     int mfdomain = -1;
     int curr_d = defeated_domains[0];
     int curr_c = 0;
-    for (int domain : defeated_domains) {
+    for (int domain: defeated_domains) {
         if (domain == curr_d) {
             curr_c++;
         } else {
@@ -395,24 +401,14 @@ void player::calculate_and_set_conquer_domain() {
     this->current_target_domain_id = mfdomain;
 }
 
-int player::turns_to_defeat(float enemy_hp) const {
-    if (this->damage <= 0.0f) {
-        return (enemy_hp > 0) ? -1 : 0;
-    }
-    float average_damage = damage + 0.2f * this->health;
-    float turns_float = enemy_hp / average_damage;
-    return static_cast<int>(turns_float);
-}
-
-void player::project_upgrade(int selected_id, const std::vector<project>& projects_list) {
-
+void player::project_upgrade(int selected_id, const std::vector<project> &projects_list) {
     if (selected_id < 0 || selected_id >= static_cast<int>(projects_list.size())) {
         std::cout << "Invalid project ID for upgrade!\n";
         return;
     }
 
-    const project& selected_project = projects_list[selected_id];
-    const std::vector<int>& p_project_levels = this->get_project_id();
+    const project &selected_project = projects_list[selected_id];
+    const std::vector<int> &p_project_levels = this->get_project_id();
 
     if (selected_id >= static_cast<int>(p_project_levels.size()) || p_project_levels[selected_id] == 0) {
         std::cout << "You don't own project " << selected_id << ". This should be checked in menu!\n";
@@ -430,32 +426,52 @@ void player::project_upgrade(int selected_id, const std::vector<project>& projec
         float reward = selected_project.get_cashback() * static_cast<float>(current_level + 1) * 10.0f;
         this->set_currency1(this->get_currency1() + reward);
 
-        std::cout << "\n[SUCCES] project \"" << selected_project.get_name() << "\" was upgraded to level " << current_level + 1 << "\n";
+        std::cout << "\n[SUCCES] project \"" << selected_project.get_name() << "\" was upgraded to level " <<
+                current_level + 1 << "\n";
         std::cout << "New currency1: " << this->get_currency1() << "\n";
     } else {
         std::cout << "Not enough money! Required: " << cost << ", Available: " << current_currency << ".\n";
     }
 }
 
-void player::fight_teacher(const teacher& opponent, int p_project_id) {
-    float critical_chance = opponent.get_critical_chance();
+void player::fight_teacher(const teacher &opponent, int p_project_id) {
+    float player_damage = this->get_total_damage();
+    float teacher_damage = 10.0f + (opponent.get_health() * 0.1f);
+    float teacher_hp = opponent.get_health();
 
-    int player_turns = this->turns_to_defeat(opponent.get_health());
-    int teacher_turns = opponent.turns_to_defeat(this->get_health(), critical_chance);
+    std::cout << "\n You faced " << opponent.get_last_name() << "\n";
+    std::cout << "You (hp: " << this->health << ", damage: " << player_damage << ") vs Teacher (hp: " << teacher_hp <<
+            ", damage: " << teacher_damage << ")\n";
 
-    if (player_turns != -1 && (teacher_turns == -1 || player_turns <= teacher_turns)) {
-        std::cout << opponent.get_last_name() << " defeated! Well done! You got project no." << p_project_id << "\n";
+    int turns_to_win = (player_damage > 0) ? static_cast<int>(std::ceil(teacher_hp / player_damage)) : 999;
 
+    int turns_to_die = (teacher_damage > 0) ? static_cast<int>(std::ceil(this->health / teacher_damage)) : 999;
+
+    if (turns_to_win <= turns_to_die) {
+        std::cout << "Victory! You defeated " << opponent.get_last_name() << "!\n";
+
+        float damage_taken = turns_to_win * teacher_damage;
+
+        this->health -= damage_taken;
+        if (this->health < 0) this->health = 0;
+
+        std::cout << "You took " << damage_taken << " damage during the fight.\n";
+        std::cout << "Remaining Health: " << this->health << "\n";
+
+        std::cout << "You got project no." << p_project_id << "\n \n";
         this->add_project_id(p_project_id);
         int domain_id = opponent.get_domain();
         this->add_defeated_domain(domain_id);
         this->calculate_and_set_conquer_domain();
     } else {
-        std::cout << "You died! Teacher " << opponent.get_last_name() << " was stronger." << "\n";
+        this->health = 0;
+        std::cout << "Defeated! " << opponent.get_last_name() << " was too strong.\n";
+        std::cout << "You needed " << turns_to_win << " turns, but could only survive " << turns_to_die << ".\n";
+        this->respawn();
     }
 }
 
-void player::idle_earnings(const std::vector<project>& projects_list) {
+void player::idle_earnings(const std::vector<project> &projects_list) {
     long long current_time = std::chrono::duration_cast<std::chrono::seconds>(
         std::chrono::system_clock::now().time_since_epoch()).count();
 
@@ -485,10 +501,101 @@ void player::idle_earnings(const std::vector<project>& projects_list) {
         float final_earnings = total_idle_earnings * static_cast<float>(tick_count);
         set_currency1(get_currency1() + final_earnings);
 
-        std::cout << "\nIdle Income: You were away for " << time_elapsed_seconds / 3600 << " hours and " <<(time_elapsed_seconds % 3600) / 60 << " minutes and " << (time_elapsed_seconds % 60) << " seconds.\n";
+        std::cout << "\nIdle Income: You were away for " << time_elapsed_seconds / 3600 << " hours and " << (
+            time_elapsed_seconds % 3600) / 60 << " minutes and " << (time_elapsed_seconds % 60) << " seconds.\n";
         std::cout << "You earned " << final_earnings << " currency1!\n";
     }
     set_last_login_timestamp(current_time);
+}
+
+bool player::has_any_project() const {
+    for (int i: project_levels) {
+        if (i > 0) return true;
+    }
+    return false;
+}
+
+bool player::boost_random_project(int value) {
+    std::vector<int> projects;
+    for (size_t i = 0; i < project_levels.size(); ++i) {
+        if (project_levels[i] > 0) projects.push_back(static_cast<int>(i));
+    }
+
+    if (projects.empty()) return false;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(0, static_cast<int>(projects.size()) - 1);
+
+    int random_idx = projects[distr(gen)];
+    project_levels[random_idx] += value;
+
+    std::cout << "Project ID " << random_idx << " increased by " << value << " levels!\n";
+    return true;
+}
+
+float player::get_total_damage() const {
+    float total = this->damage;
+    for (const auto &i: inventory) {
+        if (i->get_type() == "book") {
+            if (!i->get_consumable()) {
+                if (auto b = dynamic_cast<book *>(i.get())) {
+                    total += b->get_damage_bonus();
+                }
+            }
+        }
+    }
+    return total;
+}
+
+void player::use_items_menu() {
+    if (inventory.empty()) return;
+    std::cout << "\n Player's inventory \n";
+    for (size_t i = 0; i < inventory.size(); ++i) {
+        std::cout << i + 1 << ". " << inventory[i]->get_name()
+                << " [" << inventory[i]->get_type() << "]"
+                << (inventory[i]->get_consumable() ? " (Consumable)" : " (Passive)")
+                << "\n";
+    }
+
+    int idx;
+    std::cout << "Select item ID to use (0 to skip): ";
+    std::cin >> idx;
+
+    if (idx > 0 && idx <= static_cast<int>(inventory.size())) {
+        auto &item_ptr = inventory[idx - 1];
+        item_ptr->use(*this);
+        if (item_ptr->get_consumable()) {
+            if (item_ptr->get_type() == "cheating_sheet" && !this->has_any_project()) {
+                std::cout << "(Item kept in inventory because it had no effect)\n";
+            } else {
+                inventory.erase(inventory.begin() + (idx - 1));
+                std::cout << "-> Item removed from inventory.\n";
+            }
+        }
+    }
+}
+
+void player::respawn() {
+    std::cout << "\n=== YOU FAINTED ===\n";
+    std::cout << "You were carried out of the examination room to the nurse's office.\n";
+
+    float max_hp = 500.0f;
+
+    this->health = max_hp / 2.0f;
+
+    std::cout << "-> Health restored to 50% (" << this->health << " hp).\n";
+
+    float penalty = 0.50f;
+    float lost_money = this->currency1 * penalty;
+
+    this->currency1 -= lost_money;
+    if (this->currency1 < 0) this->currency1 = 0;
+
+    std::cout << "-> You paid " << lost_money << " currency1 for the medical bill.\n";
+    std::cout << "-> Remaining currency1: " << this->currency1 << "\n";
+
+    std::cout << "Don't give up! Come back when you are stronger!\n";
 }
 
 void player::reset_game() {
@@ -515,7 +622,7 @@ void player::reset_game() {
     }
 }
 
-inline std::istream& operator>>(std::istream& is, player& t) {
+inline std::istream &operator>>(std::istream &is, player &t) {
     std::string temp_pass1, temp_pass2;
     t.currency1 = 100.0;
     t.currency2 = 0.0;
@@ -530,17 +637,16 @@ inline std::istream& operator>>(std::istream& is, player& t) {
         std::cout << "Password must be at least 5 chars long!\n";
         std::cout << "Insert your password> ";
         is >> temp_pass1;
-        std:: cout << "Re-type your password# ";
+        std::cout << "Re-type your password# ";
         is >> temp_pass2;
         if (temp_pass1 != temp_pass2) std::cout << "Retry. Passwords doesn't match!\n";
         if (temp_pass1.size() < 5) std::cout << "Password must be at least 5 chars long!\n";
-    } while (temp_pass1 != temp_pass2 || temp_pass1.size()< 5);
+    } while (temp_pass1 != temp_pass2 || temp_pass1.size() < 5);
     t.password = temp_pass1;
     return is;
 }
 
-std::ostream& operator<<(std::ostream& os, const player& t) {
+std::ostream &operator<<(std::ostream &os, const player &t) {
     os << t.username;
     return os;
 }
-

@@ -25,9 +25,11 @@ public:
     }
 
     static std::vector<book *> load_books();
-    bool purchase(player& p) override;
-};
 
+    bool purchase(player &p) override;
+
+    void use(player &p) override;
+};
 
 
 #endif //OOP_BOOK_H

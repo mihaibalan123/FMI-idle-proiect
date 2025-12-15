@@ -40,8 +40,6 @@ class player {
 
     void project_upgrade(int selected_id, const std::vector<project> &projects_list);
 
-    [[nodiscard]] int turns_to_defeat(float enemy_hp) const;
-
 public:
     player(std::string name, std::string password, int conquer_domain, float currency1, float currency2, float health,
            float damage, std::vector<int> project_id, std::vector<int> project_levels,
@@ -81,6 +79,8 @@ public:
 
     [[nodiscard]] float get_health() const;
 
+    [[nodiscard]] float get_damage() const;
+
     [[nodiscard]] float get_currency1() const;
 
     [[nodiscard]] const std::vector<int> &get_project_levels() const;
@@ -95,6 +95,8 @@ public:
 
     void set_health(float value);
 
+    void set_damage(float value);
+
     void set_last_login_timestamp(long long timestamp);
 
     static std::vector<player> load_players();
@@ -106,6 +108,16 @@ public:
     [[nodiscard]] bool verify_password() const;
 
     void idle_earnings(const std::vector<project> &projects_list);
+
+    [[nodiscard]] float get_total_damage() const;
+
+    void use_items_menu();
+
+    bool has_any_project() const;
+
+    bool boost_random_project(int value);
+
+    void respawn();
 
     friend std::istream &operator>>(std::istream &is, player &t);
 

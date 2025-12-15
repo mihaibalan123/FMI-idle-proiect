@@ -35,7 +35,10 @@ public:
     }
 
     static std::vector<cheating_sheet *> load_cheating_sheets();
+
     bool purchase(player &p) override;
+
+    void use(player &p) override;
 };
 
 #endif //OOP_CHEATING_SHEET_H

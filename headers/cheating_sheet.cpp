@@ -1,6 +1,7 @@
 #include "cheating_sheet.h"
 #include "player.h"
 #include <fstream>
+#include <random>
 #include <nlohmann/json.hpp>
 
 item *cheating_sheet::clone() const {
@@ -37,4 +38,35 @@ bool cheating_sheet::purchase(player& p) {
 
     std::cout << "Not enough health! Please stay alive... Cost: " << this->price << "\n";
     return false;
+}
+
+void cheating_sheet::use(player &p) {
+    std::cout << "[ITEM] Using '" << this->name << "'...\n";
+
+    if (!p.has_any_project()) {
+        std::cout << "You have no active projects to boost! (use this item later)\n";
+        return;
+    }
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+    float roll = dis(gen);
+
+    std::cout << "(Success Chance: " << this->success_chance * 100 << "%)\n";
+
+    if (roll <= this->success_chance){
+        std::cout << "Success! \n";
+        bool boosted = p.boost_random_project(this->project_boost);
+        if(!boosted) std::cout << "Failed... \n";
+    } else {
+        std::cout << "You were caught! \n";
+        float current_hp = p.get_health();
+        float new_hp = current_hp - this->risk_damage;
+        if (new_hp < 0) new_hp = 0;
+
+        p.set_health(new_hp);
+        std::cout << "You took " << this->risk_damage << " damage. Current hp is " << new_hp << "\n";
+
+    }
 }

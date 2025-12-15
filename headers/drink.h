@@ -8,9 +8,10 @@ class drink : public item {
 
 public:
     drink(std::string name, std::string description, std::string rarity, float price,
-          bool consumable, float health_restore) : item(std::move(name), std::move(description), std::move(rarity), price,
-                                                      consumable),
-                                                 health_restore(health_restore) {
+          bool consumable, float health_restore) : item(std::move(name), std::move(description), std::move(rarity),
+                                                        price,
+                                                        consumable),
+                                                   health_restore(health_restore) {
     }
 
     [[nodiscard]] item *clone() const override;
@@ -24,7 +25,10 @@ public:
     }
 
     static std::vector<drink *> load_drinks();
-    bool purchase(player& p) override;
+
+    bool purchase(player &p) override;
+
+    void use(player &p) override;
 };
 
 

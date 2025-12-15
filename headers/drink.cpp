@@ -32,3 +32,11 @@ bool drink::purchase(player& p) {
     std::cout << "Not enough currency2! Cost: " << this->price << "\n";
     return false;
 }
+
+void drink::use(player& p) {
+    float current_hp = p.get_health();
+    p.set_health(current_hp + this->health_restore);
+
+    std::cout << "[DRINK] You consumed '" << this->name << "' and restored " << this->health_restore << "hp. \n";
+    std::cout << "Current Health: " << p.get_health() << "\n";
+}
