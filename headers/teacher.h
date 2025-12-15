@@ -50,11 +50,9 @@ public:
 
     [[nodiscard]] const std::string& get_last_name() const;
     [[nodiscard]] float get_health() const;
-    [[nodiscard]] float get_critical_chance() const;
     [[nodiscard]] int get_domain() const;
 
     static std::vector<teacher> load_teachers(const std::vector<project>& projects_list);
-    [[nodiscard]] int turns_to_defeat(float enemy_hp, float t_critical_chance) const;
 
     friend std::istream& operator>>(std::istream& is,  teacher &t);
     friend std::ostream& operator<<(std::ostream& os, const teacher &t);
