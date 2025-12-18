@@ -105,10 +105,10 @@ void menu::run() {
                 players_list[curr_player].perform_upgrade(projects_list);
                 break;
             case 8:
-                players_list[curr_player].reset_progress();
+                item_shop.run(players_list[curr_player]);
                 break;
             case 9:
-                item_shop.run(players_list[curr_player]);
+                players_list[curr_player].reset_progress();
                 break;
             default:
                 std::cout << "Invalid choice.\n";
