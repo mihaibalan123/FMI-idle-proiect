@@ -67,9 +67,11 @@ void menu::run() {
             curr_player = 0;
             players_list[curr_player].idle_earnings(projects_list);
         }
-        std::cout << "1.Select Player / Switch user\n" << "2.Show current player basic stats\n" <<
-                "3.Examination room ---> fight a teacher\n" << "4.Player Projects Information\n" <<
-                "5.Upgrade your projects\n" << "6.RESTANTA (Reset currency)\n" << "7.SHOP (Buy Items)\n" "0.Exit\n";
+        std::cout << "1. Select Player / Switch user\n" << "2. Visit an easy part-time job \n" <<
+                "3. Visit a *complex* part-time job \n" << "4. Show  stats\n" <<
+                "5. Examination room (fight a teacher)\n" << "6. Projects Information\n" <<
+                "7. Projects upgrade \n" << "8. Shop (buy items)\n" << "9. 'Restanta' (reset currency)\n"  << "0.Exit\n";
+        std::cout << ">";
         std::cin >> option;
         if (!option) {
             close();
@@ -85,21 +87,27 @@ void menu::run() {
         }
         switch (option) {
             case 2:
-                players_list[curr_player].show_stats();
+                players_list[curr_player].start_easy_job();
                 break;
             case 3:
-                players_list[curr_player].enter_examination_room(teachers_list);
+                players_list[curr_player].start_complex_job();
                 break;
             case 4:
-                players_list[curr_player].show_projects_info(projects_list);
+                players_list[curr_player].show_stats();
                 break;
             case 5:
-                players_list[curr_player].perform_upgrade(projects_list);
+                players_list[curr_player].enter_examination_room(teachers_list);
                 break;
             case 6:
+                players_list[curr_player].show_projects_info(projects_list);
+                break;
+            case 7:
+                players_list[curr_player].perform_upgrade(projects_list);
+                break;
+            case 8:
                 players_list[curr_player].reset_progress();
                 break;
-            case 7 :
+            case 9:
                 item_shop.run(players_list[curr_player]);
                 break;
             default:

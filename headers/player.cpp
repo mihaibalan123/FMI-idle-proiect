@@ -290,6 +290,7 @@ void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
     int aux_t_index = -1;
     do {
         std::cout << "Who do you wanna fight? (0-4; 5 for auto-pick the -weakest- one)\n";
+        std::cout << ">";
         std::cin >> fight_t;
         if (fight_t == 5) {
             std::cout << "Auto-picking option " << recommended_slot << "...\n";
@@ -478,10 +479,14 @@ void player::idle_earnings(const std::vector<project> &projects_list) {
     long long time_elapsed_seconds = current_time - get_last_login_timestamp();
     constexpr long long parse_seconds = 5 * 60;
 
+    set_last_login_timestamp(current_time);
+
     if (time_elapsed_seconds <= 0) {
-        set_last_login_timestamp(current_time);
         return;
     }
+
+    std::cout << "\nIdle Income: You were away for " << time_elapsed_seconds / 3600 << " hours and " << (
+            time_elapsed_seconds % 3600) / 60 << " minutes and " << (time_elapsed_seconds % 60) << " seconds.\n";
 
     long long tick_count = time_elapsed_seconds / parse_seconds;
 
@@ -499,13 +504,37 @@ void player::idle_earnings(const std::vector<project> &projects_list) {
         }
 
         float final_earnings = total_idle_earnings * static_cast<float>(tick_count);
-        set_currency1(get_currency1() + final_earnings);
 
-        std::cout << "\nIdle Income: You were away for " << time_elapsed_seconds / 3600 << " hours and " << (
-            time_elapsed_seconds % 3600) / 60 << " minutes and " << (time_elapsed_seconds % 60) << " seconds.\n";
+        set_currency1(get_currency1() + final_earnings);
         std::cout << "You earned " << final_earnings << " currency1!\n";
     }
-    set_last_login_timestamp(current_time);
+
+    float max_hp = 500.0f;
+
+    if (this->health < max_hp) {
+        long long seconds_per_hp = 150;
+        float hp_regen_rate = 1.0f;
+
+        long long ticks = time_elapsed_seconds / seconds_per_hp;
+        float hp_gained = static_cast<float>(ticks) * hp_regen_rate;
+
+        if (hp_gained > 0) {
+            float old_hp = this->health;
+            this->health += hp_gained;
+
+            if (this->health > max_hp) {
+                this->health = max_hp;
+            }
+
+            std::cout << "You recovered " << (this->health - old_hp) << " hp while resting.\n";
+            std::cout << "Current Health: " << this->health << " / " << max_hp << "\n";
+            std::cout << "\n";
+        }
+    } else {
+        std::cout << " Current Health: maximum (fully rested).\n";
+        std::cout << "\n";
+    }
+
 }
 
 bool player::has_any_project() const {
@@ -579,11 +608,9 @@ void player::respawn() {
     std::cout << "\n=== YOU FAINTED ===\n";
     std::cout << "You were carried out of the examination room to the nurse's office.\n";
 
-    float max_hp = 500.0f;
+    this->health = 1.0f;
 
-    this->health = max_hp / 2.0f;
-
-    std::cout << "-> Health restored to 50% (" << this->health << " hp).\n";
+    std::cout << "-> Health set at 1 hp! \n";
 
     float penalty = 0.50f;
     float lost_money = this->currency1 * penalty;
@@ -595,6 +622,141 @@ void player::respawn() {
     std::cout << "-> Remaining currency1: " << this->currency1 << "\n";
 
     std::cout << "Don't give up! Come back when you are stronger!\n";
+}
+
+void player::start_easy_job() {
+    std::cout << "\n You've got easiest job of your life! Start doing your job... \n";
+    std::cout << "Type '-999' to quit.\n\n";
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> num_dist(1, 50);
+    std::uniform_int_distribution<> op_dist(0, 2);
+
+    while (true) {
+        int a = num_dist(gen);
+        int b = num_dist(gen);
+        int op = op_dist(gen);
+
+        long long correct_answer = 0;
+        char op_char;
+
+        if (op == 2) {
+            a = (a % 12) + 1;
+            b = (b % 12) + 1;
+            op_char = '*';
+            correct_answer = a * b;
+        } else if (op == 1) {
+            if (a < b) std::swap(a, b);
+            op_char = '-';
+            correct_answer = a - b;
+        } else {
+            op_char = '+';
+            correct_answer = a + b;
+        }
+
+        std::cout << a << " " << op_char << " " << b << " = ";
+
+        long long user_answer;
+        while (!(std::cin >> user_answer)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Numbers only! Try again: ";
+        }
+
+        if (user_answer == -999) break;
+
+        if (user_answer == correct_answer) {
+            float reward = 35.0f;
+            this->currency1 += reward;
+            std::cout << " -> Correct! + " << reward << " currency1.\n";
+        } else {
+            std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
+        }
+    }
+}
+
+static long long calculate_op(long long a, long long b, char op) {
+    switch (op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        default: return 0;
+    }
+}
+
+void player::start_complex_job() {
+    std::cout << "Complex expressions, higher money. Watch out!\n";
+    std::cout << "Type '-999' to quit.\n\n";
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> small_num(2, 10);
+    std::uniform_int_distribution<> medium_num(10, 50);
+    std::uniform_int_distribution<> structure_dist(0, 1);
+    std::uniform_int_distribution<> op_dist(0, 2);
+    std::string ops = "+-*";
+
+    while (true) {
+        char op1 = ops[op_dist(gen)];
+        char op2 = ops[op_dist(gen)];
+
+        long long a, b, c;
+
+        if (op1 == '*') {
+            a = small_num(gen);
+        } else {
+            a = medium_num(gen);
+        }
+
+        if (op1 == '*' || op2 == '*') {
+            b = small_num(gen);
+        } else {
+            b = medium_num(gen);
+        }
+
+        if (op2 == '*') {
+            c = small_num(gen);
+        } else {
+            c = medium_num(gen);
+        }
+
+        long long correct_answer = 0;
+        std::string expression;
+
+        int structure = structure_dist(gen);
+
+        if (structure == 0) {
+            long long step1 = calculate_op(a, b, op1);
+            correct_answer = calculate_op(step1, c, op2);
+            expression = "(" + std::to_string(a) + " " + op1 + " " + std::to_string(b) + ") "
+                                + op2 + " " + std::to_string(c);
+        } else {
+            long long step1 = calculate_op(b, c, op2);
+            correct_answer = calculate_op(a, step1, op1);
+            expression = std::to_string(a) + " " + op1 + " (" + std::to_string(b) + " "
+                                + op2 + " " + std::to_string(c) + ")";
+        }
+
+        std::cout <<  expression << " = ";
+
+        long long answer;
+        while (!(std::cin >> answer)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Numbers only! Try again: ";
+        }
+
+        if (answer == -999) break;
+
+        if (answer == correct_answer) {
+            float reward = 55.0f;
+            this->currency1 += reward;
+            std::cout << " -> Genius! + " << reward << " currency1.\n";
+        } else {
+            std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
+        }
+    }
 }
 
 void player::reset_game() {

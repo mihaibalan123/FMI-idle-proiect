@@ -119,6 +119,10 @@ public:
 
     void respawn();
 
+    void start_easy_job();
+
+    void start_complex_job();
+
     friend std::istream &operator>>(std::istream &is, player &t);
 
     friend std::ostream &operator<<(std::ostream &os, const player &t);
