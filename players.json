@@ -1,10 +1,11 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 117981.859375,
+        "currency1": 117851.6015625,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
+            1,
             1,
             1,
             1,
@@ -18,7 +19,7 @@
             3,
             3
         ],
-        "health": 346.0999755859375,
+        "health": 163.69998168945313,
         "inventory": [
             {
                 "consumable": false,
@@ -57,9 +58,29 @@
                 "risk_damage": 10.0,
                 "success_chance": 0.800000011920929,
                 "type": "cheating_sheet"
+            },
+            {
+                "consumable": false,
+                "damage_bonus": 10.0,
+                "description": "Useful ALOT(+10 damage)",
+                "name": "Autocad Extra-Classes",
+                "price": 50.0,
+                "rarity": "Legendary",
+                "type": "book"
+            },
+            {
+                "consumable": true,
+                "description": "Obvious (1 project level up, 80% risk, -10 if not success).",
+                "name": "Japanese 'helmet'",
+                "price": 10.0,
+                "project_boost": 1,
+                "rarity": "Common",
+                "risk_damage": 10.0,
+                "success_chance": 0.800000011920929,
+                "type": "cheating_sheet"
             }
         ],
-        "last_login_timestamp": 1766040980,
+        "last_login_timestamp": 1766041668,
         "name": "mihai",
         "password": "123456",
         "project_id": [
@@ -95,7 +116,7 @@
             0,
             0,
             0,
-            3,
+            4,
             0,
             0,
             0,
@@ -147,7 +168,7 @@
             0,
             0,
             0,
-            0,
+            1,
             0,
             0,
             1
@@ -185,7 +206,7 @@
             0,
             0,
             0,
-            3,
+            4,
             0,
             0,
             0,
@@ -237,7 +258,7 @@
             0,
             0,
             0,
-            0,
+            1,
             0,
             0,
             1
