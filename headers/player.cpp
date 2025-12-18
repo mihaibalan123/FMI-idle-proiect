@@ -3,6 +3,7 @@
 #include "book.h"
 #include "cheating_sheet.h"
 #include "drink.h"
+#include "exception.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -63,8 +64,7 @@ void player::set_last_login_timestamp(long long timestamp) {
 
 std::vector<player> player::load_players() {
     std::vector<player> players_list;
-    std::ifstream f2("players.json");
-    nlohmann::json data2 = nlohmann::json::parse(f2);
+    nlohmann::json data2 = load_json_verified("players.json");
 
     for (auto &i_player: data2) {
         std::vector<std::unique_ptr<item> > temp_inventory;
@@ -285,22 +285,23 @@ void player::enter_examination_room(const std::vector<teacher> &teachers_list) {
         }
     }
     std::cout << "\n Hint: Weakest teacher is at option " << recommended_slot << " with " << min_hp << " hp.\n";
-
-    int fight_t = -1;
-    int aux_t_index = -1;
+    int fight_t;
+    int aux_t_index;
     do {
         std::cout << "Who do you wanna fight? (0-4; 5 for auto-pick the -weakest- one)\n";
         std::cout << ">";
-        std::cin >> fight_t;
+        try {
+            fight_t = get_verified_input(0, static_cast<int>(teachers_list.size()));
+        }
+        catch (const invalid_input_error& e) {
+            std::cerr << "[!] " << e.what() << "\n";
+            return;
+        }
         if (fight_t == 5) {
             std::cout << "Auto-picking option " << recommended_slot << "...\n";
             fight_t = recommended_slot;
         }
-        if (fight_t >= 0 && fight_t < 5 && fight_t < static_cast<int>(teacher_indices.size())) {
             aux_t_index = teacher_indices[fight_t];
-        } else {
-            std::cout << "Invalid selection.\n";
-        }
     } while (aux_t_index == -1);
 
     const teacher &teacher_fought = teachers_list[aux_t_index];

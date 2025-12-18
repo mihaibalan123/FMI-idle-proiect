@@ -1,4 +1,5 @@
 #include "shop.h"
+#include "exception.h"
 
 void shop::start() {
     books_list = book::load_books();
@@ -15,16 +16,18 @@ void shop::buy_book(player &p) const {
     }
     std::cout << "0. Back\nSelect: ";
 
-    int choice;
-    std::cin >> choice;
+    int choice = get_verified_input(0, static_cast<int>(books_list.size()));
+    if (choice == 0) return;
 
-    if (choice > 0 && choice <= static_cast<int>(books_list.size())) {
         book *selected = books_list[choice - 1];
+
+        if (p.get_currency1() < selected->get_price()) {
+            throw insufficient_funds_error(selected->get_name());
+        }
 
         if (selected->purchase(p)) {
             p.add_item(std::unique_ptr<item>(selected->clone()));
         }
-    }
 }
 
 void shop::buy_drink(player &p) const {
@@ -35,15 +38,17 @@ void shop::buy_drink(player &p) const {
                 << " | " << drinks_list[i]->get_description() << "\n";
     }
     std::cout << "0. Back\nSelect: ";
-    int choice;
-    std::cin >> choice;
 
-    if (choice > 0 && choice <= static_cast<int>(drinks_list.size())) {
+    int choice = get_verified_input(0, static_cast<int>(books_list.size()));
+    if (choice == 0) return;
+
         drink *selected = drinks_list[choice - 1];
+        if (p.get_currency1() < selected->get_price()) {
+            throw insufficient_funds_error(selected->get_name());
+        }
         if (selected->purchase(p)) {
             p.add_item(std::unique_ptr<item>(selected->clone()));
         }
-    }
 }
 
 void shop::buy_cheating_sheet(player &p) const {
@@ -54,23 +59,26 @@ void shop::buy_cheating_sheet(player &p) const {
                 << " | " << cheating_sheets_list[i]->get_description() << "\n";
     }
     std::cout << "0. Back\nSelect: ";
-    int choice;
-    std::cin >> choice;
 
-    if (choice > 0 && choice <= static_cast<int>(cheating_sheets_list.size())) {
+    int choice = get_verified_input(0, static_cast<int>(books_list.size()));
+    if (choice == 0) return;
+
         cheating_sheet *selected = cheating_sheets_list[choice - 1];
+        if (p.get_currency1() < selected->get_price()) {
+            throw insufficient_funds_error(selected->get_name());
+        }
         if (selected->purchase(p)) {
             p.add_item(std::unique_ptr<item>(selected->clone()));
         } else {
             std::cout << "Not enough money!\n";
         }
-    }
 }
 
 void shop::run(player &p) const {
-    int option = 0;
+    int option = -1;
+
     do {
-        std::cout << "\nPBT Shop--PBT Shop--PBT Shop\n";
+        std::cout << "\n -- PBT Shop -- PBT Shop -- PBT Shop \n";
         std::cout << "Wallet: " << p.get_currency1() << "\n";
         std::cout << "1. Buy Books\n";
         std::cout << "2. Buy Drinks\n";
@@ -78,21 +86,35 @@ void shop::run(player &p) const {
         std::cout << "4. Check Inventory\n";
         std::cout << "0. Exit Shop\n";
         std::cout << "> ";
-        std::cin >> option;
 
-        switch (option) {
-            case 1:
-                buy_book(p);
-                break;
-            case 2: buy_drink(p);
-                break;
-            case 3: buy_cheating_sheet(p);
-                break;
-            case 4: p.show_inventory();
-                break;
-            case 0: std::cout << "Leaving shop...\n";
-                break;
-            default: std::cout << "Invalid option.\n";
+        try {
+            option = get_verified_input(0, 4);
+
+            switch (option) {
+                case 1:
+                    buy_book(p);
+                    break;
+                case 2:
+                    buy_drink(p);
+                    break;
+                case 3:
+                    buy_cheating_sheet(p);
+                    break;
+                case 4:
+                    p.show_inventory();
+                    break;
+                case 0:
+                    std::cout << "Leaving shop...\n";
+                    break;
+                default:
+                    break;
+            }
+        } catch (const invalid_input_error &e) {
+            std::cerr << "\n" << e.what() << "\n";
+        } catch (const insufficient_funds_error &e) {
+            std::cerr << "\n" << e.what() << "\n";
+        } catch (const std::exception &e) {
+            std::cerr << "\n" << e.what() << "\n";
         }
     } while (option != 0);
 }

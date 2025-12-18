@@ -1,4 +1,5 @@
 #include "teacher.h"
+#include "exception.h"
 
 const std::string &teacher::get_last_name() const {
     return last_name;
@@ -14,8 +15,7 @@ int teacher::get_domain() const {
 
 std::vector<teacher> teacher::load_teachers(const std::vector<project> &projects_list) {
     std::vector<teacher> teachers_list;
-    std::ifstream f("teachers.json");
-    nlohmann::json data = nlohmann::json::parse(f);
+    nlohmann::json data = load_json_verified("teachers.json");
 
     for (const auto &i_teacher: data) {
         int project_idx = i_teacher["assigned_project"];

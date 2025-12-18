@@ -1,5 +1,6 @@
 #include "cheating_sheet.h"
 #include "player.h"
+#include "exception.h"
 #include <fstream>
 #include <random>
 #include <nlohmann/json.hpp>
@@ -10,9 +11,7 @@ item *cheating_sheet::clone() const {
 
 std::vector<cheating_sheet *> cheating_sheet::load_cheating_sheets() {
     std::vector<cheating_sheet *> cheating_sheets_list;
-    std::ifstream f("cheating_sheets.json");
-
-    nlohmann::json data = nlohmann::json::parse(f);
+    nlohmann::json data = load_json_verified("cheating_sheets.json");
 
     for (const auto &j: data) {
         cheating_sheets_list.push_back(new cheating_sheet(

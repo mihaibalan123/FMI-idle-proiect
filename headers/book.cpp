@@ -1,5 +1,6 @@
 #include "book.h"
 #include "player.h"
+#include "exception.h"
 #include <iostream>
 #include <nlohmann/json.hpp>
 
@@ -9,8 +10,7 @@ item *book::clone() const {
 
 std::vector<book *> book::load_books() {
     std::vector<book *> books_list;
-    std::ifstream f("books.json");
-    nlohmann::json data = nlohmann::json::parse(f);
+    nlohmann::json data = load_json_verified("books.json");
     for (const auto &j: data) {
         books_list.push_back(new book(
             j.value("name", ""),

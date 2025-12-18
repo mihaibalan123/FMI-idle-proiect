@@ -1,4 +1,5 @@
 #include "drink.h"
+#include "exception.h"
 #include <iostream>
 #include <nlohmann/json.hpp>
 
@@ -8,8 +9,7 @@ item *drink::clone() const {
 
 std::vector<drink *> drink::load_drinks() {
     std::vector<drink *> drinks_list;
-    std::ifstream f1("drinks.json");
-    nlohmann::json data = nlohmann::json::parse(f1);
+    nlohmann::json data = load_json_verified("drinks.json");
     for (const auto &j: data) {
         drinks_list.push_back(new drink(
             j.value("name", ""),

@@ -1,4 +1,5 @@
 #include "project.h"
+#include "exception.h"
 
 const std::string& project::get_name() const {
     return proj_name;
@@ -15,8 +16,7 @@ float project::get_cashback() const {
 std::vector<project> project::load_projects() {
 
     std::vector<project> projects_list;
-    std::ifstream f1("projects.json");
-    nlohmann::json data1 = nlohmann::json::parse(f1);
+    nlohmann::json data1 = load_json_verified("projects.json");
 
     for (const auto &i_project: data1) {
         project temp_project(
