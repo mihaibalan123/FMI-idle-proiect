@@ -57,7 +57,46 @@ public:
     }
 
     ~player() = default;
-    player(player&&) = default;
+
+    player(const player& other)
+        : username(other.username),
+          password(other.password),
+          current_target_domain_id(other.current_target_domain_id), // Asta era mai jos înainte
+          currency1(other.currency1),
+          currency2(other.currency2),
+          health(other.health),
+          damage(other.damage),
+          project_id(other.project_id),
+          project_levels(other.project_levels),
+          defeated_domains(other.defeated_domains),
+          last_login_timestamp(other.last_login_timestamp)
+    {
+        for (const auto& item_ptr : other.inventory) {
+            this->inventory.push_back(std::unique_ptr<item>(item_ptr->clone()));
+        }
+    }
+
+    friend void swap(player& first, player& second) noexcept {
+        using std::swap;
+        swap(first.username, second.username);
+        swap(first.password, second.password);
+        swap(first.inventory, second.inventory);
+        swap(first.project_levels, second.project_levels);
+        swap(first.project_id, second.project_id);
+        swap(first.defeated_domains, second.defeated_domains);
+        swap(first.health, second.health);
+        swap(first.currency1, second.currency1);
+        swap(first.currency2, second.currency2);
+        swap(first.damage, second.damage);
+        swap(first.current_target_domain_id, second.current_target_domain_id);
+        swap(first.last_login_timestamp, second.last_login_timestamp);
+    }
+
+    player& operator=(player other) {
+        swap(*this, other);
+        return *this;
+    }
+
 
     void add_item(std::unique_ptr<item> new_item);
 

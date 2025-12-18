@@ -365,8 +365,7 @@ void player::show_inventory() const {
     }
     std::cout << username << "'s Inventory \n";
     for (size_t i = 0; i < inventory.size(); ++i) {
-        std::cout << i + 1 << ". [" << inventory[i]->get_type() << "] " << inventory[i]->get_name() << "\n";
-        std::cout << "   Description: " << inventory[i]->get_description() << "\n";
+        std::cout << *inventory[i] << "\n";
     }
 }
 

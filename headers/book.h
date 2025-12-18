@@ -29,6 +29,10 @@ public:
     bool purchase(player &p) override;
 
     void use(player &p) override;
+protected:
+    void print1(std::ostream& os) const override {
+        os << " - book ---> " << description << " (price: " << price << ")";
+    }
 };
 
 

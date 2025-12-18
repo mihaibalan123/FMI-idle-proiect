@@ -39,6 +39,10 @@ public:
     bool purchase(player &p) override;
 
     void use(player &p) override;
+protected:
+    void print1(std::ostream& os) const override {
+        os << " - cheating sheet ---> " << description << " (price: " << price << ")";
+    }
 };
 
 #endif //OOP_CHEATING_SHEET_H

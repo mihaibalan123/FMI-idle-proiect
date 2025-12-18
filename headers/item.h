@@ -21,6 +21,16 @@ public:
 
     virtual ~item() = default;
 
+    void print(std::ostream& os) const {
+        os << "[ITEM] " << name << " | ";
+        print1(os);
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const item& it) {
+        it.print(os);
+        return os;
+    }
+
     [[nodiscard]] virtual item *clone() const = 0;
 
     [[nodiscard]] virtual std::string get_type() const = 0;
@@ -47,6 +57,10 @@ public:
 
     [[nodiscard]] const std::string &get_description() const {
         return description;
+    }
+protected:
+    virtual void print1(std::ostream& os) const {
+        os << description << " (price: " << price << ")";
     }
 };
 
