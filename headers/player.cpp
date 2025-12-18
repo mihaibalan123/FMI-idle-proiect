@@ -645,14 +645,14 @@ void player::start_easy_job() {
             a = (a % 12) + 1;
             b = (b % 12) + 1;
             op_char = '*';
-            correct_answer = a * b;
+            correct_answer = static_cast<long long>(a) * b;
         } else if (op == 1) {
             if (a < b) std::swap(a, b);
             op_char = '-';
             correct_answer = a - b;
         } else {
             op_char = '+';
-            correct_answer = a + b;
+            correct_answer = static_cast<long long>(a) + b;
         }
 
         std::cout << a << " " << op_char << " " << b << " = ";
