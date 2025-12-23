@@ -87,7 +87,7 @@ void menu::run() {
 
     int option = -1;
     do {
-        std::cout << "1. Select Player / Switch user\n"
+        std::cout << "1. Select player / Switch player\n"
                   << "2. Visit an easy part-time job (+currency)\n"
                   << "3. Visit a *complex* part-time job (++currency)\n"
                   << "4. Show stats\n"

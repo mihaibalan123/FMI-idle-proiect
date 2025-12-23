@@ -2,17 +2,31 @@
 
 ## Descriere
 
-  **FMI Idle** simulează experiența Facultății de Matematică și Informatică din perspectiva studentului Ics - încrezător și mândru, căruia i se pare că facultatea este un joc "idle". Ajută-l pe Ics să treacă de Sesiune, să se dueleze cu Profesori și să realizeze Proiecte din ce în ce mai bune! 
-  
-  (mereu) Ics primește bani de la Părinți însă, cu cât evoluează mai mult în viața de student, economia acestuia explodează, reușind să se îmbunătățească permanent (poate să obțină chiar și diverse Job-uri part-time) devenind mai puternic **psihic** odată cu trecerea timpului. O putere supranaturală (denumită generic Restanța) îl va face să înțeleagă că ar fi putut să ia alte decizii în trecut și îl învață că poate da RESET la Facultate. RESET-ul îi anihilează Banii primiți de la Părinți, îl trimite la pasul 0 dar contribuie la economia viitoare căci lui Ics îi rămân experiențele trăite.
-  
-  Va reuși vreodată Ics să termine Facultatea sau va deveni un milionar terorizat de Restanță ce nu se va bucura vreodată de o licență la FMI?
+  ****
+_**FMI-Idle**_ urmărește experiența reinterpretată a unui student la Facultatea de Matematică și Informatică
+căruia i se pare că facultatea este un joc "Idle".
 
-  La prima rulare a jocului, utilizatorul trebuie sa selecteze un profil deja creat conectandu-se cu parola sau poate crea un profil nou. In meniu se pot vedea statisticile user-ului (valoarea currency1/currency2 ---> generic momentan). Userul se poate duela cu profesori, castigandu-le proiectul din dreptul lor. Fiecare proiect are o variabila de pret (intrucat poate fi imbunatatit) si una de cashback (overtime ---> momentan la 5 minute) valoarea currency1 se incrementeaza cu cashback-ul fiecarui proiect detinut. Se poate reseta valoarea currency1 si se incrementeaza logaritmic * 5 valoarea currency2. Totul se ramane in fisiere json la terminarea programului. Urmeaza iteme, buff-uri, debuff-uri, ....
+****
+Scopul jocului este de a deveni cât mai puternic duelându-te cu profesori, obținând proiecte și folosind
+iteme speciale care cresc valoarea currency-ului.
+
+****
+În joc, studentul este reprezentat generic de player. La început, oricare player nu deține nimic iar statisticile sunt
+slabe. Totuși, când nu e logat, obține o anumită valoare a currency-ului. Poate munci în cadrul unor Job-uri Part-Time care oferă recompense în funcție de dificultate. Mai departe
+se poate duela cu profesori aleși aleatoriu dar în alegerea cărora are o anumită implicare. Odată fixat pool-ul de
+profesori,
+se poate folosi de Itemele din inventar (dacă deține așa ceva) ce-i pot îmbunătăți anumite statistici.
+De asemenea, își poate da Heal după fiecare luptă consumând Iteme luate din Shop sau pur și simplu
+poate aștepta (când nu e logat își reface 1 hp la 2 min 30 sec ). După tipul lor, itemele costă diverse tipuri de
+currency sau viață. Partea de "Restanță" funcționează pentru player ca un reset pentru primul tip de currency
+convertindu-l pe acesta relativ la o scală logaritmică în cel de-al doilea tip.
+
+> +++ În partea de final urmează să fie adăugate Achievement-uri !
 
 ## Reminder:
 
-Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar dacă documentați riguros acest proces.
+Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar dacă documentați riguros acest
+proces.
 Codul generat pus "ca să fie"/pe care nu îl înțelegeți se punctează doar pentru puncte bonus, doar în contextul
 în care oferă funcționalități ajutătoare și doar dacă are sens.
 
@@ -25,7 +39,8 @@ O cerință nu se consideră îndeplinită dacă este realizată doar prin cod g
 - **Fără variabile globale!**
 - **Fără atribute publice!**
 - **Pentru T2 și T3, fără date în cod!** Datele vor fi citite din fișier, aveți exemple destule.
-- **Obligatoriu** fișiere cu date mai multe din care să citiți, obligatoriu cu biblioteci externe: fișiere (local sau server) sau baze de date
+- **Obligatoriu** fișiere cu date mai multe din care să citiți, obligatoriu cu biblioteci externe: fișiere (local sau
+  server) sau baze de date
 - obligatoriu (TBD) să integrați cel puțin două biblioteci externe pe lângă cele pentru stocare
 
 ### Tema 0
@@ -36,18 +51,25 @@ O cerință nu se consideră îndeplinită dacă este realizată doar prin cod g
 ## Tema 1
 
 #### Cerințe
-- [x] definirea a minim **3-4 clase** folosind compunere cu clasele definite de voi; moștenirile nu se iau în considerare aici
+
+- [x] definirea a minim **3-4 clase** folosind compunere cu clasele definite de voi; moștenirile nu se iau în
+  considerare aici
 - [x] constructori de inițializare cu parametri pentru fiecare clasă
 - [x] pentru o aceeași (singură) clasă: constructor de copiere, `operator=` de copiere, destructor
+
 <!-- - [x] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
 <!-- - [x] pentru o altă clasă: toate cele 5 funcții membru speciale -->
-- [x] `operator<<` pentru **toate** clasele pentru afișare (`std::ostream`) folosind compunere de apeluri cu `operator<<`
+
+- [x] `operator<<` pentru **toate** clasele pentru afișare (`std::ostream`) folosind compunere de apeluri cu
+  `operator<<`
 - [x] cât mai multe `const` (unde este cazul) și funcții `private`
-- [x] implementarea a minim 3 funcții membru publice pentru funcționalități netriviale specifice temei alese, dintre care cel puțin 1-2 funcții mai complexe
-  - nu doar citiri/afișări sau adăugat/șters elemente într-un/dintr-un vector
+- [x] implementarea a minim 3 funcții membru publice pentru funcționalități netriviale specifice temei alese, dintre
+  care cel puțin 1-2 funcții mai complexe
+    - nu doar citiri/afișări sau adăugat/șters elemente într-un/dintr-un vector
 - [x] scenariu de utilizare **cu sens** a claselor definite:
-  - crearea de obiecte și apelarea tuturor funcțiilor membru publice în main
-  - vor fi adăugate în fișierul `tastatura.txt` DOAR exemple de date de intrare de la tastatură (dacă există); dacă aveți nevoie de date din fișiere, creați alte fișiere separat
+    - crearea de obiecte și apelarea tuturor funcțiilor membru publice în main
+    - vor fi adăugate în fișierul `tastatura.txt` DOAR exemple de date de intrare de la tastatură (dacă există); dacă
+      aveți nevoie de date din fișiere, creați alte fișiere separat
 - [x] minim 50-55% din codul propriu să fie C++, `.gitattributes` configurat corect
 - [x] tag de `git`: de exemplu `v0.1`
 - [x] serviciu de integrare continuă (CI) cu **toate bifele**; exemplu: GitHub Actions
@@ -56,43 +78,53 @@ O cerință nu se consideră îndeplinită dacă este realizată doar prin cod g
 ## Tema 2
 
 #### Cerințe
+
 - [ ] separarea codului din clase în `.h` (sau `.hpp`) și `.cpp`
 - [ ] moșteniri:
-  - minim o clasă de bază și **3 clase derivate** din aceeași ierarhie
-  - ierarhia trebuie să fie cu bază proprie, nu derivată dintr-o clasă predefinită
-  - [ ] funcții virtuale (pure) apelate prin pointeri de bază din clasa care conține atributul de tip pointer de bază
-    - minim o funcție virtuală va fi **specifică temei** (i.e. nu simple citiri/afișări sau preluate din biblioteci i.e. draw/update/render)
-    - constructori virtuali (clone): sunt necesari, dar nu se consideră funcții specifice temei
-    - afișare virtuală, interfață non-virtuală
-  - [ ] apelarea constructorului din clasa de bază din constructori din derivate
-  - [ ] clasă cu atribut de tip pointer la o clasă de bază cu derivate; aici apelați funcțiile virtuale prin pointer de bază, eventual prin interfața non-virtuală din bază
-    - [ ] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
-    - [ ] `dynamic_cast`/`std::dynamic_pointer_cast` pentru downcast cu sens
-    - [ ] smart pointers (recomandat, opțional)
+    - minim o clasă de bază și **3 clase derivate** din aceeași ierarhie
+    - ierarhia trebuie să fie cu bază proprie, nu derivată dintr-o clasă predefinită
+    - [ ] funcții virtuale (pure) apelate prin pointeri de bază din clasa care conține atributul de tip pointer de bază
+        - minim o funcție virtuală va fi **specifică temei** (i.e. nu simple citiri/afișări sau preluate din biblioteci
+          i.e. draw/update/render)
+        - constructori virtuali (clone): sunt necesari, dar nu se consideră funcții specifice temei
+        - afișare virtuală, interfață non-virtuală
+    - [ ] apelarea constructorului din clasa de bază din constructori din derivate
+    - [ ] clasă cu atribut de tip pointer la o clasă de bază cu derivate; aici apelați funcțiile virtuale prin pointer
+      de bază, eventual prin interfața non-virtuală din bază
+        - [ ] suprascris cc/op= pentru copieri/atribuiri corecte, copy and swap
+        - [ ] `dynamic_cast`/`std::dynamic_pointer_cast` pentru downcast cu sens
+        - [ ] smart pointers (recomandat, opțional)
 - [ ] excepții
-  - [ ] ierarhie proprie cu baza `std::exception` sau derivată din `std::exception`; minim **3** clase pentru erori specifice distincte
-    - clasele de excepții trebuie să trateze categorii de erori distincte (exemplu de erori echivalente: citire fișiere cu diverse extensii)
-  - [ ] utilizare cu sens: de exemplu, `throw` în constructor (sau funcție care întoarce un obiect), `try`/`catch` în `main`
-  - această ierarhie va fi complet independentă de ierarhia cu funcții virtuale
+    - [ ] ierarhie proprie cu baza `std::exception` sau derivată din `std::exception`; minim **3** clase pentru erori
+      specifice distincte
+        - clasele de excepții trebuie să trateze categorii de erori distincte (exemplu de erori echivalente: citire
+          fișiere cu diverse extensii)
+    - [ ] utilizare cu sens: de exemplu, `throw` în constructor (sau funcție care întoarce un obiect), `try`/`catch` în
+      `main`
+    - această ierarhie va fi complet independentă de ierarhia cu funcții virtuale
 - [ ] funcții și atribute `static`
 - [ ] STL
 - [ ] cât mai multe `const`
 - [ ] funcții *de nivel înalt*, de eliminat cât mai mulți getters/setters/funcții low-level
 - [ ] minim 75-80% din codul propriu să fie C++
-- [ ] la sfârșit: commit separat cu adăugarea unei noi clase derivate fără a modifica restul codului, **pe lângă cele 3 derivate deja adăugate** din aceeași ierarhie
-  - noua derivată nu poate fi una existentă care a fost ștearsă și adăugată din nou
-  - noua derivată va fi integrată în codul existent (adică va fi folosită, nu adăugată doar ca să fie)
+- [ ] la sfârșit: commit separat cu adăugarea unei noi clase derivate fără a modifica restul codului, **pe lângă cele 3
+  derivate deja adăugate** din aceeași ierarhie
+    - noua derivată nu poate fi una existentă care a fost ștearsă și adăugată din nou
+    - noua derivată va fi integrată în codul existent (adică va fi folosită, nu adăugată doar ca să fie)
 - [ ] tag de `git` pe commit cu **toate bifele**: de exemplu `v0.2`
 - [ ] code review #2 2 proiecte
 
 ## Tema 3
 
 #### Cerințe
+
 - [ ] 2 șabloane de proiectare (design patterns)
 - [ ] o clasă șablon cu sens; minim **2 instanțieri**
-  - [ ] preferabil și o funcție șablon (template) cu sens; minim 2 instanțieri
+    - [ ] preferabil și o funcție șablon (template) cu sens; minim 2 instanțieri
 - [ ] minim 85% din codul propriu să fie C++
+
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
+
 - [ ] tag de `git` pe commit cu **toate bifele**: de exemplu `v0.3` sau `v1.0`
 - [ ] code review #3 2 proiecte
 
@@ -103,28 +135,30 @@ Proiectul este configurat cu CMake.
 Instrucțiuni pentru terminal:
 
 1. Pasul de configurare
+
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 # sau ./scripts/cmake.sh configure
 ```
 
 Sau pe Windows cu GCC folosind Git Bash:
+
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -G Ninja
 # sau ./scripts/cmake.sh configure -g Ninja
 ```
 
 Pentru a configura cu ASan, avem opțiunea `-DUSE_ASAN=ON` (nu merge pe Windows cu GCC):
+
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DUSE_ASAN=ON
 # sau ./scripts/cmake.sh configure -e "-DUSE_ASAN=ON"
 ```
 
-
 La acest pas putem cere să generăm fișiere de proiect pentru diverse medii de lucru.
 
-
 2. Pasul de compilare
+
 ```sh
 cmake --build build --config Debug --parallel 6
 # sau ./scripts/cmake.sh build
@@ -132,8 +166,8 @@ cmake --build build --config Debug --parallel 6
 
 Cu opțiunea `parallel` specificăm numărul de fișiere compilate în paralel.
 
-
 3. Pasul de instalare (opțional)
+
 ```sh
 cmake --install build --config Debug --prefix install_dir
 # sau ./scripts/cmake.sh install
@@ -144,24 +178,27 @@ Vezi și [`scripts/cmake.sh`](scripts/cmake.sh).
 Observație: folderele `build/` și `install_dir/` sunt adăugate în fișierul `.gitignore` deoarece
 conțin fișiere generate și nu ne ajută să le versionăm.
 
-
 ## Instrucțiuni pentru a rula executabilul
 
 Există mai multe variante:
 
-1. Din directorul de build (implicit `build`). Executabilul se află la locația `./build/oop` după ce a fost rulat pasul de compilare al proiectului (`./scripts/cmake.sh build` - pasul 2 de mai sus).
+1. Din directorul de build (implicit `build`). Executabilul se află la locația `./build/oop` după ce a fost rulat pasul
+   de compilare al proiectului (`./scripts/cmake.sh build` - pasul 2 de mai sus).
 
 ```sh
 ./build/oop
 ```
 
-2. Din directorul `install_dir`. Executabilul se află la locația `./install_dir/bin/oop` după ce a fost rulat pasul de instalare (`./scripts/cmake.sh install` - pasul 3 de mai sus).
+2. Din directorul `install_dir`. Executabilul se află la locația `./install_dir/bin/oop` după ce a fost rulat pasul de
+   instalare (`./scripts/cmake.sh install` - pasul 3 de mai sus).
 
 ```sh
 ./install_dir/bin/oop
 ```
 
-3. Rularea programului folosind Valgrind se poate face executând script-ul `./scripts/run_valgrind.sh` din rădăcina proiectului. Pe Windows acest script se poate rula folosind WSL (Windows Subsystem for Linux). Valgrind se poate rula în modul interactiv folosind: `RUN_INTERACTIVE=true ./scripts/run_valgrind.sh`
+3. Rularea programului folosind Valgrind se poate face executând script-ul `./scripts/run_valgrind.sh` din rădăcina
+   proiectului. Pe Windows acest script se poate rula folosind WSL (Windows Subsystem for Linux). Valgrind se poate rula
+   în modul interactiv folosind: `RUN_INTERACTIVE=true ./scripts/run_valgrind.sh`
 
 Implicit, nu se rulează interactiv, iar datele pentru `std::cin` sunt preluate din fișierul `tastatura.txt`.
 
@@ -171,7 +208,8 @@ RUN_INTERACTIVE=true ./scripts/run_valgrind.sh
 ./scripts/run_valgrind.sh
 ```
 
-4. Pentru a rula executabilul folosind ASan, este nevoie ca la pasul de configurare (vezi mai sus) să fie activat acest sanitizer. Ar trebui să meargă pe macOS și Linux. Pentru Windows, ar merge doar cu MSVC (nerecomandat).
+4. Pentru a rula executabilul folosind ASan, este nevoie ca la pasul de configurare (vezi mai sus) să fie activat acest
+   sanitizer. Ar trebui să meargă pe macOS și Linux. Pentru Windows, ar merge doar cu MSVC (nerecomandat).
 
 Comanda este aceeași ca la pasul 1 sau 2. Nu merge combinat cu Valgrind.
 

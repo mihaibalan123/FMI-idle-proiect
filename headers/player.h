@@ -61,7 +61,7 @@ public:
     player(const player& other)
         : username(other.username),
           password(other.password),
-          current_target_domain_id(other.current_target_domain_id), // Asta era mai jos înainte
+          current_target_domain_id(other.current_target_domain_id),
           currency1(other.currency1),
           currency2(other.currency2),
           health(other.health),

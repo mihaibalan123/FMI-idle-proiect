@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include <utility>
 
 
 class game_exception : public std::exception {
@@ -13,7 +14,7 @@ protected:
     std::string message;
 
 public:
-    explicit game_exception(const std::string &msg) : message(msg) {
+    explicit game_exception(std::string msg) : message(std::move(msg)) {
     }
 
     [[nodiscard]] const char *what() const noexcept override {
