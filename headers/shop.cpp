@@ -19,7 +19,7 @@ void shop::buy_book(player &p) const {
     int choice = get_verified_input(0, static_cast<int>(books_list.size()));
     if (choice == 0) return;
 
-    book *selected = books_list[choice - 1];
+    const book *selected = books_list[choice - 1];
 
 
     if (p.has_item(selected->get_name())) {
@@ -49,7 +49,7 @@ void shop::buy_drink(player &p) const {
     int choice = get_verified_input(0, static_cast<int>(drinks_list.size()));
     if (choice == 0) return;
 
-    drink *selected = drinks_list[choice - 1];
+    const drink *selected = drinks_list[choice - 1];
     if (p.has_item(selected->get_name())) {
         std::cout << "\n[!] You already have '" << selected->get_name() << "' in your inventory!\n";
         std::cout << "Drink it first before buying another.\n";
@@ -77,7 +77,7 @@ void shop::buy_cheating_sheet(player &p) const {
     int choice = get_verified_input(0, static_cast<int>(cheating_sheets_list.size()));
     if (choice == 0) return;
 
-    cheating_sheet *selected = cheating_sheets_list[choice - 1];
+    const cheating_sheet *selected = cheating_sheets_list[choice - 1];
     if (p.has_item(selected->get_name())) {
         std::cout << "\n[!] You already have a '" << selected->get_name() << "'!\n";
         std::cout << "Use it first or sell it.\n";
@@ -101,7 +101,7 @@ void shop::sell_item(player &p) {
 
     std::cout << "\nSell Items\n";
     for (size_t i = 0; i < p.get_inventory_size(); ++i) {
-        item* current_item = p.get_item_at(i);
+        const item* current_item = p.get_item_at(i);
         float sell_price = current_item->get_price() / 2.0f;
 
         std::cout << i + 1 << ". " << current_item->get_name() << " | Sell Price: " << sell_price << "\n";
@@ -112,7 +112,7 @@ void shop::sell_item(player &p) {
     if (choice == 0) return;
 
     int index = choice - 1;
-    item* selected = p.get_item_at(index);
+    const item* selected = p.get_item_at(index);
     float sell_value = selected->get_price() / 2.0f;
 
     std::cout << "Sold " << selected->get_name() << " for " << sell_value << " currency1.\n";
