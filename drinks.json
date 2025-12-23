@@ -14,5 +14,85 @@
     "price": 20.0,
     "consumable": true,
     "health_restore": 40.0
+  },
+  {
+    "name": "Tap Water",
+    "description": "Basic hydration. Tastes like rust. (5 hp restore)",
+    "rarity": "Common",
+    "price": 1.0,
+    "consumable": true,
+    "health_restore": 5.0
+  },
+  {
+    "name": "Vending Machine Tea",
+    "description": "Hot sugar water. (10 hp restore)",
+    "rarity": "Common",
+    "price": 3.0,
+    "consumable": true,
+    "health_restore": 10.0
+  },
+  {
+    "name": "Double Espresso",
+    "description": "Heart palpitations included. (25 hp restore)",
+    "rarity": "Common",
+    "price": 10.0,
+    "consumable": true,
+    "health_restore": 25.0
+  },
+  {
+    "name": "Cola Zero",
+    "description": "No sugar, full chemicals. (30 hp restore)",
+    "rarity": "Common",
+    "price": 12.0,
+    "consumable": true,
+    "health_restore": 30.0
+  },
+  {
+    "name": "Mate Tea",
+    "description": "Hipster energy. (50 hp restore)",
+    "rarity": "Rare",
+    "price": 35.0,
+    "consumable": true,
+    "health_restore": 50.0
+  },
+  {
+    "name": "Vitamin C Effervescent",
+    "description": "Immunity boost. (70 hp restore)",
+    "rarity": "Rare",
+    "price": 50.0,
+    "consumable": true,
+    "health_restore": 70.0
+  },
+  {
+    "name": "Protein Shake",
+    "description": "Gains for your brain. (100 hp restore)",
+    "rarity": "Rare",
+    "price": 80.0,
+    "consumable": true,
+    "health_restore": 100.0
+  },
+  {
+    "name": "Monster Java",
+    "description": "Coffee and Monster combined. Dangerous. (150 hp restore)",
+    "rarity": "Epic",
+    "price": 150.0,
+    "consumable": true,
+    "health_restore": 150.0
+  },
+  {
+    "name": "Pre-Workout",
+    "description": "You can smell colors now. (250 hp restore)",
+    "rarity": "Epic",
+    "price": 300.0,
+    "consumable": true,
+    "health_restore": 250.0
+  },
+  {
+    "name": "Grandma's Soup",
+    "description": "Heals the soul too. (400 hp restore)",
+    "rarity": "Epic",
+    "price": 500.0,
+    "consumable": true,
+    "health_restore": 400.0
   }
 ]

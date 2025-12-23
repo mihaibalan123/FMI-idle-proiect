@@ -12,6 +12,8 @@ class shop {
     void buy_book(player& p) const;
     void buy_drink(player& p) const;
     void buy_cheating_sheet(player& p) const;
+
+    static void sell_item(player& p);
 public:
     shop() = default;
     ~shop (){

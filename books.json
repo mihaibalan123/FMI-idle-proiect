@@ -3,8 +3,144 @@
     "name": "Autocad Extra-Classes",
     "description": "Useful ALOT(+10 damage)",
     "rarity": "Legendary",
-    "price": 50.0,
+    "price": 1000.0,
     "consumable": false,
     "damage_bonus": 10.0
+  },
+  {
+    "name": "Intro to C++",
+    "description": "Hello World! (+2 damage)",
+    "rarity": "Common",
+    "price": 550.0,
+    "consumable": false,
+    "damage_bonus": 2.0
+  },
+  {
+    "name": "Algebra Notes",
+    "description": "Found in a trash can. Still useful. (+5 damage)",
+    "rarity": "Common",
+    "price": 700.0,
+    "consumable": false,
+    "damage_bonus": 5.0
+  },
+  {
+    "name": "SDA Manual",
+    "description": "MIT approved. (+12 damage)",
+    "rarity": "Common",
+    "price": 1250.0,
+    "consumable": false,
+    "damage_bonus": 12.0
+  },
+  {
+    "name": "OOP Tutoriat",
+    "description": "Good to know it exists... (+20 damage)",
+    "rarity": "Rare",
+    "price": 2500.0,
+    "consumable": false,
+    "damage_bonus": 20.0
+  },
+  {
+    "name": "Clean Code",
+    "description": "Readable code. (+35 damage)",
+    "rarity": "Legendary",
+    "price": 5000.0,
+    "consumable": false,
+    "damage_bonus": 35.0
+  },
+  {
+    "name": "Coding Interview",
+    "description": "Got some experience! (+10 damage)",
+    "rarity": "Rare",
+    "price": 900.0,
+    "consumable": false,
+    "damage_bonus": 10.0
+  },
+  {
+    "name": "Packet tracer classes",
+    "description": "Ouch! (+75 damage)",
+    "rarity": "Epic",
+    "price": 8500.0,
+    "consumable": false,
+    "damage_bonus": 75.0
+  },
+  {
+    "name": "Operating Systems",
+    "description": "Seg fault. (+100 damage)",
+    "rarity": "Epic",
+    "price": 12000.0,
+    "consumable": false,
+    "damage_bonus": 100.0
+  },
+  {
+    "name": "Assembly Language Guide",
+    "description": "Kinda chinese (+10 damage)",
+    "rarity": "Epic",
+    "price": 1200.0,
+    "consumable": false,
+    "damage_bonus": 10.0
+  },
+  {
+    "name": "Functional Programming",
+    "description": "No side effects, only damage. (+16 damage)",
+    "rarity": "Epic",
+    "price": 2200.0,
+    "consumable": false,
+    "damage_bonus": 16.0
+  },
+  {
+    "name": "Machine Learning Bible",
+    "description": "Your attacks are now predictive. (+20 damage)",
+    "rarity": "Legendary",
+    "price": 475.0,
+    "consumable": false,
+    "damage_bonus": 20.0
+  },
+  {
+    "name": "Quantum Computing Thesis",
+    "description": "You are both dead and alive. (+35 damage)",
+    "rarity": "Legendary",
+    "price": 6000.0,
+    "consumable": false,
+    "damage_bonus": 35.0
+  },
+  {
+    "name": "StackOverflow Gold Account",
+    "description": "Infinite knowledge. (+6 damage)",
+    "rarity": "Mythical",
+    "price": 200.0,
+    "consumable": false,
+    "damage_bonus": 6.0
+  },
+  {
+    "name": "ChatGPT 5.0 Alpha",
+    "description": "It writes the code for you. (-1 damage)",
+    "rarity": "Godly",
+    "price": 1.0,
+    "consumable": false,
+    "damage_bonus": -1.0
+  },
+  {
+    "name": "Professor's Solution Key",
+    "description": "The ultimate cheat code. (+15 damage)",
+    "rarity": "Godly",
+    "price": 1200.0,
+    "consumable": false,
+    "damage_bonus": 15.0
+  },
+  {
+    "name": "Bachelor's Degree",
+    "description": "Paper power! (+25 damage)",
+    "rarity": "Godly",
+    "price": 750.0,
+    "consumable": false,
+    "damage_bonus": 25.0
+  },
+  {
+    "name": "PhD in AI",
+    "description": "They call you Doctor now. (+60 damage)",
+    "rarity": "Unique",
+    "price": 3500.0,
+    "consumable": false,
+    "damage_bonus": 60.0
   }
 ]

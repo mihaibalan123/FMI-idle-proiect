@@ -128,6 +128,12 @@ public:
 
     [[nodiscard]] long long get_last_login_timestamp() const;
 
+    [[nodiscard]] size_t get_inventory_size() const;
+
+    [[nodiscard]] item* get_item_at(size_t index) const;
+
+    void remove_item_at(size_t index);
+
     void set_currency1(float value);
 
     void set_currency2(float value);
@@ -161,6 +167,8 @@ public:
     void start_easy_job();
 
     void start_complex_job();
+
+    [[nodiscard]] bool has_item(const std::string& item_name) const;
 
     friend std::istream &operator>>(std::istream &is, player &t);
 

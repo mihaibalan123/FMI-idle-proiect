@@ -19,15 +19,22 @@ void shop::buy_book(player &p) const {
     int choice = get_verified_input(0, static_cast<int>(books_list.size()));
     if (choice == 0) return;
 
-        book *selected = books_list[choice - 1];
+    book *selected = books_list[choice - 1];
 
-        if (p.get_currency1() < selected->get_price()) {
-            throw insufficient_funds_error(selected->get_name());
-        }
 
-        if (selected->purchase(p)) {
-            p.add_item(std::unique_ptr<item>(selected->clone()));
-        }
+    if (p.has_item(selected->get_name())) {
+        std::cout << "\n[!] You already own '" << selected->get_name() << "'!\n";
+        std::cout << "You cannot buy duplicates.\n";
+        return;
+    }
+
+    if (p.get_currency1() < selected->get_price()) {
+        throw insufficient_funds_error(selected->get_name());
+    }
+
+    p.set_currency1(p.get_currency1() - selected->get_price());
+    p.add_item(std::unique_ptr<item>(selected->clone()));
+    std::cout << "Successfully purchased " << selected->get_name() << "!\n";
 }
 
 void shop::buy_drink(player &p) const {
@@ -39,16 +46,23 @@ void shop::buy_drink(player &p) const {
     }
     std::cout << "0. Back\nSelect: ";
 
-    int choice = get_verified_input(0, static_cast<int>(books_list.size()));
+    int choice = get_verified_input(0, static_cast<int>(drinks_list.size()));
     if (choice == 0) return;
 
-        drink *selected = drinks_list[choice - 1];
-        if (p.get_currency1() < selected->get_price()) {
-            throw insufficient_funds_error(selected->get_name());
-        }
-        if (selected->purchase(p)) {
-            p.add_item(std::unique_ptr<item>(selected->clone()));
-        }
+    drink *selected = drinks_list[choice - 1];
+    if (p.has_item(selected->get_name())) {
+        std::cout << "\n[!] You already have '" << selected->get_name() << "' in your inventory!\n";
+        std::cout << "Drink it first before buying another.\n";
+        return;
+    }
+
+    if (p.get_currency1() < selected->get_price()) {
+        throw insufficient_funds_error(selected->get_name());
+    }
+
+    p.set_currency1(p.get_currency1() - selected->get_price());
+    p.add_item(std::unique_ptr<item>(selected->clone()));
+    std::cout << "Successfully purchased " << selected->get_name() << "!\n";
 }
 
 void shop::buy_cheating_sheet(player &p) const {
@@ -60,18 +74,51 @@ void shop::buy_cheating_sheet(player &p) const {
     }
     std::cout << "0. Back\nSelect: ";
 
-    int choice = get_verified_input(0, static_cast<int>(books_list.size()));
+    int choice = get_verified_input(0, static_cast<int>(cheating_sheets_list.size()));
     if (choice == 0) return;
 
-        cheating_sheet *selected = cheating_sheets_list[choice - 1];
-        if (p.get_currency1() < selected->get_price()) {
-            throw insufficient_funds_error(selected->get_name());
-        }
-        if (selected->purchase(p)) {
-            p.add_item(std::unique_ptr<item>(selected->clone()));
-        } else {
-            std::cout << "Not enough money!\n";
-        }
+    cheating_sheet *selected = cheating_sheets_list[choice - 1];
+    if (p.has_item(selected->get_name())) {
+        std::cout << "\n[!] You already have a '" << selected->get_name() << "'!\n";
+        std::cout << "Use it first or sell it.\n";
+        return;
+    }
+
+    if (p.get_currency1() < selected->get_price()) {
+        throw insufficient_funds_error(selected->get_name());
+    }
+
+    p.set_currency1(p.get_currency1() - selected->get_price());
+    p.add_item(std::unique_ptr<item>(selected->clone()));
+    std::cout << "Successfully purchased " << selected->get_name() << "!\n";
+}
+
+void shop::sell_item(player &p) {
+    if (p.get_inventory_size() == 0) {
+        std::cout << "\nYour inventory is empty.\n";
+        return;
+    }
+
+    std::cout << "\nSell Items\n";
+    for (size_t i = 0; i < p.get_inventory_size(); ++i) {
+        item* current_item = p.get_item_at(i);
+        float sell_price = current_item->get_price() / 2.0f;
+
+        std::cout << i + 1 << ". " << current_item->get_name() << " | Sell Price: " << sell_price << "\n";
+    }
+    std::cout << "0. Back \n Item to sell: ";
+
+    int choice = get_verified_input(0, static_cast<int>(p.get_inventory_size()));
+    if (choice == 0) return;
+
+    int index = choice - 1;
+    item* selected = p.get_item_at(index);
+    float sell_value = selected->get_price() / 2.0f;
+
+    std::cout << "Sold " << selected->get_name() << " for " << sell_value << " currency1.\n";
+
+    p.set_currency1(p.get_currency1() + sell_value);
+    p.remove_item_at(index);
 }
 
 void shop::run(player &p) const {
@@ -84,11 +131,12 @@ void shop::run(player &p) const {
         std::cout << "2. Buy Drinks\n";
         std::cout << "3. Buy Cheating Sheets\n";
         std::cout << "4. Check Inventory\n";
+        std::cout << "5. Sell an item\n";
         std::cout << "0. Exit Shop\n";
         std::cout << "> ";
 
         try {
-            option = get_verified_input(0, 4);
+            option = get_verified_input(0, 5);
 
             switch (option) {
                 case 1:
@@ -102,6 +150,9 @@ void shop::run(player &p) const {
                     break;
                 case 4:
                     p.show_inventory();
+                    break;
+                case 5:
+                    sell_item(p);
                     break;
                 case 0:
                     std::cout << "Leaving shop...\n";

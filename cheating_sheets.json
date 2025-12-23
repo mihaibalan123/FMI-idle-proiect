@@ -8,5 +8,175 @@
     "project_boost": 1,
     "success_chance": 0.8,
     "risk_damage": 10.0
+  },
+  {
+    "name": "Palm Scribble",
+    "description": "Classic. Sweaty palms might erase it. (1 lvl, 50% chance)",
+    "rarity": "Common",
+    "price": 5.0,
+    "consumable": true,
+    "project_boost": 1,
+    "success_chance": 0.5,
+    "risk_damage": 5.0
+  },
+  {
+    "name": "Napkin Notes",
+    "description": "Pretend you have a cold. (1 lvl, 60% chance)",
+    "rarity": "Common",
+    "price": 15.0,
+    "consumable": true,
+    "project_boost": 1,
+    "success_chance": 0.6,
+    "risk_damage": 8.0
+  },
+  {
+    "name": "Written on Desk",
+    "description": "Hope the teacher doesn't look down. (1 lvl, 65% chance)",
+    "rarity": "Common",
+    "price": 25.0,
+    "consumable": true,
+    "project_boost": 1,
+    "success_chance": 0.65,
+    "risk_damage": 12.0
+  },
+  {
+    "name": "Phone in Sleeve",
+    "description": "High risk, basic reward. (1 lvl, 40% chance)",
+    "rarity": "Common",
+    "price": 50.0,
+    "consumable": true,
+    "project_boost": 1,
+    "success_chance": 0.4,
+    "risk_damage": 30.0
+  },
+  {
+    "name": "Bathroom Break",
+    "description": "Go check the textbook. (2 lvl, 70% chance)",
+    "rarity": "Rare",
+    "price": 100.0,
+    "consumable": true,
+    "project_boost": 2,
+    "success_chance": 0.7,
+    "risk_damage": 20.0
+  },
+  {
+    "name": "Smart Watch",
+    "description": "Looks like a normal watch... mostly. (2 lvl, 75% chance)",
+    "rarity": "Rare",
+    "price": 250.0,
+    "consumable": true,
+    "project_boost": 2,
+    "success_chance": 0.75,
+    "risk_damage": 25.0
+  },
+  {
+    "name": "Tiny Bluetooth Earpiece",
+    "description": "Agent 007 style. (2 lvl, 80% chance)",
+    "rarity": "Rare",
+    "price": 500.0,
+    "consumable": true,
+    "project_boost": 2,
+    "success_chance": 0.8,
+    "risk_damage": 50.0
+  },
+  {
+    "name": "UV Light Pen",
+    "description": "Invisible ink. Very sneaky. (3 lvl, 85% chance)",
+    "rarity": "Epic",
+    "price": 1000.0,
+    "consumable": true,
+    "project_boost": 3,
+    "success_chance": 0.85,
+    "risk_damage": 40.0
+  },
+  {
+    "name": "Calculator Shell",
+    "description": "Phone hidden inside calculator. (3 lvl, 90% chance)",
+    "rarity": "Epic",
+    "price": 1500.0,
+    "consumable": true,
+    "project_boost": 3,
+    "success_chance": 0.9,
+    "risk_damage": 45.0
+  },
+  {
+    "name": "Dictionary Hack",
+    "description": "Pages replaced with notes. (3 lvl, 95% chance)",
+    "rarity": "Epic",
+    "price": 2500.0,
+    "consumable": true,
+    "project_boost": 3,
+    "success_chance": 0.95,
+    "risk_damage": 10.0
+  },
+  {
+    "name": "Google Glass prototype",
+    "description": "Augmented reality cheating. (4 lvl, 90% chance)",
+    "rarity": "Legendary",
+    "price": 5000.0,
+    "consumable": true,
+    "project_boost": 4,
+    "success_chance": 0.9,
+    "risk_damage": 100.0
+  },
+  {
+    "name": "Hacked Server",
+    "description": "Change the grades directly. (5 lvl, 50% chance)",
+    "rarity": "Legendary",
+    "price": 10000.0,
+    "consumable": true,
+    "project_boost": 5,
+    "success_chance": 0.5,
+    "risk_damage": 300.0
+  },
+  {
+    "name": "Twin Brother/Sister",
+    "description": "Send them to take the exam. (5 lvl, 95% chance)",
+    "rarity": "Legendary",
+    "price": 15000.0,
+    "consumable": true,
+    "project_boost": 5,
+    "success_chance": 0.95,
+    "risk_damage": 200.0
+  },
+  {
+    "name": "Bribery (Small)",
+    "description": "A bottle of whiskey. (2 lvl, 100% chance)",
+    "rarity": "Rare",
+    "price": 20000.0,
+    "consumable": true,
+    "project_boost": 2,
+    "success_chance": 1.0,
+    "risk_damage": 0.0
+  },
+  {
+    "name": "Bribery (Large)",
+    "description": "New equipment for the lab. (5 lvl, 100% chance)",
+    "rarity": "Mythical",
+    "price": 100000.0,
+    "consumable": true,
+    "project_boost": 5,
+    "success_chance": 1.0,
+    "risk_damage": 0.0
+  },
+  {
+    "name": "Dean's Password",
+    "description": "Ultimate access. (10 lvl, 99% chance)",
+    "rarity": "Godly",
+    "price": 500000.0,
+    "consumable": true,
+    "project_boost": 10,
+    "success_chance": 0.99,
+    "risk_damage": 300.0
+  },
+  {
+    "name": "Neuralink Chip",
+    "description": "Internet in your brain. (10 lvl, 100% chance)",
+    "rarity": "Unique",
+    "price": 1000000.0,
+    "consumable": true,
+    "project_boost": 10,
+    "success_chance": 1.0,
+    "risk_damage": 0.0
   }
 ]

@@ -42,6 +42,23 @@ long long player::get_last_login_timestamp() const {
     return last_login_timestamp;
 }
 
+size_t player::get_inventory_size() const {
+    return inventory.size();
+}
+
+item* player::get_item_at(size_t index) const {
+    if (index >= inventory.size()) {
+        return nullptr;
+    }
+    return inventory[index].get();
+}
+
+void player::remove_item_at(size_t index) {
+    if (index < inventory.size()) {
+        inventory.erase(inventory.begin() + static_cast<long long>(index));
+    }
+}
+
 void player::set_currency1(float value) {
     currency1 = value;
 }
@@ -365,8 +382,8 @@ void player::show_inventory() const {
         return;
     }
     std::cout << username << "'s Inventory \n";
-    for (size_t i = 0; i < inventory.size(); ++i) {
-        std::cout << *inventory[i] << "\n";
+    for (const auto & i : inventory) {
+        std::cout << *i << "\n";
     }
 }
 
@@ -757,6 +774,15 @@ void player::start_complex_job() {
             std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
         }
     }
+}
+
+bool player::has_item(const std::string& item_name) const {
+    for (const auto& item_ptr : inventory) {
+        if (item_ptr->get_name() == item_name) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void player::reset_game() {
