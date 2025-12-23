@@ -641,6 +641,28 @@ void player::respawn() {
     std::cout << "Don't give up! Come back when you are stronger!\n";
 }
 
+static long long get_math_input() {
+    std::string input;
+    std::cin >> input;
+
+    if (input == "-999") return -999;
+
+    size_t pos;
+    long long val;
+
+    try {
+        val = std::stoll(input, &pos);
+    } catch (...) {
+        throw invalid_input_error("Not a number!");
+    }
+
+    if (pos < input.size()) {
+        throw invalid_input_error("Invalid chars. Only digits, please!");
+    }
+
+    return val;
+}
+
 void player::start_easy_job() {
     std::cout << "\n You've got easiest job of your life! Start doing your job... \n";
     std::cout << "Type '-999' to quit.\n\n";
@@ -672,23 +694,27 @@ void player::start_easy_job() {
             correct_answer = static_cast<long long>(a) + b;
         }
 
-        std::cout << a << " " << op_char << " " << b << " = ";
+        bool input_is_valid = false;
+        while (!input_is_valid) {
+            std::cout << a << " " << op_char << " " << b << " = ";
+            try {
+                long long user_answer = get_math_input();
 
-        long long user_answer;
-        while (!(std::cin >> user_answer)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Numbers only! Try again: ";
-        }
+                if (user_answer == -999) return;
 
-        if (user_answer == -999) break;
+                if (user_answer == correct_answer) {
+                    float reward = 35.0f;
+                    this->currency1 += reward;
+                    std::cout << " -> Correct! + " << reward << " currency1.\n";
+                } else {
+                    std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
+                }
 
-        if (user_answer == correct_answer) {
-            float reward = 35.0f;
-            this->currency1 += reward;
-            std::cout << " -> Correct! + " << reward << " currency1.\n";
-        } else {
-            std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
+                input_is_valid = true;
+
+            } catch (const invalid_input_error& e) {
+                std::cerr << "\n" << e.what() << " Try again.\n";
+            }
         }
     }
 }
@@ -755,23 +781,25 @@ void player::start_complex_job() {
                                 + op2 + " " + std::to_string(c) + ")";
         }
 
-        std::cout <<  expression << " = ";
+        bool input_is_valid = false;
+        while (!input_is_valid) {
+            std::cout <<  expression << " = ";
+            try {
+                long long answer = get_math_input();
 
-        long long answer;
-        while (!(std::cin >> answer)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Numbers only! Try again: ";
-        }
+                if (answer == -999) return;
 
-        if (answer == -999) break;
-
-        if (answer == correct_answer) {
-            float reward = 55.0f;
-            this->currency1 += reward;
-            std::cout << " -> Genius! + " << reward << " currency1.\n";
-        } else {
-            std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
+                if (answer == correct_answer) {
+                    float reward = 55.0f;
+                    this->currency1 += reward;
+                    std::cout << " -> Genius! + " << reward << " currency1.\n";
+                } else {
+                    std::cout << " -> Wrong! Answer: " << correct_answer << ".\n";
+                }
+                input_is_valid = true;
+            } catch (const invalid_input_error& e) {
+                std::cerr << "\n" << e.what() << " Try again.\n";
+            }
         }
     }
 }
