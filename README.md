@@ -74,6 +74,7 @@ O cerință nu se consideră îndeplinită dacă este realizată doar prin cod g
 - [x] tag de `git`: de exemplu `v0.1`
 - [x] serviciu de integrare continuă (CI) cu **toate bifele**; exemplu: GitHub Actions
 - [ ] code review #1 2 proiecte
+- Am făcut primul code-review (comment la ultimul commit găsit)
 
 ## Tema 2
 
