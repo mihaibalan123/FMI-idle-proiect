@@ -21,10 +21,6 @@ public:
         return "drink";
     }
 
-    [[nodiscard]] float get_health_restore() const {
-        return health_restore;
-    }
-
     static std::vector<drink *> load_drinks();
 
     void use(player &p) override;

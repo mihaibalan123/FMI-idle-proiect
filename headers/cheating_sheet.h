@@ -23,18 +23,6 @@ public:
         return "cheating_sheet";
     }
 
-    [[nodiscard]] int get_project_boost() const {
-        return project_boost;
-    }
-
-    [[nodiscard]] float get_success_chance() const {
-        return success_chance;
-    }
-
-    [[nodiscard]] float get_risk_damage() const {
-        return risk_damage;
-    }
-
     static std::vector<cheating_sheet *> load_cheating_sheets();
 
     void use(player &p) override;

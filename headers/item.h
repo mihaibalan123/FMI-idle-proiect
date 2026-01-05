@@ -44,10 +44,6 @@ public:
 
     virtual void use(player &p) = 0;
 
-    [[nodiscard]] const std::string &get_rarity() const {
-        return rarity;
-    }
-
     [[nodiscard]] bool get_consumable() const {
         return consumable;
     }
@@ -58,10 +54,6 @@ public:
 
     [[nodiscard]] float get_price() const {
         return price;
-    }
-
-    [[nodiscard]] const std::string &get_description() const {
-        return description;
     }
 
     virtual nlohmann::json to_json() const {
