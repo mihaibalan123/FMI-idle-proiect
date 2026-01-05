@@ -28,17 +28,6 @@ std::vector<cheating_sheet *> cheating_sheet::load_cheating_sheets() {
     return cheating_sheets_list;
 }
 
-bool cheating_sheet::purchase(player& p) {
-    if (p.get_health() >= this->price) {
-        p.set_health(p.get_health() - this->price);
-        std::cout << "Paid " << this->price << " of your own life for cheating sheet" << name << "'.\n";
-        return true;
-    }
-
-    std::cout << "Not enough health! Please stay alive... Cost: " << this->price << "\n";
-    return false;
-}
-
 void cheating_sheet::use(player &p) {
     std::cout << "[ITEM] Using '" << this->name << "'...\n";
 
@@ -67,5 +56,13 @@ void cheating_sheet::use(player &p) {
         p.set_health(new_hp);
         std::cout << "You took " << this->risk_damage << " damage. Current hp is " << new_hp << "\n";
 
+    }
+}
+
+void cheating_sheet::buy_cheating_sheet(player &p, const std::vector<cheating_sheet*>& cheating_sheet_list) {
+    std::vector<item*> list(cheating_sheet_list.begin(), cheating_sheet_list.end());
+
+    if (item* selected = item::select_item(list, "Black Market")) {
+        selected->purchase(p);
     }
 }

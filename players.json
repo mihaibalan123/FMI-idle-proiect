@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 752513.4375,
+        "currency1": 1516636.25,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -40,9 +40,31 @@
                 "risk_damage": 10.0,
                 "success_chance": 0.800000011920929,
                 "type": "cheating_sheet"
+            },
+            {
+                "consumable": true,
+                "description": "A bottle of whiskey. (2 lvl, 100% chance)",
+                "name": "Bribery (Small)",
+                "price": 20000.0,
+                "project_boost": 2,
+                "rarity": "Rare",
+                "risk_damage": 0.0,
+                "success_chance": 1.0,
+                "type": "cheating_sheet"
+            },
+            {
+                "consumable": true,
+                "description": "Internet in your brain. (10 lvl, 100% chance)",
+                "name": "Neuralink Chip",
+                "price": 1000000.0,
+                "project_boost": 10,
+                "rarity": "Unique",
+                "risk_damage": 0.0,
+                "success_chance": 1.0,
+                "type": "cheating_sheet"
             }
         ],
-        "last_login_timestamp": 1766456592,
+        "last_login_timestamp": 1767619783,
         "name": "mihai",
         "password": "123456",
         "project_id": [

@@ -1,6 +1,7 @@
 #ifndef OOP_CHEATING_SHEET_H
 #define OOP_CHEATING_SHEET_H
 #include "item.h"
+#include "player.h"
 
 class player;
 
@@ -36,12 +37,16 @@ public:
 
     static std::vector<cheating_sheet *> load_cheating_sheets();
 
-    bool purchase(player &p) override;
-
     void use(player &p) override;
-protected:
-    void print1(std::ostream& os) const override {
-        os << " - cheating sheet ---> " << description << " (price: " << price << ")";
+
+    static void buy_cheating_sheet(player &p, const std::vector<cheating_sheet*>& cheating_sheets_list);
+
+    nlohmann::json to_json() const override {
+        nlohmann::json j = item::to_json();
+        j["project_boost"] = project_boost;
+        j["success_chance"] = success_chance;
+        j["risk_damage"] = risk_damage;
+        return j;
     }
 };
 

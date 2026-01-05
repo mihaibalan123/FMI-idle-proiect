@@ -4,18 +4,12 @@
 #include "teacher.h"
 #include "project.h"
 #include "player.h"
-#include "book.h"
-#include "drink.h"
-#include "cheating_sheet.h"
 #include "shop.h"
 
 class menu {
     std::vector<teacher> teachers_list;
     std::vector<project> projects_list;
     std::vector<player> players_list;
-    std::vector<book*> books_list;
-    std::vector<drink*> drinks_list;
-    std::vector<cheating_sheet*> cheating_sheets_list;
     shop item_shop;
     int curr_player = -1;
     void start();

@@ -154,31 +154,7 @@ void player::save_players(const std::vector<player> &players_list) {
         p_json["inventory"] = nlohmann::json::array();
 
         for (const auto &item_ptr: p.inventory) {
-            nlohmann::json item_json;
-            item_json["type"] = item_ptr->get_type();
-            item_json["name"] = item_ptr->get_name();
-            item_json["description"] = item_ptr->get_description();
-            item_json["price"] = item_ptr->get_price();
-            item_json["rarity"] = item_ptr->get_rarity();
-            item_json["consumable"] = item_ptr->get_consumable();
-
-            if (item_ptr->get_type() == "book") {
-                if (const auto b = dynamic_cast<const book *>(item_ptr.get())) {
-                    item_json["damage_bonus"] = b->get_damage_bonus();
-                    item_json["rarity"] = b->get_rarity();
-                }
-            } else if (item_ptr->get_type() == "drink") {
-                if (const auto d = dynamic_cast<const drink *>(item_ptr.get())) {
-                    item_json["health_restore"] = d->get_health_restore();
-                }
-            } else if (item_ptr->get_type() == "cheating_sheet") {
-                if (const auto c = dynamic_cast<const cheating_sheet *>(item_ptr.get())) {
-                    item_json["project_boost"] = c->get_project_boost();
-                    item_json["success_chance"] = c->get_success_chance();
-                    item_json["risk_damage"] = c->get_risk_damage();
-                }
-            }
-            p_json["inventory"].push_back(item_json);
+            p_json["inventory"].push_back(item_ptr->to_json());
         }
         json_players_list.push_back(p_json);
     }

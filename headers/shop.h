@@ -9,10 +9,6 @@ class shop {
     std::vector<book*> books_list;
     std::vector<drink*> drinks_list;
     std::vector<cheating_sheet*> cheating_sheets_list;
-    void buy_book(player& p) const;
-    void buy_drink(player& p) const;
-    void buy_cheating_sheet(player& p) const;
-
     static void sell_item(player& p);
 public:
     shop() = default;
@@ -24,7 +20,6 @@ public:
         drinks_list.clear();
         cheating_sheets_list.clear();
     }
-
     void start();
     void run(player& p) const;
 };

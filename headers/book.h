@@ -26,12 +26,14 @@ public:
 
     static std::vector<book *> load_books();
 
-    bool purchase(player &p) override;
-
     void use(player &p) override;
-protected:
-    void print1(std::ostream& os) const override {
-        os << " - book ---> " << description << " (price: " << price << ")";
+
+    static void buy_book(player &p, const std::vector<book*>& books_list);
+
+    nlohmann::json to_json() const override {
+        nlohmann::json j = item::to_json();
+        j["damage_bonus"] = damage_bonus;
+        return j;
     }
 };
 

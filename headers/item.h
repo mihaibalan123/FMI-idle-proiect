@@ -3,6 +3,7 @@
 #include <fstream>
 #include <utility>
 #include <vector>
+#include "nlohmann/json.hpp"
 
 class player;
 
@@ -22,7 +23,7 @@ public:
     virtual ~item() = default;
 
     void print(std::ostream& os) const {
-        os << "[ITEM] " << name << " | ";
+        os << "[" << get_type() << "] " << name << " | ";
         print1(os);
     }
 
@@ -35,7 +36,11 @@ public:
 
     [[nodiscard]] virtual std::string get_type() const = 0;
 
-    virtual bool purchase(player &p) = 0;
+    virtual bool purchase(player &p);
+
+    void print(int index) const;
+
+    static item* select_item(const std::vector<item*>& item_list, const std::string& type);
 
     virtual void use(player &p) = 0;
 
@@ -58,6 +63,18 @@ public:
     [[nodiscard]] const std::string &get_description() const {
         return description;
     }
+
+    virtual nlohmann::json to_json() const {
+        nlohmann::json j;
+        j["type"] = get_type();
+        j["name"] = name;
+        j["description"] = description;
+        j["price"] = price;
+        j["rarity"] = rarity;
+        j["consumable"] = consumable;
+        return j;
+    }
+
 protected:
     virtual void print1(std::ostream& os) const {
         os << description << " (price: " << price << ")";

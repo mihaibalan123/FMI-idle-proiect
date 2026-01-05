@@ -2,6 +2,7 @@
 #define OOP_DRINK_H
 #include "item.h"
 #include "player.h"
+#include <vector>
 
 class drink : public item {
     float health_restore;
@@ -26,14 +27,16 @@ public:
 
     static std::vector<drink *> load_drinks();
 
-    bool purchase(player &p) override;
-
     void use(player &p) override;
 
-protected:
-    void print1(std::ostream &os) const override {
-        os << " - drink ---> " << description << " (price: " << price << ")";
+    static void buy_drink(player &p, const std::vector<drink*>& drinks_list);
+
+    nlohmann::json to_json() const override {
+        nlohmann::json j = item::to_json();
+        j["health_restore"] = health_restore;
+        return j;
     }
+
 };
 
 

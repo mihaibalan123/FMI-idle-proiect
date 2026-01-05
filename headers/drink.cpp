@@ -22,21 +22,18 @@ std::vector<drink *> drink::load_drinks() {
     return drinks_list;
 }
 
-bool drink::purchase(player& p) {
-    if (p.get_currency2() >= this->price) {
-        p.set_currency2(p.get_currency2() - this->price);
-        std::cout << "Paid " << this->price << " currency2 for drink '" << name << "'.\n";
-        return true;
-    }
-
-    std::cout << "Not enough currency2! Cost: " << this->price << "\n";
-    return false;
-}
-
 void drink::use(player& p) {
     float current_hp = p.get_health();
     p.set_health(current_hp + this->health_restore);
 
     std::cout << "[DRINK] You consumed '" << this->name << "' and restored " << this->health_restore << "hp. \n";
     std::cout << "Current Health: " << p.get_health() << "\n";
+}
+
+void drink::buy_drink(player &p, const std::vector<drink*>& drinks_list) {
+    std::vector<item*> list(drinks_list.begin(), drinks_list.end());
+
+    if (item* selected = item::select_item(list, "Drinks List")) {
+        selected->purchase(p);
+    }
 }
