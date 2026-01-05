@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 1519398.0,
+        "currency1": 1022760.75,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -12,14 +12,16 @@
             1,
             1,
             1,
+            1,
             2,
             2,
+            3,
             3,
             3,
             3,
             3
         ],
-        "health": 500.0,
+        "health": 266.5,
         "inventory": [
             {
                 "consumable": false,
@@ -62,9 +64,37 @@
                 "risk_damage": 0.0,
                 "success_chance": 1.0,
                 "type": "cheating_sheet"
+            },
+            {
+                "consumable": false,
+                "description": "Essentials for new students.",
+                "name": "Supply Crate",
+                "price": 500000.0,
+                "random_items_count": 1,
+                "rarity": "Common",
+                "type": "gadget",
+                "uses_count": 0
+            },
+            {
+                "consumable": true,
+                "description": "Immunity boost. (70 hp restore)",
+                "health_restore": 70.0,
+                "name": "Vitamin C Effervescent",
+                "price": 50.0,
+                "rarity": "Rare",
+                "type": "drink"
+            },
+            {
+                "consumable": false,
+                "damage_bonus": 16.0,
+                "description": "No side effects, only damage. (+16 damage)",
+                "name": "Functional Programming",
+                "price": 2200.0,
+                "rarity": "Epic",
+                "type": "book"
             }
         ],
-        "last_login_timestamp": 1767621832,
+        "last_login_timestamp": 1767625410,
         "name": "mihai",
         "password": "123456",
         "project_id": [
@@ -100,7 +130,7 @@
             0,
             0,
             0,
-            4,
+            5,
             0,
             0,
             0,
@@ -110,7 +140,7 @@
             0,
             0,
             0,
-            0,
+            1,
             0,
             0,
             0,
@@ -153,6 +183,11 @@
             0,
             0,
             1,
+            0,
+            0,
+            1,
+            0,
+            0,
             0,
             0,
             1
@@ -190,7 +225,7 @@
             0,
             0,
             0,
-            4,
+            5,
             0,
             0,
             0,
@@ -200,7 +235,7 @@
             0,
             0,
             0,
-            0,
+            1,
             0,
             0,
             0,
@@ -243,6 +278,11 @@
             0,
             0,
             1,
+            0,
+            0,
+            1,
+            0,
+            0,
             0,
             0,
             1
