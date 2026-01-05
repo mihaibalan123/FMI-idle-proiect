@@ -32,7 +32,11 @@ public:
         j["health_restore"] = health_restore;
         return j;
     }
-
+protected:
+    void print1(std::ostream& os) const override {
+        item::print1(os);
+        os << " restores: " << health_restore << " hp";
+    }
 };
 
 

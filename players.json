@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 1516636.25,
+        "currency1": 1519398.0,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -64,7 +64,7 @@
                 "type": "cheating_sheet"
             }
         ],
-        "last_login_timestamp": 1767619783,
+        "last_login_timestamp": 1767621832,
         "name": "mihai",
         "password": "123456",
         "project_id": [

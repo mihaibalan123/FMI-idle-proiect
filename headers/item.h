@@ -69,7 +69,7 @@ public:
 
 protected:
     virtual void print1(std::ostream& os) const {
-        os << description << " (price: " << price << ")";
+        os << " (price: " << price << ")";
     }
 };
 

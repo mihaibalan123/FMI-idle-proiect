@@ -35,6 +35,11 @@ public:
         j["damage_bonus"] = damage_bonus;
         return j;
     }
+protected:
+    void print1(std::ostream& os) const override {
+        item::print1(os);
+        os << " gives bonus damage: " << damage_bonus;
+    }
 };
 
 

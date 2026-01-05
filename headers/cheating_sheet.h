@@ -36,6 +36,13 @@ public:
         j["risk_damage"] = risk_damage;
         return j;
     }
+protected:
+    void print1(std::ostream& os) const override {
+        item::print1(os);
+        os << " boosts " << project_boost
+           << " project with a success chance of " << success_chance << "%"
+           << " and you risk taking " << risk_damage << " damage. ";
+    }
 };
 
 #endif //OOP_CHEATING_SHEET_H
