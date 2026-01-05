@@ -52,11 +52,11 @@ void gadget::use(player &p) {
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, item_pool.size() - 1);
+    std::uniform_int_distribution<size_t> dis(0, item_pool.size() - 1);
 
     for (int i = 0; i < this->random_items; ++i) {
-        int random_index = dis(gen);
-        item* selected_template = item_pool[random_index];
+        size_t random_index = dis(gen);
+        const item* selected_template = item_pool[random_index];
         std::unique_ptr<item> new_reward(selected_template->clone());
         std::cout << " -> You found: " << new_reward->get_name() << " (" << new_reward->get_type() << ")\n";
         p.add_item(std::move(new_reward));
