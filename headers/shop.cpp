@@ -5,6 +5,7 @@ void shop::start() {
     books_list = book::load_books();
     drinks_list = drink::load_drinks();
     cheating_sheets_list = cheating_sheet::load_cheating_sheets();
+    gadgets_list = gadget::load_gadgets();
 }
 
 void shop::sell_item(player &p) {
@@ -44,13 +45,14 @@ void shop::run(player &p) const {
         std::cout << "1. Buy Books\n";
         std::cout << "2. Buy Drinks\n";
         std::cout << "3. Buy Cheating Sheets\n";
-        std::cout << "4. Check Inventory\n";
-        std::cout << "5. Sell an item\n";
+        std::cout << "4. Buy Gadgets\n";
+        std::cout << "5. Check Inventory\n";
+        std::cout << "6. Sell an item\n";
         std::cout << "0. Exit Shop\n";
         std::cout << "> ";
 
         try {
-            option = get_verified_input(0, 5);
+            option = get_verified_input(0, 6);
 
             switch (option) {
                 case 1:
@@ -63,9 +65,12 @@ void shop::run(player &p) const {
                     cheating_sheet::buy_cheating_sheet(p, cheating_sheets_list);
                     break;
                 case 4:
-                    p.show_inventory();
+                    gadget::buy_gadget(p, gadgets_list);
                     break;
                 case 5:
+                    p.show_inventory();
+                    break;
+                case 6:
                     sell_item(p);
                     break;
                 case 0:

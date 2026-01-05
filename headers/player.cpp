@@ -4,6 +4,7 @@
 #include "cheating_sheet.h"
 #include "drink.h"
 #include "exception.h"
+#include "gadget.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -110,6 +111,12 @@ std::vector<player> player::load_players() {
                     float risk = item_json.value("risk_damage", 0.0f);
                     temp_inventory.push_back(std::make_unique<cheating_sheet>(
                         i_name, i_desc, i_rarity, i_price, i_consumable, boost, chance, risk
+                    ));
+                }else if (type == "gadget") {
+                    int uses = item_json.value("uses_count", 1);
+                    int random_items = item_json.value("random_items", 1);
+                    temp_inventory.push_back(std::make_unique<gadget>(
+                        i_name, i_desc, i_rarity, i_price, i_consumable, uses, random_items
                     ));
                 }
             }

@@ -1,0 +1,102 @@
+[
+  {
+    "type": "gadget",
+    "name": "Supply Crate",
+    "description": "Essentials for new students.",
+    "rarity": "Common",
+    "price": 500000.0,
+    "consumable": false,
+    "uses_count": 1,
+    "random_items_count": 2
+  },
+  {
+    "type": "gadget",
+    "name": "Lucky Mystery Sack",
+    "description": "CMight contain something good.",
+    "rarity": "Common",
+    "price": 25000.0,
+    "consumable": false,
+    "uses_count": 1,
+    "random_items_count": 1
+  },
+  {
+    "type": "gadget",
+    "name": "Hacked Tablet",
+    "description": "Battery life is low.",
+    "rarity": "Rare",
+    "price": 250000.0,
+    "consumable": false,
+    "uses_count": 3,
+    "random_items_count": 1
+  },
+  {
+    "type": "gadget",
+    "name": "Professor's Briefcase",
+    "description": "Heavy with knowledge.",
+    "rarity": "Epic",
+    "price": 400000.0,
+    "consumable": false,
+    "uses_count": 1,
+    "random_items_count": 4
+  },
+  {
+    "type": "gadget",
+    "name": "Quantum Replicator",
+    "description": "Advanced tech that prints items from air.",
+    "rarity": "Legendary",
+    "price": 1200000.0,
+    "consumable": false,
+    "uses_count": 5,
+    "random_items_count": 2
+  },
+  {
+    "type": "gadget",
+    "name": "Lost & Found Bin",
+    "description": "Has goood loot.",
+    "rarity": "Common",
+    "price": 75000.0,
+    "consumable": false,
+    "uses_count": 2,
+    "random_items_count": 2
+  },
+  {
+    "type": "gadget",
+    "name": "Senior's Stash",
+    "description": "Left behind by a graduated student.",
+    "rarity": "Rare",
+    "price": 150000.0,
+    "consumable": false,
+    "uses_count": 1,
+    "random_items_count": 3
+  },
+  {
+    "type": "gadget",
+    "name": "Black Market Drone",
+    "description": "Delivers goods directly to your inventory.",
+    "rarity": "Epic",
+    "price": 600000.0,
+    "consumable": false,
+    "uses_count": 4,
+    "random_items_count": 1
+  },
+  {
+    "type": "gadget",
+    "name": "Pandora's Lunchbox",
+    "description": "Don't ask what is inside until you open it.",
+    "rarity": "Epic",
+    "price": 300000.0,
+    "consumable": false,
+    "uses_count": 2,
+    "random_items_count": 3
+  },
+  {
+    "type": "gadget",
+    "name": "Developer's Console",
+    "description": "A device that breaks reality. Overpowered.",
+    "rarity": "Legendary",
+    "price": 5000000.0,
+    "consumable": false,
+    "uses_count": 10,
+    "random_items_count": 5
+  }
+]
