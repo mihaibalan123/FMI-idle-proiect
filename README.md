@@ -21,8 +21,6 @@ poate aștepta (când nu e logat își reface 1 hp la 2 min 30 sec ). După tipu
 currency sau viață. Partea de "Restanță" funcționează pentru player ca un reset pentru primul tip de currency
 convertindu-l pe acesta relativ la o scală logaritmică în cel de-al doilea tip.
 
-> +++ În partea de final urmează să fie adăugate Achievement-uri !
-
 ## Reminder:
 
 Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar dacă documentați riguros acest

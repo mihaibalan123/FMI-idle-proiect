@@ -30,7 +30,7 @@ public:
 
     static void buy_book(player &p, const std::vector<book*>& books_list);
 
-    nlohmann::json to_json() const override {
+    [[nodiscard]] nlohmann::json to_json() const override {
         nlohmann::json j = item::to_json();
         j["damage_bonus"] = damage_bonus;
         return j;
