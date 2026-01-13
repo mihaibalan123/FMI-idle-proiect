@@ -808,7 +808,7 @@ void player::start_complex_job() {
 }
 
 void player::add_observer(observer* obs) {
-    for (auto* existing : observers) {
+    for (const auto* existing : observers) {
         if (existing == obs) return;
     }
     observers.push_back(obs);

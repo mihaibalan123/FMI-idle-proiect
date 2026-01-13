@@ -13,7 +13,8 @@ enum class Rank {
 class RankConverter {
 public:
     static std::string to_string(Rank r);
-    static Rank from_string(const std::string& s);
+
+    static Rank from_string(const std::string &s);
 };
 
 class achievement {
@@ -23,6 +24,7 @@ class achievement {
     Event required_event;
     int threshold;
     bool unlocked;
+
     void print_unlock_message() const;
 
 public:
@@ -32,16 +34,16 @@ public:
           rank(rank),
           required_event(event),
           threshold(threshold),
-          unlocked(unlocked)
-    {}
+          unlocked(unlocked) {
+    }
 
-    explicit achievement(const nlohmann::json& j) {
-        name = j.value("name", "Unknown");
-        description = j.value("description", "No desc");
-        rank = RankConverter::from_string(j.value("rank", "BRONZE"));
-        required_event = EventConverter::from_string(j.value("event", "CURRENCY_GAINED"));
-        threshold = j.value("threshold", 100);
-        unlocked = j.value("unlocked", false);
+    explicit achievement(const nlohmann::json &j)
+        : name(j.value("name", "Unknown")),
+          description(j.value("description", "No desc")),
+          rank(RankConverter::from_string(j.value("rank", "BRONZE"))),
+          required_event(EventConverter::from_string(j.value("event", "CURRENCY_GAINED"))),
+          threshold(j.value("threshold", 100)),
+          unlocked(j.value("unlocked", false)) {
     }
 
     [[nodiscard]] nlohmann::json to_json() const;
