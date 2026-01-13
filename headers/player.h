@@ -9,6 +9,7 @@
 #include "project.h"
 #include "teacher.h"
 #include "item.h"
+#include "observer.h"
 #include <vector>
 #include <chrono>
 
@@ -20,6 +21,7 @@ class player {
     std::vector<int> project_levels;
     std::vector<int> defeated_domains;
     std::vector<std::unique_ptr<item> > inventory;
+    std::vector<observer*> observers;
     long long last_login_timestamp = 0;
 
     void add_project_id(int id);
@@ -132,6 +134,12 @@ public:
 
     [[nodiscard]] item* get_item_at(size_t index) const;
 
+    int get_items_bought_count() const;
+
+    int get_enemies_defeated_count() const;
+
+    int get_projects_upgraded_count() const;
+
     void remove_item_at(size_t index);
 
     void set_currency1(float value);
@@ -167,6 +175,10 @@ public:
     void start_easy_job();
 
     void start_complex_job();
+
+    void add_observer(observer* obs);
+
+    void notify(Event event, int value) const;
 
     [[nodiscard]] bool has_item(const std::string& item_name) const;
 

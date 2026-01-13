@@ -72,6 +72,12 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         headers/exception.h
         headers/gadget.cpp
         headers/gadget.h
+        headers/observer.cpp
+        headers/observer.h
+        headers/achievement.cpp
+        headers/achievement.h
+        headers/achievement_system.cpp
+        headers/achievement_system.h
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )

@@ -4,8 +4,8 @@
 
 int main() {
     try {
-        menu main_menu;
-        main_menu.run();
+        menu* main_menu = menu::get_menu();
+        main_menu -> run();
     }
     catch (const file_integrity_error& e) {
         std::cerr << e.what() << "\n";

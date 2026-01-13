@@ -13,7 +13,12 @@ class shop {
     std::vector<gadget*> gadgets_list;
     static void sell_item(player& p);
 public:
-    shop() = default;
+    shop() {
+        books_list = book::load_books();
+        drinks_list = drink::load_drinks();
+        cheating_sheets_list = cheating_sheet::load_cheating_sheets();
+        gadgets_list = gadget::load_gadgets();
+    };
     ~shop (){
         for (auto p : books_list) delete p;
         for (auto p : drinks_list) delete p;
@@ -24,7 +29,6 @@ public:
         cheating_sheets_list.clear();
         gadgets_list.clear();
     }
-    void start();
     void run(player& p) const;
 };
 

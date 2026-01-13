@@ -1,13 +1,6 @@
 #include "shop.h"
 #include "exception.h"
 
-void shop::start() {
-    books_list = book::load_books();
-    drinks_list = drink::load_drinks();
-    cheating_sheets_list = cheating_sheet::load_cheating_sheets();
-    gadgets_list = gadget::load_gadgets();
-}
-
 void shop::sell_item(player &p) {
     if (p.get_inventory_size() == 0) {
         std::cout << "\nYour inventory is empty.\n";

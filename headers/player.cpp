@@ -54,6 +54,22 @@ item* player::get_item_at(size_t index) const {
     return inventory[index].get();
 }
 
+int player::get_items_bought_count() const {
+    return static_cast<int>(inventory.size());
+}
+
+int player::get_enemies_defeated_count() const {
+    return static_cast<int>(defeated_domains.size());
+}
+
+int player::get_projects_upgraded_count() const {
+    int sum = 0;
+    for (int lvl : project_levels) {
+        sum += lvl;
+    }
+    return sum;
+}
+
 void player::remove_item_at(size_t index) {
     if (index < inventory.size()) {
         inventory.erase(inventory.begin() + static_cast<long long>(index));
@@ -62,6 +78,7 @@ void player::remove_item_at(size_t index) {
 
 void player::set_currency1(float value) {
     currency1 = value;
+    notify(Event::CURRENCY_GAINED, static_cast<int>(this->currency1));
 }
 
 void player::set_currency2(float value) {
@@ -357,6 +374,7 @@ void player::add_project_id(int id) {
 void player::add_item(std::unique_ptr<item> new_item) {
     this->inventory.push_back(std::move(new_item));
     std::cout << "Item added to your inventory!\n";
+    notify(Event::ITEM_BOUGHT, inventory.size());
 }
 
 void player::show_inventory() const {
@@ -430,6 +448,7 @@ void player::project_upgrade(int selected_id, const std::vector<project> &projec
         std::cout << "\n[SUCCES] project \"" << selected_project.get_name() << "\" was upgraded to level " <<
                 current_level + 1 << "\n";
         std::cout << "New currency1: " << this->get_currency1() << "\n";
+        notify(Event::PROJECT_UPGRADED, get_projects_upgraded_count());
     } else {
         std::cout << "Not enough money! Required: " << cost << ", Available: " << current_currency << ".\n";
     }
@@ -464,6 +483,7 @@ void player::fight_teacher(const teacher &opponent, int p_project_id) {
         int domain_id = opponent.get_domain();
         this->add_defeated_domain(domain_id);
         this->calculate_and_set_conquer_domain();
+        notify(Event::ENEMY_DEFEATED, get_enemies_defeated_count());
     } else {
         this->health = 0;
         std::cout << "Defeated! " << opponent.get_last_name() << " was too strong.\n";
@@ -784,6 +804,19 @@ void player::start_complex_job() {
                 std::cerr << "\n" << e.what() << " Try again.\n";
             }
         }
+    }
+}
+
+void player::add_observer(observer* obs) {
+    for (auto* existing : observers) {
+        if (existing == obs) return;
+    }
+    observers.push_back(obs);
+}
+
+void player::notify(Event event, int value) const {
+    for (auto* obs : observers) {
+        obs->on_notify(event, value);
     }
 }
 

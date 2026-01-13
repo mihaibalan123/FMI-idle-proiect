@@ -1,0 +1,242 @@
+[
+    {
+        "name": "Collector I",
+        "description": "Inventory Stuffer (20 items).",
+        "rank": "BRONZE",
+        "event": "ITEM_BOUGHT",
+        "threshold": 20,
+        "unlocked": false
+    },
+    {
+        "name": "Collector II",
+        "description": "Walking Warehouse (50 items).",
+        "rank": "SILVER",
+        "event": "ITEM_BOUGHT",
+        "threshold": 50,
+        "unlocked": false
+    },
+    {
+        "name": "Collector III",
+        "description": "Black Hole (100 items).",
+        "rank": "GOLD",
+        "event": "ITEM_BOUGHT",
+        "threshold": 100,
+        "unlocked": false
+    },
+    {
+        "name": "Millionaire I",
+        "description": "Seven Figures (1.000.000 gold).",
+        "rank": "BRONZE",
+        "event": "CURRENCY_GAINED",
+        "threshold": 1000000,
+        "unlocked": false
+    },
+    {
+        "name": "Millionaire II",
+        "description": "Multi-Millionaire (50.000.000 gold).",
+        "rank": "SILVER",
+        "event": "CURRENCY_GAINED",
+        "threshold": 50000000,
+        "unlocked": false
+    },
+    {
+        "name": "Millionaire III",
+        "description": "Almost there (500.000.000 gold).",
+        "rank": "GOLD",
+        "event": "CURRENCY_GAINED",
+        "threshold": 500000000,
+        "unlocked": false
+    },
+    {
+        "name": "Billionaire I",
+        "description": "Three Comma Club (1 Billion).",
+        "rank": "BRONZE",
+        "event": "CURRENCY_GAINED",
+        "threshold": 1000000000,
+        "unlocked": false
+    },
+    {
+        "name": "Billionaire II",
+        "description": "Oligarch (50 Billion).",
+        "rank": "SILVER",
+        "event": "CURRENCY_GAINED",
+        "threshold": 50000000000,
+        "unlocked": false
+    },
+    {
+        "name": "Billionaire III",
+        "description": "Economy Breaker (100 Billion).",
+        "rank": "GOLD",
+        "event": "CURRENCY_GAINED",
+        "threshold": 100000000000,
+        "unlocked": false
+    },
+    {
+        "name": "Trillionaire I",
+        "description": "GDP of a Country (1 Trillion).",
+        "rank": "BRONZE",
+        "event": "CURRENCY_GAINED",
+        "threshold": 1000000000000,
+        "unlocked": false
+    },
+    {
+        "name": "Trillionaire II",
+        "description": "World Bank (50 Trillion).",
+        "rank": "SILVER",
+        "event": "CURRENCY_GAINED",
+        "threshold": 50000000000000,
+        "unlocked": false
+    },
+    {
+        "name": "Trillionaire III",
+        "description": "System Overflow (100 Trillion).",
+        "rank": "GOLD",
+        "event": "CURRENCY_GAINED",
+        "threshold": 100000000000000,
+        "unlocked": false
+    },
+    {
+        "name": "Warrior I",
+        "description": "The Survivor (50 enemies).",
+        "rank": "BRONZE",
+        "event": "ENEMY_DEFEATED",
+        "threshold": 50,
+        "unlocked": false
+    },
+    {
+        "name": "Warrior II",
+        "description": "Bloodthirsty (150 enemies).",
+        "rank": "SILVER",
+        "event": "ENEMY_DEFEATED",
+        "threshold": 150,
+        "unlocked": false
+    },
+    {
+        "name": "Warrior III",
+        "description": "Spartan (300 enemies).",
+        "rank": "GOLD",
+        "event": "ENEMY_DEFEATED",
+        "threshold": 300,
+        "unlocked": false
+    },
+    {
+        "name": "Conqueror I",
+        "description": "Warlord (500 enemies).",
+        "rank": "BRONZE",
+        "event": "ENEMY_DEFEATED",
+        "threshold": 500,
+        "unlocked": false
+    },
+    {
+        "name": "Conqueror II",
+        "description": "Genghis Khan (1000 enemies).",
+        "rank": "SILVER",
+        "event": "ENEMY_DEFEATED",
+        "threshold": 1000,
+        "unlocked": false
+    },
+    {
+        "name": "Conqueror III",
+        "description": "Extinction Event (5000 enemies).",
+        "rank": "GOLD",
+        "event": "ENEMY_DEFEATED",
+        "threshold": 5000,
+        "unlocked": false
+    },
+    {
+        "name": "Geek I",
+        "description": "Bookworm (50 total levels).",
+        "rank": "BRONZE",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 50,
+        "unlocked": false
+    },
+    {
+        "name": "Geek II",
+        "description": "Top of the Class (100 total levels).",
+        "rank": "SILVER",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 100,
+        "unlocked": false
+    },
+    {
+        "name": "Geek III",
+        "description": "Valedictorian (200 total levels).",
+        "rank": "GOLD",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 200,
+        "unlocked": false
+    },
+    {
+        "name": "Scientist I",
+        "description": "Lab Rat (500 total levels).",
+        "rank": "BRONZE",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 500,
+        "unlocked": false
+    },
+    {
+        "name": "Scientist II",
+        "description": "Nobel Prize (1000 total levels).",
+        "rank": "SILVER",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 1000,
+        "unlocked": false
+    },
+    {
+        "name": "Scientist III",
+        "description": "Einstein (2000 total levels).",
+        "rank": "GOLD",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 2000,
+        "unlocked": false
+    },
+    {
+        "name": "Architect I",
+        "description": "Matrix Builder (5000 total levels).",
+        "rank": "BRONZE",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 5000,
+        "unlocked": false
+    },
+    {
+        "name": "Architect II",
+        "description": "Reality Bender (10000 total levels).",
+        "rank": "SILVER",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 10000,
+        "unlocked": false
+    },
+    {
+        "name": "Architect III",
+        "description": "The Singularity (50000 total levels).",
+        "rank": "GOLD",
+        "event": "PROJECT_UPGRADED",
+        "threshold": 50000,
+        "unlocked": false
+    },
+    {
+        "name": "Hoarder I",
+        "description": "Need a bag (150 items).",
+        "rank": "BRONZE",
+        "event": "ITEM_BOUGHT",
+        "threshold": 150,
+        "unlocked": false
+    },
+    {
+        "name": "Hoarder II",
+        "description": "Need a truck (250 items).",
+        "rank": "SILVER",
+        "event": "ITEM_BOUGHT",
+        "threshold": 250,
+        "unlocked": false
+    },
+    {
+        "name": "Hoarder III",
+        "description": "Need a warehouse (500 items).",
+        "rank": "GOLD",
+        "event": "ITEM_BOUGHT",
+        "threshold": 500,
+        "unlocked": false
+    }
+]

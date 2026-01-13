@@ -9,13 +9,7 @@
 #include <chrono>
 #include <cmath>
 
-
-void menu::start() {
-    projects_list = project::load_projects();
-    teachers_list = teacher::load_teachers(projects_list);
-    players_list = player::load_players();
-    item_shop.start();
-}
+menu *menu::main_menu = nullptr;
 
 void menu::choose_player() {
     while (true) {
@@ -30,8 +24,7 @@ void menu::choose_player() {
         try {
             int max_option = static_cast<int>(players_list.size() + 1);
             option = get_verified_input(0, max_option);
-        }
-        catch (const invalid_input_error& e) {
+        } catch (const invalid_input_error &e) {
             std::cerr << "\n[!] " << e.what() << "\n";
             return;
         }
@@ -41,6 +34,7 @@ void menu::choose_player() {
         }
 
         if (option == static_cast<int>(players_list.size() + 1)) {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             curr_player = player::add_new_player(players_list);
 
             if (curr_player != -1) {
@@ -53,6 +47,26 @@ void menu::choose_player() {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         if (players_list[index].verify_password()) {
             curr_player = index;
+            Asystem.reset_progress();
+            players_list[curr_player].add_observer(&Asystem);
+            players_list[curr_player].notify(
+                Event::CURRENCY_GAINED,
+                players_list[curr_player].get_currency1()
+            );
+
+            players_list[curr_player].notify(
+                Event::ITEM_BOUGHT,
+                players_list[curr_player].get_items_bought_count()
+            );
+
+            players_list[curr_player].notify(
+                Event::ENEMY_DEFEATED,
+                players_list[curr_player].get_enemies_defeated_count()
+            );
+            players_list[curr_player].notify(
+                Event::PROJECT_UPGRADED,
+                players_list[curr_player].get_projects_upgraded_count()
+            );
             std::cout << "Access granted! Welcome back.\n";
             players_list[curr_player].idle_earnings(projects_list);
             return;
@@ -72,8 +86,6 @@ void menu::close() {
 }
 
 void menu::run() {
-    start();
-
     std::cout << "Welcome to FMI-Idle Game!\n";
 
     if (players_list.empty()) {
@@ -88,19 +100,20 @@ void menu::run() {
     int option = -1;
     do {
         std::cout << "1. Select player / Switch player\n"
-                  << "2. Visit an easy part-time job (+currency)\n"
-                  << "3. Visit a *complex* part-time job (++currency)\n"
-                  << "4. Show stats\n"
-                  << "5. Examination room (fight a teacher)\n"
-                  << "6. Projects Information\n"
-                  << "7. Projects upgrade\n"
-                  << "8. Shop (buy items)\n"
-                  << "9. 'Restanta' (Reset Currency)\n"
-                  << "0. Exit\n";
+                << "2. Visit an easy part-time job (+currency)\n"
+                << "3. Visit a *complex* part-time job (++currency)\n"
+                << "4. Show stats\n"
+                << "5. Examination room (fight a teacher)\n"
+                << "6. Projects Information\n"
+                << "7. Projects upgrade\n"
+                << "8. Shop (buy items)\n"
+                << "9. 'Restanta' (Reset Currency)\n"
+                << "10. Achievements \n"
+                << "0. Exit\n";
         std::cout << "> ";
 
         try {
-            option = get_verified_input(0, 9);
+            option = get_verified_input(0, 10);
 
             if (option == 0) {
                 close();
@@ -142,24 +155,22 @@ void menu::run() {
                 case 9:
                     players_list[curr_player].reset_progress();
                     break;
+                case 10:
+                    Asystem.show_achievements();
+                    break;
                 default:
                     break;
             }
-        }
-        catch (const insufficient_funds_error& e) {
+        } catch (const insufficient_funds_error &e) {
             std::cerr << "\n" << e.what() << "\n";
             std::cout << "Tip: Go to work (option 2 or 3) to make money.\n";
-        }
-        catch (const player_weak_error& e) {
+        } catch (const player_weak_error &e) {
             std::cerr << "\n" << e.what() << "\n";
             std::cout << "Tip: Buy drinks from the shop to heal.\n";
-        }
-        catch (const invalid_input_error& e) {
+        } catch (const invalid_input_error &e) {
+            std::cerr << "\n" << e.what() << "\n";
+        } catch (const std::exception &e) {
             std::cerr << "\n" << e.what() << "\n";
         }
-        catch (const std::exception& e) {
-            std::cerr << "\n" << e.what() << "\n";
-        }
-
     } while (option != 0);
 }
