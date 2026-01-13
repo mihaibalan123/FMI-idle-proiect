@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 2472924.75,
+        "currency1": 2502690.5,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -22,7 +22,7 @@
             3,
             3
         ],
-        "health": 500.0,
+        "health": 490.80584716796875,
         "inventory": [
             {
                 "consumable": false,
@@ -104,9 +104,18 @@
                 "risk_damage": 300.0,
                 "success_chance": 0.9900000095367432,
                 "type": "cheating_sheet"
+            },
+            {
+                "consumable": false,
+                "damage_bonus": 14.912843704223633,
+                "description": "Restored during Secret Santa event.",
+                "name": "Dusty Scroll",
+                "price": 120.0,
+                "rarity": "Dusty",
+                "type": "book"
             }
         ],
-        "last_login_timestamp": 1768333598,
+        "last_login_timestamp": 1768343912,
         "name": "mihai",
         "password": "123456",
         "project_id": [
@@ -250,7 +259,7 @@
             0,
             0,
             0,
-            1,
+            2,
             0,
             0,
             0,
@@ -292,10 +301,10 @@
             0,
             0,
             0,
-            1,
+            7,
             0,
             0,
-            1,
+            6,
             0,
             0,
             0,
@@ -331,6 +340,20 @@
         "last_login_timestamp": 1768266888,
         "name": "silviu",
         "password": "1234567",
+        "project_id": [],
+        "project_levels": []
+    },
+    {
+        "conquer_domain": -1,
+        "currency1": 100.0,
+        "currency2": 0.0,
+        "damage": 7.0,
+        "defeated_domains": [],
+        "health": 500.0,
+        "inventory": [],
+        "last_login_timestamp": 1768343981,
+        "name": "vasile",
+        "password": "123456",
         "project_id": [],
         "project_levels": []
     }

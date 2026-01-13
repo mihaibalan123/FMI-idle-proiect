@@ -21,12 +21,12 @@ public:
                             price(price), consumable(consumable) {
     }
 
-    explicit item(const nlohmann::json& j) {
-        name = j.value("name", "Unknown");
-        description = j.value("description", " ");
-        rarity = j.value("rarity", "Common");
-        price = j.value("price", 0.0f);
-        consumable = j.value("consumable", false);
+    explicit item(const nlohmann::json& j)
+        : name(j.value("name", "Unknown")),
+          description(j.value("description", "No desc")),
+          rarity(j.value("rarity", "Common")),
+          price(j.value("price", 0.0f)),
+          consumable(j.value("consumable", false)) {
     }
 
     template <typename T>

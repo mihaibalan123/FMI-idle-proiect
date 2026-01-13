@@ -6,6 +6,7 @@
 #include "player.h"
 #include "shop.h"
 #include "achievement_system.h"
+#include "tutoring_class.h"
 
 class menu {
     std::vector<project> projects_list;
@@ -18,6 +19,8 @@ class menu {
     void choose_player();
 
     void close();
+
+    void open_tutoring_session();
 
     static menu *main_menu;
 

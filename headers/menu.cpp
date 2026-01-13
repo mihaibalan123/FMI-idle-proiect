@@ -4,6 +4,7 @@
 #include "teacher.h"
 #include "project.h"
 #include "exception.h"
+#include "tutoring_class.h"
 #include <cstdlib>
 #include <random>
 #include <chrono>
@@ -51,7 +52,7 @@ void menu::choose_player() {
             players_list[curr_player].add_observer(&Asystem);
             players_list[curr_player].notify(
                 Event::CURRENCY_GAINED,
-                players_list[curr_player].get_currency1()
+                static_cast<int>(players_list[curr_player].get_currency1())
             );
 
             players_list[curr_player].notify(
@@ -85,6 +86,67 @@ void menu::close() {
     player::save_players(players_list);
 }
 
+void menu::open_tutoring_session() {
+    std::cout << "\n--- Tutoring Classes ---\n";
+    std::cout << "1. Lifetime exam (get scholarship) \n";
+    std::cout << "2. Coding Workshop (get levels) \n";
+    std::cout << "3. Secret Santa (restore items) \n";
+    std::cout << "0. Back\n";
+    std::cout << "Select class: ";
+
+    int choice;
+    try {
+        choice = get_verified_input(0, 3);
+    } catch (const std::exception& e) {
+        std::cout << e.what() << "\n";
+        return;
+    }
+    if (choice == 0) return;
+
+    player& current_p = players_list[curr_player];
+
+    if (choice == 1) {
+        std::cout << "Funds: " << current_p.get_currency1() << "\n";
+        if (current_p.get_currency1() < 50.0f) {
+            std::cout << "You need at least 50 currency1 to participate.\n";
+        }
+        else {
+            std::cout << "Pay the fee (higher fee = higher potential scholarship): ";
+            try {
+                int max_funds = static_cast<int>(current_p.get_currency1());
+                int input_val = get_verified_input(50, max_funds);
+                auto tuition = static_cast<float>(input_val);
+                tutoring_class<float>::give_reward(current_p, tuition);
+            } catch (const invalid_input_error &e) {
+                std::cout << "Input Error: " << e.what() << "\n";
+            } catch (const std::exception &e) {
+                std::cout << "An error occurred: " << e.what() << "\n";
+            }
+        }
+    }
+    else if (choice == 2) {
+        std::cout << "Energy hours to commit: (1-10): ";
+        try {
+            int hours = get_verified_input(1, 10);
+            tutoring_class<int>::give_reward(current_p, hours);
+        } catch (const invalid_input_error &e) {
+            std::cout << "Input Error: " << e.what() << "\n";
+        } catch (const std::exception &e) {
+            std::cout << "Error: " << e.what() << "\n";
+        }
+    }
+    else if (choice == 3) {
+        std::vector<std::string> items = {"Scroll", "Dagger", "Statue", "Coin"};
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+        std::uniform_int_distribution<size_t> dis(0, items.size() - 1);
+
+        size_t idx = dis(gen);
+
+        tutoring_class<std::string>::give_reward(current_p, items[idx]);
+    }
+}
+
 void menu::run() {
     std::cout << "Welcome to FMI-Idle Game!\n";
 
@@ -109,11 +171,12 @@ void menu::run() {
                 << "8. Shop (buy items)\n"
                 << "9. 'Restanta' (Reset Currency)\n"
                 << "10. Achievements \n"
+                << "11. Tutoring Session \n"
                 << "0. Exit\n";
         std::cout << "> ";
 
         try {
-            option = get_verified_input(0, 10);
+            option = get_verified_input(0, 11);
 
             if (option == 0) {
                 close();
@@ -157,6 +220,9 @@ void menu::run() {
                     break;
                 case 10:
                     Asystem.show_achievements();
+                    break;
+                case 11:
+                    open_tutoring_session();
                     break;
                 default:
                     break;
