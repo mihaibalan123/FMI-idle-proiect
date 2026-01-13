@@ -1,6 +1,5 @@
 #include "gadget.h"
 #include "player.h"
-#include "exception.h"
 #include "book.h"
 #include "drink.h"
 #include "cheating_sheet.h"
@@ -13,33 +12,15 @@ item *gadget::clone() const {
     return new gadget(*this);
 }
 
-std::vector<gadget *> gadget::load_gadgets() {
-    std::vector<gadget *> gadgets_list;
-    nlohmann::json data = load_json_verified("gadgets.json");
-
-    for (const auto &j: data) {
-        gadgets_list.push_back(new gadget(
-            j.value("name", "Unknown Gadget"),
-            j.value("description", "No desc"),
-            j.value("rarity", "Common"),
-            j.value("price", 0.0f),
-            j.value("consumable", false),
-            j.value("uses_count", 1),
-            j.value("random_items_count", 1)
-        ));
-    }
-    return gadgets_list;
-}
-
 void gadget::use(player &p) {
     if (this->uses_count <= 0) {
         std::cout << "Gadget is empty!\n";
         return;
     }
 
-    std::vector<book*> loaded_books = book::load_books();
-    std::vector<cheating_sheet*> loaded_sheets = cheating_sheet::load_cheating_sheets();
-    std::vector<drink*> loaded_drinks = drink::load_drinks();
+    std::vector<book*> loaded_books = item::load_items<book>("books.json");
+    std::vector<cheating_sheet*> loaded_sheets = item::load_items<cheating_sheet>("cheating_sheets.json");
+    std::vector<drink*> loaded_drinks = item::load_items<drink>("drinks.json");
 
     std::vector<item*> item_pool;
 

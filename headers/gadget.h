@@ -16,9 +16,12 @@ public:
           random_items(random_items_count) {
     }
 
-    [[nodiscard]] item *clone() const override;
+    explicit gadget(const nlohmann::json& j) : item(j) {
+        uses_count = j.value("uses_count", 1);
+        random_items = j.value("random_items_count", 1);
+    }
 
-    static std::vector<gadget *> load_gadgets();
+    [[nodiscard]] item *clone() const override;
 
     static void buy_gadget(player &p, const std::vector<gadget*>& gadgets_list);
 

@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 2772456.75,
+        "currency1": 2472924.75,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -93,9 +93,20 @@
                 "price": 2200.0,
                 "rarity": "Epic",
                 "type": "book"
+            },
+            {
+                "consumable": true,
+                "description": "Ultimate access. (10 lvl, 99% chance)",
+                "name": "Dean's Password",
+                "price": 500000.0,
+                "project_boost": 10,
+                "rarity": "Godly",
+                "risk_damage": 300.0,
+                "success_chance": 0.9900000095367432,
+                "type": "cheating_sheet"
             }
         ],
-        "last_login_timestamp": 1768266644,
+        "last_login_timestamp": 1768333598,
         "name": "mihai",
         "password": "123456",
         "project_id": [

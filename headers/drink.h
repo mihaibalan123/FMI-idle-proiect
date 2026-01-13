@@ -15,14 +15,15 @@ public:
                                                    health_restore(health_restore) {
     }
 
+    explicit drink(const nlohmann::json& j) : item(j) {
+        health_restore = j.value("health_restore", 0.0f);
+    }
+
     [[nodiscard]] item *clone() const override;
 
     [[nodiscard]] std::string get_type() const override {
         return "drink";
     }
-
-    static std::vector<drink *> load_drinks();
-
     void use(player &p) override;
 
     static void buy_drink(player &p, const std::vector<drink*>& drinks_list);

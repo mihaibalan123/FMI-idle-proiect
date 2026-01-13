@@ -13,6 +13,9 @@ public:
                                                 damage_bonus(damage_bonus) {
     }
 
+    explicit book(const nlohmann::json& j) : item(j) {
+        damage_bonus = j.value("damage_bonus", 0.0f);
+    }
 
     [[nodiscard]] item *clone() const override;
 
@@ -23,8 +26,6 @@ public:
     [[nodiscard]] float get_damage_bonus() const {
         return damage_bonus;
     }
-
-    static std::vector<book *> load_books();
 
     void use(player &p) override;
 

@@ -17,13 +17,17 @@ public:
         project_boost(project_boost), success_chance(succes_chance), risk_damage(risk_damage) {
     }
 
+    explicit cheating_sheet(const nlohmann::json& j) : item(j) {
+        project_boost = j.value("project_boost", 0);
+        success_chance = j.value("success_chance", 0.0f);
+        risk_damage = j.value("risk_damage", 0.0f);
+    }
+
     [[nodiscard]] item *clone() const override;
 
     [[nodiscard]] std::string get_type() const override {
         return "cheating_sheet";
     }
-
-    static std::vector<cheating_sheet *> load_cheating_sheets();
 
     void use(player &p) override;
 

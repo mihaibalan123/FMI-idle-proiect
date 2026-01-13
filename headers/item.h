@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 #include "nlohmann/json.hpp"
+#include "exception.h"
 
 class player;
 
@@ -18,6 +19,24 @@ public:
     item(std::string name, std::string description, std::string rarity, float price,
          bool consumable) : name(std::move(name)), description(std::move(description)), rarity(std::move(rarity)),
                             price(price), consumable(consumable) {
+    }
+
+    explicit item(const nlohmann::json& j) {
+        name = j.value("name", "Unknown");
+        description = j.value("description", " ");
+        rarity = j.value("rarity", "Common");
+        price = j.value("price", 0.0f);
+        consumable = j.value("consumable", false);
+    }
+
+    template <typename T>
+    static std::vector<T*> load_items(const std::string& filename) {
+        std::vector<T*> items_list;
+        nlohmann::json data = load_json_verified(filename);
+        for (const auto& j : data) {
+            items_list.push_back(new T(j));
+        }
+        return items_list;
     }
 
     virtual ~item() = default;

@@ -16,11 +16,12 @@ class shop {
 
 public:
     shop()
-        : books_list(book::load_books()),
-          drinks_list(drink::load_drinks()),
-          cheating_sheets_list(cheating_sheet::load_cheating_sheets()),
-          gadgets_list(gadget::load_gadgets()) {
+        : books_list(item::load_items<book>("books.json")),
+          drinks_list(item::load_items<drink>("drinks.json")),
+          cheating_sheets_list(item::load_items<cheating_sheet>("cheating_sheets.json")),
+          gadgets_list(item::load_items<gadget>("gadgets.json")) {
     }
+
     ~shop() {
         for (auto p: books_list) delete p;
         for (auto p: drinks_list) delete p;
