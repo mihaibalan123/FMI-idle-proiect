@@ -182,6 +182,14 @@ public:
 
     [[nodiscard]] bool has_item(const std::string& item_name) const;
 
+    [[nodiscard]] int get_inventory_size_int() const;
+
+    [[nodiscard]] item* get_item_at_index_raw(int index) const;
+
+    void remove_item_by_index_safe(int index);
+
+    void show_inventory_simple() const;
+
     friend std::istream &operator>>(std::istream &is, player &t);
 
     friend std::ostream &operator<<(std::ostream &os, const player &t);

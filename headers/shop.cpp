@@ -1,5 +1,6 @@
 #include "shop.h"
 #include "exception.h"
+#include "crafting_system.h"
 
 void shop::sell_item(player &p) {
     if (p.get_inventory_size() == 0) {
@@ -41,11 +42,12 @@ void shop::run(player &p) const {
         std::cout << "4. Buy Gadgets\n";
         std::cout << "5. Check Inventory\n";
         std::cout << "6. Sell an item\n";
+        std::cout << "7. Crafting table\n";
         std::cout << "0. Exit Shop\n";
         std::cout << "> ";
 
         try {
-            option = get_verified_input(0, 6);
+            option = get_verified_input(0, 7);
 
             switch (option) {
                 case 1:
@@ -65,6 +67,9 @@ void shop::run(player &p) const {
                     break;
                 case 6:
                     sell_item(p);
+                    break;
+                case 7:
+                    crafting_system::start_crafting(p);
                     break;
                 case 0:
                     std::cout << "Leaving shop...\n";

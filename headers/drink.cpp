@@ -3,6 +3,10 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
+float drink::get_health_restore() const {
+    return health_restore;
+}
+
 item *drink::clone() const {
     return new drink(*this);
 }

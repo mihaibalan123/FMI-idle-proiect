@@ -19,6 +19,8 @@ public:
         health_restore = j.value("health_restore", 0.0f);
     }
 
+    [[nodiscard]] float get_health_restore() const;
+
     [[nodiscard]] item *clone() const override;
 
     [[nodiscard]] std::string get_type() const override {

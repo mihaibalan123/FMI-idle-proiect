@@ -23,6 +23,12 @@ public:
         risk_damage = j.value("risk_damage", 0.0f);
     }
 
+    [[nodiscard]] int get_project_boost() const;
+
+    [[nodiscard]] float get_success_chance() const;
+
+    [[nodiscard]] float get_risk_damage() const;
+
     [[nodiscard]] item *clone() const override;
 
     [[nodiscard]] std::string get_type() const override {

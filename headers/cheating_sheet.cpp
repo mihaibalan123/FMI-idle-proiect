@@ -5,6 +5,18 @@
 #include <random>
 #include <nlohmann/json.hpp>
 
+int cheating_sheet::get_project_boost() const {
+    return project_boost;
+}
+
+float cheating_sheet::get_success_chance() const {
+    return success_chance;
+}
+
+float cheating_sheet::get_risk_damage() const {
+    return risk_damage;
+}
+
 item *cheating_sheet::clone() const {
     return new cheating_sheet(*this);
 }

@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 2502690.5,
+        "currency1": 2600393.0,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -22,17 +22,8 @@
             3,
             3
         ],
-        "health": 490.80584716796875,
+        "health": 500.0,
         "inventory": [
-            {
-                "consumable": false,
-                "damage_bonus": 10.0,
-                "description": "Useful ALOT(+10 damage)",
-                "name": "Autocad Extra-Classes",
-                "price": 1000.0,
-                "rarity": "Legendary",
-                "type": "book"
-            },
             {
                 "consumable": true,
                 "description": "Obvious (1 project level up, 80% risk, -10 if not success).",
@@ -86,15 +77,6 @@
                 "type": "drink"
             },
             {
-                "consumable": false,
-                "damage_bonus": 16.0,
-                "description": "No side effects, only damage. (+16 damage)",
-                "name": "Functional Programming",
-                "price": 2200.0,
-                "rarity": "Epic",
-                "type": "book"
-            },
-            {
                 "consumable": true,
                 "description": "Ultimate access. (10 lvl, 99% chance)",
                 "name": "Dean's Password",
@@ -113,9 +95,18 @@
                 "price": 120.0,
                 "rarity": "Dusty",
                 "type": "book"
+            },
+            {
+                "consumable": false,
+                "damage_bonus": 30.93712615966797,
+                "description": "Crafted legendary book.",
+                "name": "Autocad Extra-Classes + Functional Programming",
+                "price": 3700.0,
+                "rarity": "Crafted",
+                "type": "book"
             }
         ],
-        "last_login_timestamp": 1768343912,
+        "last_login_timestamp": 1768355050,
         "name": "mihai",
         "password": "123456",
         "project_id": [

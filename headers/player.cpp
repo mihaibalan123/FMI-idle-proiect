@@ -829,6 +829,36 @@ bool player::has_item(const std::string& item_name) const {
     return false;
 }
 
+int player::get_inventory_size_int() const {
+    return static_cast<int>(inventory.size());
+}
+
+item* player::get_item_at_index_raw(int index) const {
+    if (index >= 0 && index < static_cast<int>(inventory.size())) {
+        return inventory[index].get();
+    }
+    return nullptr;
+}
+
+void player::remove_item_by_index_safe(int index) {
+    if (index >= 0 && index < static_cast<int>(inventory.size())) {
+        inventory.erase(inventory.begin() + index);
+    }
+}
+
+void player::show_inventory_simple() const {
+    if (inventory.empty()) {
+        std::cout << "Inventory is empty.\n";
+        return;
+    }
+    std::cout << "--- Crafting inventory ---\n";
+    for (size_t i = 0; i < inventory.size(); ++i) {
+        std::cout << i + 1 << ". " << inventory[i]->get_name()
+                  << " [" << inventory[i]->get_type() << "] "
+                  << "(Value: " << inventory[i]->get_price() << ")\n";
+    }
+}
+
 void player::reset_game() {
     float c1_to_reset = get_currency1();
 

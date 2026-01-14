@@ -80,6 +80,8 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         headers/achievement_system.h
         headers/tutoring_class.cpp
         headers/tutoring_class.h
+        headers/crafting_system.cpp
+        headers/crafting_system.h
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
