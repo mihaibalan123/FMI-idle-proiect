@@ -2,7 +2,7 @@
 
 ## Descriere
 
-  ****
+****
 _**FMI-Idle**_ urmărește experiența reinterpretată a unui student la Facultatea de Matematică și Informatică
 căruia i se pare că facultatea este un joc "Idle".
 
@@ -11,15 +11,63 @@ Scopul jocului este de a deveni cât mai puternic duelându-te cu profesori, ob�
 iteme speciale care cresc valoarea currency-ului.
 
 ****
-În joc, studentul este reprezentat generic de player. La început, oricare player nu deține nimic iar statisticile sunt
-slabe. Totuși, când nu e logat, obține o anumită valoare a currency-ului. Poate munci în cadrul unor Job-uri Part-Time care oferă recompense în funcție de dificultate. Mai departe
-se poate duela cu profesori aleși aleatoriu dar în alegerea cărora are o anumită implicare. Odată fixat pool-ul de
-profesori,
-se poate folosi de Itemele din inventar (dacă deține așa ceva) ce-i pot îmbunătăți anumite statistici.
-De asemenea, își poate da Heal după fiecare luptă consumând Iteme luate din Shop sau pur și simplu
-poate aștepta (când nu e logat își reface 1 hp la 2 min 30 sec ). După tipul lor, itemele costă diverse tipuri de
-currency sau viață. Partea de "Restanță" funcționează pentru player ca un reset pentru primul tip de currency
-convertindu-l pe acesta relativ la o scală logaritmică în cel de-al doilea tip.
+
+## Ghidul Meniului Principal
+
+Jocul este controlat simplu în consolă după cum urmează:
+
+### `1. Select Player / Switch Player`
+* Gestionează salvările jocului (Save/Load).
+* *Nota:* La logare, jocul calculează automat câți bani au produs proiectele tale cât timp ai fost offline.
+
+### `2. Visit an easy part-time job (+currency)`
+* Rezolvă ecuații matematice simple (ex: `12 + 5`).
+* Modalitate de a obține currency1 rezolvând calcule simple.
+
+### `3. Visit a complex part-time job (++currency)`
+* Rezolvă expresii matematice complexe (ex: `(10 + 2) * 4`).
+* Calcule mai grele, câștig mai mare.
+
+### `4. Show Stats`
+* Afișează atributele curente:
+    * **health:** Viața curentă (scade în lupte).
+    * **damage:** Puterea de atac (influențată de iteme și upgrade-uri).
+    * **currency1:** Banii standard.
+    * **currency2:** Token-uri speciale (Prestige).
+
+### `5. Examination Room (Combat)`
+* Luptă turn-based împotriva Profesorilor.
+* Fiecare profesor învins deblochează un **Proiect** specific în portofoliul tău.
+* *Atenție:* Dacă pierzi, ajungi la 1 hp și plătești o penalizare.
+
+### `6. Projects Information`
+* Lista proiectelor deținute și venitul pasiv generat de fiecare.
+
+### `7. Projects Upgrade`
+* Investește `currency1` pentru a crește nivelul proiectelor.
+* Nivel mai mare = Venit pasiv mai mare.
+
+### `8. Shop`
+Un meniu complex pentru gestionarea inventarului și a resurselor:
+* **1-4. Buy Items:** Cărți (damage), Băuturi (heal), Copiuțe (boost levels), Gadget-uri.
+* **5. Check Inventory:** Vezi itemele deținute.
+* **6. Sell Item:** Vinde iteme vechi pentru 50% din valoare.
+* **7. Crafting Station:** Combină 2 iteme de același tip (ex: 2 x Cărți) pentru a crea un item nou, mai puternic, cu un bonus random de 10-20%.
+* **8. Enter Gas Station:** Magazinul unde cheltui `Currency2` pentru upgrade-uri permanente sau schimb valutar.
+
+### `9. 'Restanta' (Reset / Prestige)`
+* Mecanica de **Rebirth**.
+* Resetează `currency1` și nivelul proiectelor la 0.
+* Primești `currency2` în funcție de performanța ta. Această monedă nu se pierde niciodată.
+
+### `10. Tutoring Session`
+* Mini-jocuri speciale:
+    * *Lifetime Exam:* Investește bani și vezi dacă piața crește.
+    * *Coding Workshop:* Scrie cod pentru a primi nivele gratuite la proiecte.
+    * *Secret Santa:* Primești un item aleatoriu.
+
+### `11. Achievements`
+* Sistem de realizări care deblochează trofee pe măsură ce joci.
 
 ## Reminder:
 
@@ -119,8 +167,8 @@ O cerință nu se consideră îndeplinită dacă este realizată doar prin cod g
 
 - [x] 2 șabloane de proiectare (design patterns)
 - [x] o clasă șablon cu sens; minim **2 instanțieri**
-    - [ ] preferabil și o funcție șablon (template) cu sens; minim 2 instanțieri
-- [ ] minim 85% din codul propriu să fie C++
+    - [x] preferabil și o funcție șablon (template) cu sens; minim 2 instanțieri
+- [x] minim 85% din codul propriu să fie C++
 
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
 

@@ -165,13 +165,13 @@ void menu::run() {
                 << "2. Visit an easy part-time job (+currency)\n"
                 << "3. Visit a *complex* part-time job (++currency)\n"
                 << "4. Show stats\n"
-                << "5. Examination room (fight a teacher)\n"
-                << "6. Projects Information\n"
+                << "5. Examination room (fight a teacher, get his project)\n"
+                << "6. Projects information\n"
                 << "7. Projects upgrade\n"
                 << "8. Shop (buy items)\n"
-                << "9. 'Restanta' (Reset Currency)\n"
-                << "10. Achievements \n"
-                << "11. Tutoring Session \n"
+                << "9. 'Restanta' (curr1 -> curr2)\n"
+                << "10. Tutoring session \n"
+                << "11. Achievements \n"
                 << "0. Exit\n";
         std::cout << "> ";
 
@@ -219,10 +219,10 @@ void menu::run() {
                     players_list[curr_player].reset_progress();
                     break;
                 case 10:
-                    Asystem.show_achievements();
+                    open_tutoring_session();
                     break;
                 case 11:
-                    open_tutoring_session();
+                    Asystem.show_achievements();
                     break;
                 default:
                     break;

@@ -3,7 +3,7 @@
 #include "crafting_system.h"
 
 void shop::enter_gas_station(player &p) {
-    std::cout << "\n=== PBT Gas Station (Currency 2 Store) ===\n";
+    std::cout << "\n--- PBT Gas Station (currency 2 store) ---\n";
     std::cout << "Here you spend your currency2.\n";
 
     while (true) {
@@ -96,16 +96,16 @@ void shop::run(player &p) const {
     int option = -1;
 
     do {
-        std::cout << "\n -- PBT Shop -- PBT Shop -- PBT Shop \n";
+        std::cout << "\n -- PBT Shop -- PBT Shop -- PBT Shop ---\n";
         std::cout << "Wallet: " << p.get_currency1() << "\n";
         std::cout << "1. Buy Books\n";
         std::cout << "2. Buy Drinks\n";
         std::cout << "3. Buy Cheating Sheets\n";
         std::cout << "4. Buy Gadgets\n";
-        std::cout << "5. Check Inventory\n";
+        std::cout << "5. Crafting table\n";
         std::cout << "6. Sell an item\n";
-        std::cout << "7. Crafting table\n";
-        std::cout << "8. Enter in gas station\n";
+        std::cout << "7. Check Inventory\n";
+        std::cout << "8. Enter in gas station (PBT yard)\n";
         std::cout << "0. Exit Shop\n";
         std::cout << "> ";
 
@@ -126,13 +126,13 @@ void shop::run(player &p) const {
                     gadget::buy_gadget(p, gadgets_list);
                     break;
                 case 5:
-                    p.show_inventory();
+                    crafting_system::start_crafting(p);
                     break;
                 case 6:
                     sell_item(p);
                     break;
                 case 7:
-                    crafting_system::start_crafting(p);
+                    p.show_inventory();
                     break;
                 case 8:
                     enter_gas_station(p);
