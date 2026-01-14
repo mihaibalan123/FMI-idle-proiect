@@ -14,6 +14,8 @@ class shop {
 
     static void sell_item(player &p);
 
+    static void enter_gas_station(player &p);
+
 public:
     shop()
         : books_list(item::load_items<book>("books.json")),

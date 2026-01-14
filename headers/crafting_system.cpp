@@ -26,8 +26,8 @@ float crafting_system::calculate_crafting_price(float p1, float p2) {
 }
 
 bool crafting_system::try_combine_books(player& p, item* i1, item* i2, int idx1, int idx2) {
-    auto* b1 = dynamic_cast<book*>(i1);
-    auto* b2 = dynamic_cast<book*>(i2);
+    const auto* b1 = dynamic_cast<book*>(i1);
+    const auto* b2 = dynamic_cast<book*>(i2);
 
     if (b1 && b2) {
         std::cout << "Merging books...\n";
@@ -61,8 +61,8 @@ bool crafting_system::try_combine_books(player& p, item* i1, item* i2, int idx1,
 }
 
 bool crafting_system::try_combine_drinks(player& p, item* i1, item* i2, int idx1, int idx2) {
-    auto* d1 = dynamic_cast<drink*>(i1);
-    auto* d2 = dynamic_cast<drink*>(i2);
+    const auto* d1 = dynamic_cast<drink*>(i1);
+    const auto* d2 = dynamic_cast<drink*>(i2);
 
     if (d1 && d2) {
         std::cout << "Mixing drinks...\n";
@@ -96,8 +96,8 @@ bool crafting_system::try_combine_drinks(player& p, item* i1, item* i2, int idx1
 }
 
 bool crafting_system::try_combine_sheets(player& p, item* i1, item* i2, int idx1, int idx2) {
-    auto* s1 = dynamic_cast<cheating_sheet*>(i1);
-    auto* s2 = dynamic_cast<cheating_sheet*>(i2);
+    const auto* s1 = dynamic_cast<cheating_sheet*>(i1);
+    const auto* s2 = dynamic_cast<cheating_sheet*>(i2);
 
     if (s1 && s2) {
         std::cout << "Combining sheets...\n";

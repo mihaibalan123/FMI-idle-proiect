@@ -2,6 +2,68 @@
 #include "exception.h"
 #include "crafting_system.h"
 
+void shop::enter_gas_station(player &p) {
+    std::cout << "\n=== PBT Gas Station (Currency 2 Store) ===\n";
+    std::cout << "Here you spend your currency2.\n";
+
+    while (true) {
+        std::cout << "\nCurrency2 : " << p.get_currency2() << "\n";
+        std::cout << "1. Wash a car (+5 Base Damage) [Cost: 2 curr2]\n";
+        std::cout << "2. Sell at the counter (+50 Max Health) [Cost: 3 curr2]\n";
+        std::cout << "3. Fill up some cars (Exchange 1 curr2 -> 500 curr1) [Cost: 1 curr2]\n";
+        std::cout << "0. Back to normal shop\n";
+        std::cout << "> ";
+
+        int choice;
+        try {
+            choice = get_verified_input(0, 3);
+        } catch (const std::exception& e) {
+            std::cout << e.what() << "\n";
+            continue;
+        }
+
+        if (choice == 0) break;
+
+        float current_c2 = p.get_currency2();
+
+        if (choice == 1) {
+            if (current_c2 >= 2.0f) {
+                p.set_currency2(current_c2 - 2.0f);
+                p.set_damage(p.get_damage() + 5.0f);
+                std::cout << "Damage increased by 5.\n";
+            } else {
+                std::cout << "Not enough currency2!\n";
+            }
+        }
+        else if (choice == 2) {
+            if (current_c2 >= 3.0f) {
+                p.set_currency2(current_c2 - 3.0f);
+                p.set_health(p.get_health() + 50.0f);
+                std::cout << "Health increased by 50.\n";
+            } else {
+                std::cout << "Not enough currency2!\n";
+            }
+        }
+        else if (choice == 3) {
+            if (current_c2 >= 1.0f) {
+                std::cout << "How many tokens to exchange? ";
+                try {
+                    int amount = get_verified_input(1, static_cast<int>(current_c2));
+
+                    p.set_currency2(current_c2 - static_cast<float>(amount));
+                    p.set_currency1(p.get_currency1() + (static_cast<float>(amount) * 500.0f));
+
+                    std::cout << "Exchanged " << amount << " currency2 for " << (amount * 500) << " currency1.\n";
+                } catch (...) {
+                    std::cout << "Invalid amount.\n";
+                }
+            } else {
+                std::cout << "You need at least 1 currency2 token.\n";
+            }
+        }
+    }
+}
+
 void shop::sell_item(player &p) {
     if (p.get_inventory_size() == 0) {
         std::cout << "\nYour inventory is empty.\n";
@@ -43,11 +105,12 @@ void shop::run(player &p) const {
         std::cout << "5. Check Inventory\n";
         std::cout << "6. Sell an item\n";
         std::cout << "7. Crafting table\n";
+        std::cout << "8. Enter in gas station\n";
         std::cout << "0. Exit Shop\n";
         std::cout << "> ";
 
         try {
-            option = get_verified_input(0, 7);
+            option = get_verified_input(0, 8);
 
             switch (option) {
                 case 1:
@@ -70,6 +133,9 @@ void shop::run(player &p) const {
                     break;
                 case 7:
                     crafting_system::start_crafting(p);
+                    break;
+                case 8:
+                    enter_gas_station(p);
                     break;
                 case 0:
                     std::cout << "Leaving shop...\n";
