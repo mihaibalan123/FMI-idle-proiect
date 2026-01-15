@@ -172,7 +172,7 @@ O cerință nu se consideră îndeplinită dacă este realizată doar prin cod g
 
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
 
-- [ ] tag de `git` pe commit cu **toate bifele**: de exemplu `v0.3` sau `v1.0`
+- [x] tag de `git` pe commit cu **toate bifele**: de exemplu `v0.3` sau `v1.0`
 - [ ] code review #3 2 proiecte
 
 ## Instrucțiuni de compilare

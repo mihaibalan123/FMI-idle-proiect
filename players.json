@@ -1,7 +1,7 @@
 [
     {
         "conquer_domain": 1,
-        "currency1": 3058036.75,
+        "currency1": 3692627.25,
         "currency2": 11.665760040283203,
         "damage": 7.0,
         "defeated_domains": [
@@ -24,7 +24,7 @@
             3,
             3
         ],
-        "health": 430.70001220703125,
+        "health": 500.0,
         "inventory": [
             {
                 "consumable": true,
@@ -108,7 +108,7 @@
                 "type": "book"
             }
         ],
-        "last_login_timestamp": 1768406875,
+        "last_login_timestamp": 1768472083,
         "name": "mihai",
         "password": "123456",
         "project_id": [
