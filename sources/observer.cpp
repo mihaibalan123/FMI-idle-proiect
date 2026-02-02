@@ -1,4 +1,4 @@
-#include "observer.h"
+#include "../headers/observer.h"
 
 std::string EventConverter::to_string(Event e) {
     switch(e) {

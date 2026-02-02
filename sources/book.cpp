@@ -1,6 +1,6 @@
-#include "book.h"
-#include "player.h"
-#include "exception.h"
+#include "../headers/book.h"
+#include "../headers/player.h"
+#include "../headers/exception.h"
 #include <iostream>
 #include <nlohmann/json.hpp>
 

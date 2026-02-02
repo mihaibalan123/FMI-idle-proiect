@@ -1,4 +1,4 @@
-#include "exception.h"
+#include "../headers/exception.h"
 
 nlohmann::json load_json_verified(const std::string& filename) {
     std::ifstream f(filename);

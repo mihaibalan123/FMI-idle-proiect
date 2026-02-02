@@ -1,6 +1,6 @@
-#include "shop.h"
-#include "exception.h"
-#include "crafting_system.h"
+#include "../headers/shop.h"
+#include "../headers/exception.h"
+#include "../headers/crafting_system.h"
 
 void shop::enter_gas_station(player &p) {
     std::cout << "\n--- PBT Gas Station (currency 2 store) ---\n";

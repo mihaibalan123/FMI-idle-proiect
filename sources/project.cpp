@@ -1,5 +1,5 @@
-#include "project.h"
-#include "exception.h"
+#include "../headers/project.h"
+#include "../headers/exception.h"
 
 const std::string& project::get_name() const {
     return proj_name;

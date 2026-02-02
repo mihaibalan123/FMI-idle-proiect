@@ -50,38 +50,39 @@ include(cmake/CopyHelper.cmake)
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${MAIN_EXECUTABLE_NAME}
     main.cpp
-        headers/menu.cpp
+        sources/menu.cpp
         headers/menu.h
-        headers/teacher.cpp
+        sources/teacher.cpp
         headers/teacher.h
-        headers/project.cpp
+        sources/project.cpp
         headers/project.h
-        headers/player.cpp
+        sources/player.cpp
         headers/player.h
-        headers/item.cpp
+        sources/item.cpp
         headers/item.h
-        headers/book.cpp
+        sources/book.cpp
         headers/book.h
-        headers/drink.cpp
+        sources/drink.cpp
         headers/drink.h
-        headers/cheating_sheet.cpp
+        sources/cheating_sheet.cpp
         headers/cheating_sheet.h
-        headers/shop.cpp
+        sources/shop.cpp
         headers/shop.h
-        headers/exception.cpp
+        sources/exception.cpp
         headers/exception.h
-        headers/gadget.cpp
+        sources/gadget.cpp
         headers/gadget.h
-        headers/observer.cpp
+        sources/observer.cpp
         headers/observer.h
-        headers/achievement.cpp
+        sources/achievement.cpp
         headers/achievement.h
-        headers/achievement_system.cpp
+        sources/achievement_system.cpp
         headers/achievement_system.h
-        headers/tutoring_class.cpp
         headers/tutoring_class.h
-        headers/crafting_system.cpp
+        sources/crafting_system.cpp
         headers/crafting_system.h
+        headers/item_loader.h
+        sources/item_loader.cpp
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
@@ -112,6 +113,6 @@ if(APPLE)
     install(FILES launcher.command DESTINATION ${DESTINATION_DIR})
 endif()
 
-copy_files(FILES tastatura.txt teachers.json projects.json players.json books.json cheating_sheets.json drinks.json COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
+copy_files(FILES tastatura.txt teachers.json projects.json players.json books.json cheating_sheets.json drinks.json gadgets.json achievements.json COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
 # copy_files(FILES tastatura.txt config.json DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})
 # copy_files(DIRECTORY images sounds COPY_TO_DESTINATION TARGET_NAME ${MAIN_EXECUTABLE_NAME})

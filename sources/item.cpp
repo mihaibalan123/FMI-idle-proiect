@@ -1,6 +1,6 @@
-#include "item.h"
-#include "player.h"
-#include "exception.h"
+#include "../headers/item.h"
+#include "../headers/player.h"
+#include "../headers/exception.h"
 
 void item::print(int i) const {
     std::cout << i << ". " << name

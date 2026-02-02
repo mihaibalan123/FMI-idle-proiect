@@ -1,6 +1,6 @@
-#include "cheating_sheet.h"
-#include "player.h"
-#include "exception.h"
+#include "../headers/cheating_sheet.h"
+#include "../headers/player.h"
+#include "../headers/exception.h"
 #include <fstream>
 #include <random>
 #include <nlohmann/json.hpp>

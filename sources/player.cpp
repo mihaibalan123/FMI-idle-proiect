@@ -1,10 +1,8 @@
-#include "player.h"
-#include "teacher.h"
-#include "book.h"
-#include "cheating_sheet.h"
-#include "drink.h"
-#include "exception.h"
-#include "gadget.h"
+#include "../headers/player.h"
+#include "../headers/teacher.h"
+#include "../headers/book.h"
+#include "../headers/exception.h"
+#include "../headers/item_loader.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -102,39 +100,12 @@ std::vector<player> player::load_players() {
     nlohmann::json data2 = load_json_verified("players.json");
 
     for (auto &i_player: data2) {
-        std::vector<std::unique_ptr<item> > temp_inventory;
+        std::vector<std::unique_ptr<item>> temp_inventory;
+
         if (i_player.contains("inventory")) {
             for (const auto &item_json: i_player["inventory"]) {
-                std::string type = item_json.value("type", "unknown");
-                std::string i_name = item_json.value("name", "Unknown Item");
-                std::string i_desc = item_json.value("description", "No desc");
-                std::string i_rarity = item_json.value("rarity", "Common");
-                float i_price = item_json.value("price", 0.0f);
-                bool i_consumable = item_json.value("consumable", false);
-
-                if (type == "book") {
-                    float dmg = item_json.value("damage_bonus", 0.0f);
-                    temp_inventory.push_back(std::make_unique<book>(
-                        i_name, i_desc, i_rarity, i_price, i_consumable, dmg
-                    ));
-                } else if (type == "drink") {
-                    float hp = item_json.value("health_restore", 0.0f);
-                    temp_inventory.push_back(std::make_unique<drink>(
-                        i_name, i_desc, i_rarity, i_price, i_consumable, hp
-                    ));
-                } else if (type == "cheating_sheet") {
-                    int boost = item_json.value("project_boost", 0);
-                    float chance = item_json.value("success_chance", 0.0f);
-                    float risk = item_json.value("risk_damage", 0.0f);
-                    temp_inventory.push_back(std::make_unique<cheating_sheet>(
-                        i_name, i_desc, i_rarity, i_price, i_consumable, boost, chance, risk
-                    ));
-                }else if (type == "gadget") {
-                    int uses = item_json.value("uses_count", 1);
-                    int random_items = item_json.value("random_items", 1);
-                    temp_inventory.push_back(std::make_unique<gadget>(
-                        i_name, i_desc, i_rarity, i_price, i_consumable, uses, random_items
-                    ));
+                if (auto new_item = ItemLoader::create(item_json)) {
+                    temp_inventory.push_back(std::move(new_item));
                 }
             }
         }
@@ -191,7 +162,10 @@ void player::save_players(const std::vector<player> &players_list) {
 bool player::verify_password() const {
     std::string temp_password;
     std::cout << "Required password>";
+    std::cout << "\033[0m";
     std::getline(std::cin, temp_password);
+    std::cout << "\033[0m";
+    std::cout << "\n";
     if (temp_password == this->get_password()) return true;
     return false;
 }
@@ -897,9 +871,15 @@ inline std::istream &operator>>(std::istream &is, player &t) {
     do {
         std::cout << "Password must be at least 5 chars long!\n";
         std::cout << "Insert your password> ";
+        std::cout << "\033[0m";
         is >> temp_pass1;
+        std::cout << "\033[0m";
+        std::cout << "\n";
         std::cout << "Re-type your password# ";
+        std::cout << "\033[0m";
         is >> temp_pass2;
+        std::cout << "\033[0m";
+        std::cout << "\n";
         if (temp_pass1 != temp_pass2) std::cout << "Retry. Passwords doesn't match!\n";
         if (temp_pass1.size() < 5) std::cout << "Password must be at least 5 chars long!\n";
     } while (temp_pass1 != temp_pass2 || temp_pass1.size() < 5);

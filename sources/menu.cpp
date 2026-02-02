@@ -1,10 +1,10 @@
 #include <fstream>
-#include "menu.h"
-#include "player.h"
-#include "teacher.h"
-#include "project.h"
-#include "exception.h"
-#include "tutoring_class.h"
+#include "../headers/menu.h"
+#include "../headers/player.h"
+#include "../headers/teacher.h"
+#include "../headers/project.h"
+#include "../headers/exception.h"
+#include "../headers/tutoring_class.h"
 #include <cstdlib>
 #include <random>
 #include <chrono>

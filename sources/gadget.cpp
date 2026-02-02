@@ -1,8 +1,8 @@
-#include "gadget.h"
-#include "player.h"
-#include "book.h"
-#include "drink.h"
-#include "cheating_sheet.h"
+#include "../headers/gadget.h"
+#include "../headers/player.h"
+#include "../headers/book.h"
+#include "../headers/drink.h"
+#include "../headers/cheating_sheet.h"
 #include <fstream>
 #include <random>
 #include <iostream>

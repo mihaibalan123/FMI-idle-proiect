@@ -1,5 +1,5 @@
-#include "teacher.h"
-#include "exception.h"
+#include "../headers/teacher.h"
+#include "../headers/exception.h"
 
 const std::string &teacher::get_last_name() const {
     return last_name;
