@@ -14,7 +14,7 @@
 template <typename T>
 class tutoring_class {
 public:
-    static void give_reward(player& p, T value) {
+    static void give_reward(player& p, const T& value) {
 
         std::cout << ">> Welcome to the Tutoring Session!<< \n";
 
