@@ -24,7 +24,7 @@ public:
         if constexpr (std::is_same_v<T, float>) {
             float tuition_fee = value;
 
-            std::cout << "\n--- Lifetime Exam (Financial Logic) ---\n";
+            std::cout << "\n---  Lifetime Exam (Financial Logic) ---\n";
 
             float current_balance = p.get_currency1();
             p.set_currency1(current_balance - tuition_fee);
