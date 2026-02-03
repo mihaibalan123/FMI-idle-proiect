@@ -29,7 +29,7 @@ nlohmann::json achievement::to_json() const {
 
 bool achievement::check_and_unlock(Event event, int current_value) {
     if (unlocked) return false;
-    if (event == required_event && current_value >= threshold) {
+    if (event == required_event && current_value >= 0 && static_cast<unsigned long long>(current_value) >= threshold) {
         unlocked = true;
         print_unlock_message();
         return true;
@@ -46,7 +46,7 @@ void achievement::print_status() const {
     }
     std::cout << status << " [" << RankConverter::to_string(rank) << "] "
               << name << " -- " << description
-              << " (Threshhold: " << threshold << ")\n";
+              << " (Threshold: " << threshold << ")\n";
 }
 
 void achievement::print_unlock_message() const {

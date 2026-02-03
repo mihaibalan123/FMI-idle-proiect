@@ -22,7 +22,7 @@ class achievement {
     std::string description;
     Rank rank;
     Event required_event;
-    int threshold;
+    unsigned long long int threshold;
     bool unlocked;
 
     void print_unlock_message() const;
